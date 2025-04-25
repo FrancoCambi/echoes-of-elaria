@@ -3,15 +3,28 @@ using Mono.Data.Sqlite;
 using System.IO;
 using UnityEngine;
 
-public class DBManager
+public class DBManager : MonoBehaviour 
 {
+    private static DBManager instance;
+    public static DBManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindAnyObjectByType<DBManager>();
+            }
+            return instance;
+        }
+    }
+
     private string dbPath;
     private IDbConnection connection;
 
-    public DBManager(string dbFileName)
+    private void Start()
     {
         // Ruta para acceder al archivo .db
-        string filePath = Path.Combine(Application.streamingAssetsPath, dbFileName);
+        string filePath = Path.Combine(Application.streamingAssetsPath, "template.db");
         dbPath = $"URI=file:{filePath}";
 
         // Conexión inicial
@@ -19,6 +32,7 @@ public class DBManager
         connection.Open();
         Debug.Log("Connected to DB: " + filePath);
     }
+
 
     public DataTable ExecuteQuery(string query)
     {
@@ -49,6 +63,11 @@ public class DBManager
         command.Dispose();
 
         return table;
+    }
+
+    private void OnApplicationQuit()
+    {
+        Close();
     }
 
     public void Close()

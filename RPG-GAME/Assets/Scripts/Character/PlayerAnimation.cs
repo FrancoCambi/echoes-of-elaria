@@ -21,6 +21,15 @@ public class PlayerAnimation : MonoBehaviour
     private const string ATTACK_BACK = "attack_back";
 
 
+    public string CurrentState
+    {
+        get
+        {
+            return currentState;
+        }
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

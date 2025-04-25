@@ -10,12 +10,14 @@ public class PlayerAttack : MonoBehaviour
 
     private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
+    private SwordHitbox hitbox;
 
     private AttackDirection attackDir;
     private bool attacking;
 
     private Camera mainCamera;
     private Animator animator;
+
 
     public AttackDirection AttackDir
     {
@@ -38,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         playerMovement = GetComponent<PlayerMovement>();
+        hitbox = GetComponentInChildren<SwordHitbox>();
 
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -46,9 +49,10 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !attacking)
+        if (Input.GetMouseButtonDown(0) && !attacking && !playerMovement.Dashing)
         {
             playerMovement.CanMove = false;
+            playerMovement.StopMovement();
             Attack();
         }
     }
@@ -92,6 +96,16 @@ public class PlayerAttack : MonoBehaviour
     {
         attacking = false;
         playerMovement.CanMove = true;
+    }
+
+    private void ActivateHitbox()
+    {
+        hitbox.ActivateHitbox();
+    }
+
+    private void DeactivateHitbox()
+    {
+        hitbox.DeactivateHitbox();
     }
 
     public string TypeToStringAnimation(AttackDirection attackDirection)
