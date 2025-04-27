@@ -1,17 +1,17 @@
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
-public class PlayerStatsLoader
+public class PlayerDataLoader
 {
-    private static PlayerStatsLoader instance;
+    private static PlayerDataLoader instance;
 
-    public static PlayerStatsLoader Instance
+    public static PlayerDataLoader Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new PlayerStatsLoader();
+                instance = new PlayerDataLoader();
             }
             return instance;
         }
@@ -55,5 +55,23 @@ public class PlayerStatsLoader
 
         int damage = int.Parse(table.Rows[0]["damage"].ToString());
         return damage;
+    }
+
+    public int GetMaxHealth(int id)
+    {
+        string query = $"SELECT max_health FROM characters WHERE character_id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        int maxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
+        return maxHealth;
+    }
+
+    public int GetCurrentHealth(int id)
+    {
+        string query = $"SELECT current_health FROM characters WHERE character_id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        int currentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
+        return currentHealth;
     }
 }

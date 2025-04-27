@@ -9,13 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private DBManager db;
-    private PlayerStatsLoader statsLoader;
-    private PlayerAttack playerAttack;
-    private PlayerAnimation playerAnimation;
+    private PlayerHealth playerHealth;
 
     private Vector2 movementDirection;
 
+    private int charID;
     private float movementSpeed;
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -68,13 +66,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        playerAttack = GetComponent<PlayerAttack>();
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerHealth = GetComponent<PlayerHealth>();
 
-        // NOTE: ID IS HARDCODED HERE, WILL NEED TO BE DYNAMIC.
-        movementSpeed = PlayerStatsLoader.Instance.GetMovementSpeed(1);
-        dashForce = PlayerStatsLoader.Instance.GetDashForce(1);
-        dashCD = PlayerStatsLoader.Instance.GetDashCD(1);
+        charID = GameManager.Instance.SelCharID;
+        movementSpeed = PlayerDataLoader.Instance.GetMovementSpeed(charID);
+        dashForce = PlayerDataLoader.Instance.GetDashForce(charID);
+        dashCD = PlayerDataLoader.Instance.GetDashCD(charID);
 
         canMove = true;
         canDash = true;
@@ -83,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (canMove && playerHealth.IsAlive)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -100,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (canMove)
+        if (canMove && playerHealth.IsAlive)
         {
             if (horizontal > 0)
             {

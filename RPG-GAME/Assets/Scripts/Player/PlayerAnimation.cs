@@ -18,6 +18,7 @@ public class PlayerAnimation : MonoBehaviour
     private const string ATTACK_FRONT = "attack_front";
     private const string ATTACK_SIDE = "attack_side";
     private const string ATTACK_BACK = "attack_back";
+    private const string HIT = "hit";
 
 
     public string CurrentState
@@ -40,7 +41,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (playerAttack.Attacking)
         {
@@ -75,7 +76,11 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
 
+    }
 
+    public void PlayHitAnimation()
+    {
+        ChangeAnimationState(HIT);
     }
 
     void ChangeAnimationState(string newState)

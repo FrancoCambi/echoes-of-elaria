@@ -21,7 +21,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         
     }
-    public void OnHit(int damage)
+    public void OnHit(int damage, Vector2 knockback)
     {
         health -= damage;
 
