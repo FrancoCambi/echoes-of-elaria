@@ -18,7 +18,7 @@ public class PlayerStatsLoader
     }
 
 
-    public float GetMovementSpeedById(int id)
+    public float GetMovementSpeed(int id)
     {
         string query = $"SELECT movement_speed FROM characters WHERE character_id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
@@ -28,7 +28,7 @@ public class PlayerStatsLoader
         
     }
 
-    public float GetDashForceById(int id)
+    public float GetDashForce(int id)
     {
         string query = $"SELECT dash_force FROM characters WHERE character_id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
@@ -38,7 +38,7 @@ public class PlayerStatsLoader
 
     }
 
-    public float GetDashCDById(int id)
+    public float GetDashCD(int id)
     {
         string query = $"SELECT dash_cd FROM characters WHERE character_id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
@@ -48,7 +48,7 @@ public class PlayerStatsLoader
 
     }
 
-    public int GetDamageById(int id)
+    public int GetDamage(int id)
     {
         string query = $"SELECT damage FROM characters WHERE character_id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);

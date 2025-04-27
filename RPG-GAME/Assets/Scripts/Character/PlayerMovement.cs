@@ -14,12 +14,12 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAttack playerAttack;
     private PlayerAnimation playerAnimation;
 
+    private Vector2 movementDirection;
+
     private float movementSpeed;
     private float horizontal = 0f;
     private float vertical = 0f;
-    private Vector2 movementDirection;
     private bool canMove;
-
     private bool canDash;
     private bool dashing;
     private float dashingTime = 0.3f;
@@ -72,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
 
         // NOTE: ID IS HARDCODED HERE, WILL NEED TO BE DYNAMIC.
-        movementSpeed = PlayerStatsLoader.Instance.GetMovementSpeedById(1);
-        dashForce = PlayerStatsLoader.Instance.GetDashForceById(1);
-        dashCD = PlayerStatsLoader.Instance.GetDashCDById(1);
+        movementSpeed = PlayerStatsLoader.Instance.GetMovementSpeed(1);
+        dashForce = PlayerStatsLoader.Instance.GetDashForce(1);
+        dashCD = PlayerStatsLoader.Instance.GetDashCD(1);
 
         canMove = true;
         canDash = true;

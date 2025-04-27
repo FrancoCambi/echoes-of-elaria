@@ -18,8 +18,9 @@ public class DBManager : MonoBehaviour
         }
     }
 
-    private string dbPath;
     private IDbConnection connection;
+
+    private string dbPath;
 
     private void Start()
     {

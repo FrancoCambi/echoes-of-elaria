@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    private Animator animator;
 
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
-
-    private Animator animator;
 
     private string currentState;
 

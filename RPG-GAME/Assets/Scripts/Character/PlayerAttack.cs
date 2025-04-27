@@ -8,15 +8,16 @@ public enum AttackDirection
 public class PlayerAttack : MonoBehaviour
 {
 
+    private Camera mainCamera;
+    private Animator animator;
+
     private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
     private SwordHitbox hitbox;
 
     private AttackDirection attackDir;
-    private bool attacking;
 
-    private Camera mainCamera;
-    private Animator animator;
+    private bool attacking;
 
 
     public AttackDirection AttackDir

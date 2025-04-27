@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
-
     private int id;
     private int health;
     private string enemyName;
@@ -13,7 +12,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         enemyName = gameObject.name.Replace("(Clone)", "");
         id = EnemyDataLoader.Instance.GetIdByName(enemyName);
-        health = EnemyDataLoader.Instance.GetHealthById(id);
+        health = EnemyDataLoader.Instance.GetHealth(id);
 
     }
 
@@ -22,12 +21,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         
     }
-
-    private void Death()
-    {
-        Destroy(gameObject);
-    }
-
     public void OnHit(int damage)
     {
         health -= damage;
@@ -37,4 +30,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             Death();
         }
     }
+
+    private void Death()
+    {
+        Destroy(gameObject);
+    }
+
 }
