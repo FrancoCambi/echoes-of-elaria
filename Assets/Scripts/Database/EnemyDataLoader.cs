@@ -1,6 +1,10 @@
 using System.Data;
 using UnityEngine;
 
+public enum AttackType
+{
+    Jump, Throw, Melee, None
+}
 public class EnemyDataLoader
 {
     private static EnemyDataLoader instance;
@@ -14,6 +18,26 @@ public class EnemyDataLoader
             }
             return instance;
         }
+    }
+
+    public AttackType StringToAttackType(string type)
+    {
+        if (type.ToLower() == "jump")
+        {
+            return AttackType.Jump;
+        }
+        else if (type.ToLower() == "throw")
+        {
+            return AttackType.Throw;
+        }
+        else if (type.ToLower() == "melee")
+        {
+            return AttackType.Melee;
+        }
+        
+        return AttackType.None;
+        
+
     }
 
     public int GetIdByName(string name)
@@ -62,6 +86,36 @@ public class EnemyDataLoader
 
         float patrolSpeed = float.Parse(table.Rows[0]["patrol_speed"].ToString());
         return patrolSpeed;
+
+    }
+
+    public string GetAttackType(int id)
+    {
+        string query = $"SELECT attack_type FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        string type = table.Rows[0]["attack_type"].ToString();
+        return type;
+
+    }
+
+    public float GetJumpForce(int id)
+    {
+        string query = $"SELECT jump_force FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        float jumpForce = float.Parse(table.Rows[0]["jump_force"].ToString());
+        return jumpForce;
+
+    }
+
+    public int GetAttackCD(int id)
+    {
+        string query = $"SELECT attack_cd FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        int attackCD = int.Parse(table.Rows[0]["attack_cd"].ToString());
+        return attackCD;
 
     }
 }
