@@ -12,7 +12,7 @@ public class SwordHitbox : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyHealth>().OnHit(PlayerDataLoader.Instance.GetDamage(GameManager.Instance.SelCharID), Vector2.zero);
+            other.GetComponent<EnemyHealth>().OnHit(PlayerDataLoader.Instance.GetDamage(GameManager.Instance.SelCharID), new Vector2(5,5));
         }
     }
 

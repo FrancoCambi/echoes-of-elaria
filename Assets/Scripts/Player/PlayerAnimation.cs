@@ -6,6 +6,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
+    private PlayerHealth playerHealth;
 
     private string currentState;
 
@@ -35,6 +36,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerHealth = GetComponent<PlayerHealth>();
+
         animator = GetComponent<Animator>();
 
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
@@ -46,6 +49,10 @@ public class PlayerAnimation : MonoBehaviour
         if (playerAttack.Attacking)
         {
             ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
+        }
+        else if (playerHealth.Invincible)
+        {
+            ChangeAnimationState("hit");
         }
         else
         {
@@ -72,6 +79,10 @@ public class PlayerAnimation : MonoBehaviour
                 if (!playerAttack.Attacking)
                 {
                     ChangeAnimationState(currentState.Replace("attack_", "idle_"));
+                }
+                if (!playerHealth.Invincible)
+                {
+                    ChangeAnimationState(currentState.Replace("hit", "idle_front"));
                 }
             }
         }

@@ -11,6 +11,19 @@ public class EnemyChaseZone : MonoBehaviour
 
     private int id;
     private float movementSpeed;
+    private bool canChase;
+
+    public bool CanChase
+    {
+        get
+        {
+            return canChase;
+        }
+        set
+        {
+            canChase = value;
+        }
+    }
 
     public Collider2D PlayerCollider
     {
@@ -37,10 +50,11 @@ public class EnemyChaseZone : MonoBehaviour
 
         id = EnemyDataLoader.Instance.GetIdByName(parent.name);
         movementSpeed = EnemyDataLoader.Instance.GetMovementSpeed(id);
+        canChase = true;
     }
     private void FixedUpdate()
     {
-        if (PlayerCollider != null && !enemyAttack.Attacking)
+        if (canChase && PlayerCollider != null && !enemyAttack.Attacking)
         {
 
             Vector2 direction = (PlayerCollider.transform.position - transform.position).normalized;

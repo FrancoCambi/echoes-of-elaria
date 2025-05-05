@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
+    private PlayerHealth playerHealth;
     private SwordHitbox hitbox;
 
     private AttackDirection attackDir;
@@ -41,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerHealth = GetComponent<PlayerHealth>();
         hitbox = GetComponentInChildren<SwordHitbox>();
 
         mainCamera = Camera.main;

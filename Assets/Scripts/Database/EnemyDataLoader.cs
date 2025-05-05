@@ -109,6 +109,36 @@ public class EnemyDataLoader
 
     }
 
+    public float GetKnockbackForce(int id)
+    {
+        string query = $"SELECT knockback_force FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        float knockbackForce = float.Parse(table.Rows[0]["knockback_force"].ToString());
+        return knockbackForce;
+
+    }
+
+    public int GetMinDamage(int id)
+    {
+        string query = $"SELECT min_damage FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        int minDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
+        return minDamage;
+
+    }
+
+    public int GetMaxDamage(int id)
+    {
+        string query = $"SELECT max_damage FROM mobs_data WHERE id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        int maxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
+        return maxDamage;
+
+    }
+
     public int GetAttackCD(int id)
     {
         string query = $"SELECT attack_cd FROM mobs_data WHERE id = {id}";

@@ -11,9 +11,13 @@ public class EnemyJumpAttack : MonoBehaviour
 
     private int id;
     private float jumpForce;
+    private int minDamage;
+    private int maxDamage;
+    private float knockbackForce;
     private int attackCD;
     private bool attacking;
     private bool canAttack;
+    private bool canDealDamage;
 
 
     public bool Attacking
@@ -32,11 +36,14 @@ public class EnemyJumpAttack : MonoBehaviour
 
         id = EnemyDataLoader.Instance.GetIdByName(gameObject.name);
         jumpForce = EnemyDataLoader.Instance.GetJumpForce(id);
+        minDamage = EnemyDataLoader.Instance.GetMinDamage(id);
+        maxDamage = EnemyDataLoader.Instance.GetMaxDamage(id);
+        knockbackForce = EnemyDataLoader.Instance.GetKnockbackForce(id);
         attackCD = EnemyDataLoader.Instance.GetAttackCD(id);
 
         attacking = false;
         canAttack = true;
-
+        canDealDamage = true;
     }
 
     // Update is called once per frame
@@ -64,6 +71,28 @@ public class EnemyJumpAttack : MonoBehaviour
     {
         attacking = false;
         rb.linearVelocity = Vector3.zero;
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player") && canDealDamage)
+        {
+            // THIS PROBABLY NEEDS TO CHANGE
+            StartCoroutine(DealDamage(col));
+        }
+    }
+
+    private IEnumerator DealDamage(Collision2D col)
+    {
+        canDealDamage = false;
+        IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
+        Vector2 direction = (Vector2)(col.gameObject.transform.position - transform.position).normalized;
+        Vector2 knockback = direction * knockbackForce;
+
+        int damage = Random.Range(minDamage, maxDamage + 1);
+        damageable.OnHit(damage, knockback);
+        yield return new WaitForSeconds(attackCD);
+        canDealDamage = true;
     }
 
 
