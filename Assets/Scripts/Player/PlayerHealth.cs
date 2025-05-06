@@ -32,6 +32,26 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
+    public float InvincibilityTime
+    {
+        get
+        {
+            return invincibilityTime;
+        }
+        set
+        {
+            invincibilityTime = value;
+        }
+    }
+
+    public float KnockbackTime
+    {
+        get
+        {
+            return knockbackTime;
+        }
+    }
+
 
     void Start()
     {

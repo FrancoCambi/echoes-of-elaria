@@ -60,6 +60,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool IsMoving
+    {
+        get
+        {
+            return horizontal != 0 || vertical != 0;
+        }
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -1,14 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
     private PlayerHealth playerHealth;
 
     private string currentState;
+    private bool alreadyInvincible;
 
     private const string IDLE_FRONT = "idle_front";
     private const string IDLE_SIDE = "idle_side";
@@ -34,25 +37,34 @@ public class PlayerAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
         playerHealth = GetComponent<PlayerHealth>();
 
-        animator = GetComponent<Animator>();
 
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+        alreadyInvincible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentState == "hit")
+        {
+            return;
+        }
+
         if (playerAttack.Attacking)
         {
             ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
         }
-        else if (playerHealth.Invincible)
+        else if (playerHealth.Invincible && !alreadyInvincible)
         {
-            ChangeAnimationState("hit");
+            StartCoroutine(nameof(HitAnimation));
+ 
         }
         else
         {
@@ -80,19 +92,44 @@ public class PlayerAnimation : MonoBehaviour
                 {
                     ChangeAnimationState(currentState.Replace("attack_", "idle_"));
                 }
-                if (!playerHealth.Invincible)
-                {
-                    ChangeAnimationState(currentState.Replace("hit", "idle_front"));
-                }
             }
         }
 
     }
 
-    public void PlayHitAnimation()
+    private IEnumerator HitAnimation()
     {
-        ChangeAnimationState(HIT);
+        // TODO: CHANGE MATERIAL FROM CODE NOT ANIMATION
+        ChangeAnimationState("hit");
+        alreadyInvincible = true;
+
+        yield return new WaitForSeconds(playerHealth.KnockbackTime);
+        ChangeAnimationState("idle_front");
+        
+
+
+        float elapsed = 0f;
+        Color originalColor = spriteRenderer.color;
+        float flashInterval = 0.3f;
+        float minAlpha = 0.5f;
+
+        while (elapsed < playerHealth.InvincibilityTime)
+        {
+            // Fade out
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, minAlpha);
+            yield return new WaitForSeconds(flashInterval / 2f);
+
+            // Full alpha
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+            yield return new WaitForSeconds(flashInterval / 2f);
+
+            elapsed += flashInterval;
+        }
+
+        spriteRenderer.color = originalColor;
+        alreadyInvincible = false;
     }
+
 
     void ChangeAnimationState(string newState)
     {
@@ -103,7 +140,7 @@ public class PlayerAnimation : MonoBehaviour
         currentState = newState;
     }
 
-    public AnimationClip FindAnimationByName(Animator animator, string name)
+    public AnimationClip FindAnimationByName(string name)
     {
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
         {
@@ -115,4 +152,5 @@ public class PlayerAnimation : MonoBehaviour
 
         return null;
     }
+
 }

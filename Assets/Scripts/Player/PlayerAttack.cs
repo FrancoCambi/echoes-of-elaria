@@ -92,7 +92,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         attacking = true;
-        Invoke(nameof(StopAttack), playerAnimation.FindAnimationByName(animator, "attack_" + TypeToStringAnimation(attackDir)).length);
+        Invoke(nameof(StopAttack), playerAnimation.FindAnimationByName("attack_" + TypeToStringAnimation(attackDir)).length);
     }
 
     void StopAttack()
