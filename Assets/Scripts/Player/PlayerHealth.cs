@@ -87,6 +87,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         StartCoroutine(nameof(RestoreMovement));
 
         currentHealth -= CalculateDamageReceived(damage);
+        rb.linearVelocity = Vector2.zero;
         rb.linearVelocity = knockback;
 
         if (currentHealth <= 0)
@@ -106,8 +107,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private IEnumerator RestoreMovement()
     {
         yield return new WaitForSeconds(knockbackTime);
-        playerMovement.CanMove = true;
         rb.linearVelocity = Vector2.zero;
+        playerMovement.CanMove = true;
     }
 
     private float CalculateKnockbackTime(Vector2 knockback)

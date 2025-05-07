@@ -5,6 +5,10 @@ public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private Material originalMaterial;
+    [SerializeField]
+    private Material flashMaterial;
 
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
@@ -12,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private string currentState;
     private bool alreadyInvincible;
+    private bool playingHit;
 
     private const string IDLE_FRONT = "idle_front";
     private const string IDLE_SIDE = "idle_side";
@@ -47,12 +52,13 @@ public class PlayerAnimation : MonoBehaviour
 
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         alreadyInvincible = false;
+        playingHit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentState == "hit")
+        if (playingHit)
         {
             return;
         }
@@ -99,17 +105,19 @@ public class PlayerAnimation : MonoBehaviour
 
     private IEnumerator HitAnimation()
     {
-        // TODO: CHANGE MATERIAL FROM CODE NOT ANIMATION
-        ChangeAnimationState("hit");
-        alreadyInvincible = true;
-
-        yield return new WaitForSeconds(playerHealth.KnockbackTime);
-        ChangeAnimationState("idle_front");
         
+        alreadyInvincible = true;
+        playingHit = true;
+
+        spriteRenderer.material = flashMaterial;
+        yield return new WaitForSeconds(playerHealth.KnockbackTime);
+        spriteRenderer.material = originalMaterial;
+
+        playingHit = false;
 
 
-        float elapsed = 0f;
         Color originalColor = spriteRenderer.color;
+        float elapsed = 0f;
         float flashInterval = 0.3f;
         float minAlpha = 0.5f;
 
