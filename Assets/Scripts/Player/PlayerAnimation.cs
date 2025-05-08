@@ -105,23 +105,22 @@ public class PlayerAnimation : MonoBehaviour
 
     private IEnumerator HitAnimation()
     {
-        
         alreadyInvincible = true;
         playingHit = true;
+        float flashTime = 0.2f;
 
         spriteRenderer.material = flashMaterial;
-        yield return new WaitForSeconds(playerHealth.KnockbackTime);
+        yield return new WaitForSeconds(flashTime);
         spriteRenderer.material = originalMaterial;
 
         playingHit = false;
-
 
         Color originalColor = spriteRenderer.color;
         float elapsed = 0f;
         float flashInterval = 0.3f;
         float minAlpha = 0.5f;
 
-        while (elapsed < playerHealth.InvincibilityTime)
+        while (elapsed < playerHealth.InvincibilityTime - flashTime)
         {
             // Fade out
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, minAlpha);

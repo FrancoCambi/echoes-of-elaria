@@ -77,18 +77,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (invincible) return;
 
         // Else
-
-        knockbackTime = CalculateKnockbackTime(knockback);
-
         invincible = true;
         StartCoroutine(nameof(StopInvincibility));
 
-        playerMovement.CanMove = false;
-        StartCoroutine(nameof(RestoreMovement));
-
         currentHealth -= CalculateDamageReceived(damage);
-        rb.linearVelocity = Vector2.zero;
-        rb.linearVelocity = knockback;
 
         if (currentHealth <= 0)
         {
@@ -96,6 +88,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             Death();
         }
 
+        if (knockback != Vector2.zero)
+        {
+            knockbackTime = CalculateKnockbackTime(knockback);
+            playerMovement.CanMove = false;
+            StartCoroutine(nameof(RestoreMovement));
+            rb.linearVelocity = Vector2.zero;   
+            rb.linearVelocity = knockback;
+        }
     }
 
     private IEnumerator StopInvincibility()

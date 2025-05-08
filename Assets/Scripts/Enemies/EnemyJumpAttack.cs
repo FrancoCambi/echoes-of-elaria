@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyJumpAttack : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private CapsuleCollider2D capsuleCollider;
 
     private EnemyAttackZone attackZone;
 
@@ -31,6 +32,7 @@ public class EnemyJumpAttack : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
 
         attackZone = GetComponentInChildren<EnemyAttackZone>();
 
@@ -73,27 +75,20 @@ public class EnemyJumpAttack : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
     }
 
-    private void OnCollisionStay2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player") && canDealDamage)
+        if (col.gameObject.CompareTag("Player"))
         {
-            // THIS PROBABLY NEEDS TO CHANGE
-            StartCoroutine(DealDamage(col));
+            IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
+            Vector2 direction = (Vector2)(col.gameObject.transform.position - transform.position).normalized;
+            Vector2 knockback = direction * knockbackForce;
+            int damage = Random.Range(minDamage, maxDamage + 1);
+            damageable.OnHit(damage, knockback);
+            capsuleCollider.enabled = false;
+            capsuleCollider.enabled = true;
         }
     }
 
-    private IEnumerator DealDamage(Collision2D col)
-    {
-        canDealDamage = false;
-        IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
-        Vector2 direction = (Vector2)(col.gameObject.transform.position - transform.position).normalized;
-        Vector2 knockback = direction * knockbackForce;
-
-        int damage = Random.Range(minDamage, maxDamage + 1);
-        damageable.OnHit(damage, knockback);
-        yield return new WaitForSeconds(attackCD);
-        canDealDamage = true;
-    }
 
 
 }

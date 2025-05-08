@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
                 rb.linearVelocity = movementDirection * movementSpeed;
             }
-            else if (movementDirection == Vector2.zero && !dashing && !playerHealth.Invincible)
+            else if (movementDirection == Vector2.zero && !dashing)
             {
                 StopMovement();
             }
