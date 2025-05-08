@@ -61,8 +61,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerMovement = GetComponent<PlayerMovement>();
 
         charID = GameManager.Instance.SelCharID;
-        maxHealth = PlayerDataLoader.Instance.GetMaxHealth(charID);
-        currentHealth = PlayerDataLoader.Instance.GetCurrentHealth(charID);
+        maxHealth = PlayerDataLoader.Instance.MaxHealth;
+        currentHealth = PlayerDataLoader.Instance.CurrentHealth;
         invincibilityTime = 1f;
         invincible = false;
     }

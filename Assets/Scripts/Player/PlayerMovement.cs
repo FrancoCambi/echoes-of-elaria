@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor.Toolbars;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,15 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementDirection;
 
     private int charID;
-    private float movementSpeed;
     private float horizontal = 0f;
     private float vertical = 0f;
     private bool canMove;
     private bool canDash;
     private bool dashing;
     private float dashingTime = 0.3f;
-    private float dashForce;
-    private float dashCD;
 
     public float Horizontal
     {
@@ -77,9 +75,6 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
 
         charID = GameManager.Instance.SelCharID;
-        movementSpeed = PlayerDataLoader.Instance.GetMovementSpeed(charID);
-        dashForce = PlayerDataLoader.Instance.GetDashForce(charID);
-        dashCD = PlayerDataLoader.Instance.GetDashCD(charID);
 
         canMove = true;
         canDash = true;
@@ -120,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementDirection != Vector2.zero && !dashing)
             {
 
-                rb.linearVelocity = movementDirection * movementSpeed;
+                rb.linearVelocity = movementDirection * PlayerDataLoader.Instance.MovementSpeed;
             }
             else if (movementDirection == Vector2.zero && !dashing)
             {
@@ -154,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         canMove = false;
         dashing = true;
+        float dashForce = PlayerDataLoader.Instance.DashForce;
 
         if (horizontal < 0 && vertical == 0)
         {
@@ -200,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         dashing = false;
         canMove = true;
         rb.linearVelocity = Vector2.zero;
-        yield return new WaitForSeconds(dashCD);
+        yield return new WaitForSeconds(PlayerDataLoader.Instance.DashCD);
         canDash = true;
     }
 }

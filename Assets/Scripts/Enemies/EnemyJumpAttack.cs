@@ -18,7 +18,6 @@ public class EnemyJumpAttack : MonoBehaviour
     private int attackCD;
     private bool attacking;
     private bool canAttack;
-    private bool canDealDamage;
 
 
     public bool Attacking
@@ -45,7 +44,6 @@ public class EnemyJumpAttack : MonoBehaviour
 
         attacking = false;
         canAttack = true;
-        canDealDamage = true;
     }
 
     // Update is called once per frame

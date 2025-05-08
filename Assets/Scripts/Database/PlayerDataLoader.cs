@@ -1,7 +1,7 @@
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
-public class PlayerDataLoader
+public class PlayerDataLoader : MonoBehaviour
 {
     private static PlayerDataLoader instance;
 
@@ -9,69 +9,83 @@ public class PlayerDataLoader
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new PlayerDataLoader();
-            }
+            instance ??= FindAnyObjectByType<PlayerDataLoader>();
             return instance;
         }
     }
 
+    public int MinDamage { get; private set; }
+    public int MaxDamage { get; private set; }
+    public float MovementSpeed { get; private set; }
+    public float DashForce { get; private set; }
+    public float DashCD { get; private set; }
+    public int MaxHealth { get; private set; }
+    public int CurrentHealth { get; private set; }
 
-    public float GetMovementSpeed(int id)
+
+    private void Awake()
     {
-        string query = $"SELECT movement_speed FROM characters WHERE character_id = {id}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        float speed = float.Parse(table.Rows[0]["movement_speed"].ToString());
-        return speed;
-        
+        LoadStatsFromDatabase();
     }
 
-    public float GetDashForce(int id)
+
+    private void LoadStatsFromDatabase()
     {
-        string query = $"SELECT dash_force FROM characters WHERE character_id = {id}";
+        string query = $"SELECT * FROM characters WHERE character_id = {GameManager.Instance.SelCharID}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
 
-        float dashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
-        return dashForce;
-
+        if (table.Rows.Count > 0)
+        {
+            MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
+            DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
+            DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
+            MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
+            MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
+            MaxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
+            CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
+        }
     }
 
-    public float GetDashCD(int id)
+    public void UpdateMovementSpeed(float newSpeed)
     {
-        string query = $"SELECT dash_cd FROM characters WHERE character_id = {id}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        float dashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
-        return dashCD;
-
+        MovementSpeed = newSpeed;
+        SaveStatToDatabase("movement_speed", newSpeed);
     }
 
-    public int GetDamage(int id)
+    public void UpdateDashForce(float newDashForce)
     {
-        string query = $"SELECT damage FROM characters WHERE character_id = {id}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        int damage = int.Parse(table.Rows[0]["damage"].ToString());
-        return damage;
+        DashForce = newDashForce;
+        SaveStatToDatabase("dash_force", newDashForce);
     }
 
-    public int GetMaxHealth(int id)
+    public void UpdateCurrentHealth(int newHealth)
     {
-        string query = $"SELECT max_health FROM characters WHERE character_id = {id}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        int maxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
-        return maxHealth;
+        CurrentHealth = Mathf.Clamp(newHealth, 0, MaxHealth);
+        SaveStatToDatabase("current_health", CurrentHealth);
     }
 
-    public int GetCurrentHealth(int id)
+    public void UpdateMaxHealth(int newHealth)
     {
-        string query = $"SELECT current_health FROM characters WHERE character_id = {id}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        int currentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
-        return currentHealth;
+        MaxHealth = newHealth;
+        SaveStatToDatabase("current_health", MaxHealth);
     }
+
+    public void UpdateMinDamage(int newMinDamage)
+    {
+        MinDamage = newMinDamage;
+        SaveStatToDatabase("current_health", MinDamage);
+    }
+
+    public void UpdateMaxDamage(int newMaxDamage)
+    {
+        MaxDamage = newMaxDamage;
+        SaveStatToDatabase("current_health", MaxDamage);
+    }
+
+    private void SaveStatToDatabase(string statName, float value)
+    {
+        string query = $"UPDATE characters SET {statName} = {value} WHERE character_id = {GameManager.Instance.SelCharID}";
+        DBManager.Instance.ExecuteQuery(query);
+    }
+
 }

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         selCharID = 1;
     }

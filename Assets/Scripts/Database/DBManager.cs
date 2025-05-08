@@ -22,7 +22,7 @@ public class DBManager : MonoBehaviour
 
     private string dbPath;
 
-    private void Start()
+    private void Awake()
     {
         // Ruta para acceder al archivo .db
         string filePath = Path.Combine(Application.streamingAssetsPath, "template.db");
@@ -46,7 +46,7 @@ public class DBManager : MonoBehaviour
         // Cargar columnas
         for (int i = 0; i < reader.FieldCount; i++)
         {
-            table.Columns.Add(reader.GetName(i), typeof(string)); // Todo como string para simplificar
+            table.Columns.Add(reader.GetName(i), typeof(string));
         }
 
         // Cargar filas
