@@ -12,7 +12,8 @@ public class SwordHitbox : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyHealth>().OnHit(PlayerDataLoader.Instance.MaxDamage, Vector2.zero);
+            other.GetComponent<EnemyHealth>().OnHit(PlayerManager.Instance.MaxDamage, Vector2.zero);
+            PlayerManager.Instance.GainRage(10);
         }
     }
 

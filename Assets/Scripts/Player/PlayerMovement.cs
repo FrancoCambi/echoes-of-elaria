@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementDirection != Vector2.zero && !dashing)
             {
 
-                rb.linearVelocity = movementDirection * PlayerDataLoader.Instance.MovementSpeed;
+                rb.linearVelocity = movementDirection * PlayerManager.Instance.MovementSpeed;
             }
             else if (movementDirection == Vector2.zero && !dashing)
             {
@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         canMove = false;
         dashing = true;
-        float dashForce = PlayerDataLoader.Instance.DashForce;
+        float dashForce = PlayerManager.Instance.DashForce;
 
         if (horizontal < 0 && vertical == 0)
         {
@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         dashing = false;
         canMove = true;
         rb.linearVelocity = Vector2.zero;
-        yield return new WaitForSeconds(PlayerDataLoader.Instance.DashCD);
+        yield return new WaitForSeconds(PlayerManager.Instance.DashCD);
         canDash = true;
     }
 }

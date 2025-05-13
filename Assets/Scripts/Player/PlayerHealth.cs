@@ -6,12 +6,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
 
-    private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
 
-    private int charID;
-    private int maxHealth;
-    private int currentHealth;
     private float invincibilityTime;
     private float knockbackTime;
     private bool invincible;
@@ -20,7 +16,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         get
         {
-            return currentHealth > 0;
+            return PlayerManager.Instance.CurrentHealth > 0;
         }
     }
 
@@ -57,12 +53,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody2D>();
 
-        playerAnimation = GetComponent<PlayerAnimation>();
         playerMovement = GetComponent<PlayerMovement>();
 
-        charID = GameManager.Instance.SelCharID;
-        maxHealth = PlayerDataLoader.Instance.MaxHealth;
-        currentHealth = PlayerDataLoader.Instance.CurrentHealth;
         invincibilityTime = 1f;
         invincible = false;
     }
@@ -80,11 +72,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         invincible = true;
         StartCoroutine(nameof(StopInvincibility));
 
-        currentHealth -= CalculateDamageReceived(damage);
+        int receivedDamage = CalculateDamageReceived(damage);
+        PlayerManager.Instance.TakeDamage(receivedDamage);
 
-        if (currentHealth <= 0)
+        if (PlayerManager.Instance.CurrentHealth <= 0)
         {
-            currentHealth = 0;
             Death();
         }
 
