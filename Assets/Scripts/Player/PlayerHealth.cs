@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -62,11 +63,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Death()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerManager.Instance.UpdateCurrentRage(0);
+        PlayerManager.Instance.UpdateCurrentHealth(PlayerManager.Instance.MaxHealth);
     }
 
-    public void OnHit(int damage, Vector2 knockback)
+    public int OnHit(int damage, Vector2 knockback)
     {
-        if (invincible) return;
+        if (invincible) return 0;
 
         // Else
         invincible = true;
@@ -88,7 +92,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             rb.linearVelocity = Vector2.zero;   
             rb.linearVelocity = knockback;
         }
+
+        return receivedDamage;
     }
+
 
     private IEnumerator StopInvincibility()
     {

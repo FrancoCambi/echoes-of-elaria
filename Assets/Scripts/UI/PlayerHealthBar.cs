@@ -7,8 +7,7 @@ public class PlayerHealthBar : MonoBehaviour
     private Image bar;
     private TextMeshProUGUI healthText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void Awake()
     {
         bar = GetComponent<Image>();
         healthText = GetComponentInChildren<TextMeshProUGUI>();
@@ -25,5 +24,10 @@ public class PlayerHealthBar : MonoBehaviour
     {
         bar.fillAmount = currentHealth / (float)PlayerManager.Instance.MaxHealth;
         healthText.text = $"{currentHealth}/{PlayerManager.Instance.MaxHealth}";
+    }
+
+    private void OnDisable()
+    {
+        PlayerManager.OnCurrentHealthChanged -= UpdateBar;
     }
 }

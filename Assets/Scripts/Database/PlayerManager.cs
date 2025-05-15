@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public int Level { get; private set; }
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
     public float MovementSpeed { get; private set; }
@@ -29,6 +30,7 @@ public class PlayerManager : MonoBehaviour
     public static event Action<int> OnMaxHealthChanged;
     public static event Action<int> OnCurrentRageChanged;
     public static event Action<int> OnMaxRageChanged;
+    public static event Action<int> OnLevelUp;
 
 
     private void Awake()
@@ -44,6 +46,7 @@ public class PlayerManager : MonoBehaviour
 
         if (table.Rows.Count > 0)
         {
+            Level = int.Parse(table.Rows[0]["level"].ToString());
             MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
             DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
             DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
@@ -58,6 +61,12 @@ public class PlayerManager : MonoBehaviour
 
     #region Updaters
 
+    public void UpdateLevel(int newLevel)
+    {
+        Level = newLevel;
+        SaveStatToDatabase("level", newLevel);
+        OnLevelUp?.Invoke(Level);
+    }
     public void UpdateMovementSpeed(float newSpeed)
     {
         MovementSpeed = newSpeed;
@@ -108,6 +117,8 @@ public class PlayerManager : MonoBehaviour
     {
         CurrentRage = Mathf.Clamp(newRage, 0, MaxRage);
         SaveStatToDatabase("current_rage", CurrentRage);
+        OnCurrentRageChanged?.Invoke(CurrentRage);
+
     }
 
     #endregion
@@ -117,16 +128,21 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         UpdateCurrentHealth(CurrentHealth - damage);
-        SaveStatToDatabase("current_health", CurrentHealth);
-        OnCurrentHealthChanged?.Invoke(CurrentHealth);
+
+        // Gain rage (This formula probably needs to change in the future)
+        int rageGained =  (int)Mathf.Ceil((damage * 3) / (float)(Level * 8));
+        GainRage(rageGained);
     }
 
     public void GainRage(int amount)
     {
         UpdateCurrentRage(CurrentRage += amount);
-        SaveStatToDatabase("current_rage", CurrentRage);
-        OnCurrentRageChanged?.Invoke(CurrentRage);
 
+    }
+
+    public void LevelUp()
+    {
+        UpdateLevel(Level++);
     }
 
     #endregion

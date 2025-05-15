@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         
     }
-    public void OnHit(int damage, Vector2 knockback)
+    public int OnHit(int damage, Vector2 knockback)
     {
         knockbackTime = CalculateKnockbackTime(knockback);
 
@@ -45,6 +45,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             Death();
         }
+
+        return damage;
     }
 
     private IEnumerator RestoreMovement()

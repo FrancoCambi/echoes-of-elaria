@@ -7,10 +7,10 @@ public class PlayerResourceBar : MonoBehaviour
     private Image bar;
     private TextMeshProUGUI resourceText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void Awake()
     {
         bar = GetComponent<Image>();
+
         resourceText = GetComponentInChildren<TextMeshProUGUI>();
 
         PlayerManager.OnCurrentRageChanged += UpdateBar;
@@ -26,4 +26,10 @@ public class PlayerResourceBar : MonoBehaviour
         bar.fillAmount = currentRage / (float)PlayerManager.Instance.MaxRage;
         resourceText.text = $"{currentRage}/{PlayerManager.Instance.MaxRage}";
     }
+
+    private void OnDisable()
+    {
+        PlayerManager.OnCurrentRageChanged -= UpdateBar;
+    }
 }
+    
