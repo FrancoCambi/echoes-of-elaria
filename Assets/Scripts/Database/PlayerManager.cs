@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     public int MaxRage { get; private set; }
     public int CurrentRage { get; private set; }
 
+    public int InventorySpace {  get; private set; }    
+
     public static event Action<int> OnCurrentHealthChanged;
     public static event Action<int> OnMaxHealthChanged;
     public static event Action<int> OnCurrentRageChanged;
@@ -56,6 +58,8 @@ public class PlayerManager : MonoBehaviour
             CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
             MaxRage = int.Parse(table.Rows[0]["max_rage"].ToString());
             CurrentRage = int.Parse(table.Rows[0]["current_rage"].ToString());
+            InventorySpace = int.Parse(table.Rows[0]["inventory_space"].ToString());
+
         }
     }
 
