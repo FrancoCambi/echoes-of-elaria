@@ -28,7 +28,6 @@
 - **Inventory and loot** system with item rarity and enhancements
 - Interactive **NPC dialogues** and **quest system**
 - **Shops and vendors** with item buying/selling mechanics
-- **Save/Load system** with partial persistence
 - **SQLite database integration** for world data
 
 ---
