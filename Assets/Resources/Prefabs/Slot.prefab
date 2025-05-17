@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 8769043587713723174}
   - component: {fileID: 1978197571754518869}
   - component: {fileID: 1226641096096211022}
+  - component: {fileID: 7453028856461117705}
   m_Layer: 5
   m_Name: AmountText
   m_TagString: Untagged
@@ -211,6 +212,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &7453028856461117705
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337352233890568948}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &9053519431746025036
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +236,7 @@ GameObject:
   - component: {fileID: 6828084886114063748}
   - component: {fileID: 8860444317409267381}
   - component: {fileID: 7711042024054914729}
+  - component: {fileID: 6172218576861734094}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -302,3 +316,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 2381222515188669618}
+--- !u!225 &6172218576861734094
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053519431746025036}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

@@ -72,7 +72,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-            OnInventoryChanged?.Invoke();
+        OnInventoryChanged?.Invoke();
     }
 
     public bool ItemInInventory(int itemID)

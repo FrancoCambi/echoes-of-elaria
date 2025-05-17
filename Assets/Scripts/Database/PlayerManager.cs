@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     {
         get
         {
-            instance ??= FindAnyObjectByType<PlayerManager>();
+            instance = instance != null ? instance : FindAnyObjectByType<PlayerManager>();
             return instance;
         }
     }
