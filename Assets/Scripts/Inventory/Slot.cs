@@ -8,20 +8,16 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 {
     [SerializeField]
     private Image icon;
-
     private TextMeshProUGUI amountText;
 
-    private int itemID;
+    private Item item;
+
     private int amount;
-    public int ItemID
+    public Item Item
     {
         get
         {
-            return itemID;
-        }
-        set
-        {
-            itemID = value;
+            return item;
         }
     }
     public int Amount
@@ -36,53 +32,67 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             UpdateText();
         }
     }
-
-    private void Start()
-    {
-        amountText = GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    void Update()
-    {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            Debug.Log("Hovering over: " + result.gameObject.name);
-        }
-    }
-
     public bool IsEmpty
     {
         get
         {
-            return amount == 0;
+            return item == null;
         }
     }
+
+    public bool IsFull
+    {
+        get
+        {
+            if (!IsEmpty)
+            {
+                return amount == item.MaxStack;
+            }
+            return false;
+        }
+    }
+
+    private void Start()
+    {
+        amountText = GetComponentInChildren<TextMeshProUGUI>();
+        amount = 0;
+    }
+
     public void UpdateText()
     {
         amountText.text = amount.ToString();
     }
 
-    public void AddItem(int id, int quantity)
+    public void AddItemInEmpty(int id)
     {
-        Item item = ItemsManager.Instance.GetItemByID(id);
+        item = ItemsManager.Instance.GetItemByID(id);
         icon.enabled = true;
         icon.sprite = item.Icon;
         
-        amount = quantity;
-        itemID = id;
-        UpdateText();
+        Amount++;
     }
+
+    public void StackItem()
+    {
+        Amount++;
+    }
+
+    private void RemoveItem()
+    {
+        icon.enabled = false;
+        amountText.text = "";
+        amount = 0;
+        item = null;
+    }
+
+    #region interfaces
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (icon.enabled)
+        if (!IsEmpty)
         {
-            ItemDragManager.Instance.StartDrag(ItemsManager.Instance.GetItemByID(itemID), amount, icon.sprite);
+            ItemDragManager.Instance.StartDrag(item, amount, icon.sprite, this);
             icon.color = Color.gray;
 
         }
@@ -100,16 +110,17 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (ItemDragManager.Instance.IsDragging)
+        if (ItemDragManager.Instance.IsDragging && ItemDragManager.Instance.DraggedSlot != this)
         {
-            Item item = ItemDragManager.Instance.DraggedItem;
+            item = ItemDragManager.Instance.DraggedItem;
+            Amount = ItemDragManager.Instance.DraggedStack;
             icon.enabled = true;
             icon.sprite = item.Icon;
-            amount = ItemDragManager.Instance.DraggedStack;
-            itemID = item.Id;
-            UpdateText();
+            ItemDragManager.Instance.DraggedSlot.RemoveItem();
         }
     }
+
+    #endregion
 
 
 

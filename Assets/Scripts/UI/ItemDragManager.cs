@@ -18,6 +18,7 @@ public class ItemDragManager : MonoBehaviour
 
     public Item DraggedItem { get; private set; }
     public int DraggedStack { get; private set; }
+    public Slot DraggedSlot { get; private set; }
 
     public bool IsDragging
     {
@@ -33,10 +34,11 @@ public class ItemDragManager : MonoBehaviour
         draggedImage = GetComponent<Image>();
     }
 
-    public void StartDrag(Item item, int stack, Sprite icon)
+    public void StartDrag(Item item, int stack, Sprite icon, Slot slot)
     {
         DraggedItem = item;
         DraggedStack = stack;
+        DraggedSlot = slot;
         draggedImage.sprite = icon;
         draggedImage.enabled = true;
     }
