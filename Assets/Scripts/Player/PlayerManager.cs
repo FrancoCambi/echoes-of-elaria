@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     public static event Action<int> OnCurrentHealthChanged;
     public static event Action<int> OnMaxHealthChanged;
     public static event Action<int> OnCurrentRageChanged;
-    public static event Action<int> OnMaxRageChanged;
+    //public static event Action<int> OnMaxRageChanged;
     public static event Action<int> OnLevelUp;
 
 
