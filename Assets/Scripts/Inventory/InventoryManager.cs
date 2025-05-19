@@ -29,8 +29,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public static event Action OnInventoryChanged;
-
     private void Start()
     {
         for (int i = 0; i < PlayerManager.Instance.InventorySpace; i++)
@@ -44,29 +42,27 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            AddItem(1, 1);
+            AddItems(1, 1);
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
-            AddItem(1, 3);
+            AddItems(2, 1);
         }
     }
 
-    public void AddItem(int itemID, int amount)
+    public void AddItems(int itemID, int amount)
     {
         if (ItemInInventory(itemID))
         {
-            StackItem(itemID, amount);
+            StackItems(itemID, amount);
         }
         else
         {
-            AddItemInEmpty(itemID, amount);
+            AddItemsInEmpty(itemID, amount);
         }
-
-        OnInventoryChanged?.Invoke();
     }
 
-    public void StackItem(int itemID, int amount)
+    private void StackItems(int itemID, int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -74,28 +70,29 @@ public class InventoryManager : MonoBehaviour
 
             if (slot)
             {
-                slot.StackItem();
+                slot.Amount++;
             }
             else
             {
-                AddItemInEmpty(itemID, amount - i);
+                AddItemsInEmpty(itemID, amount - i);
                 return;
             }
         }
     }
 
-    public void AddItemInEmpty(int itemID, int amount)
+    private void AddItemsInEmpty(int itemID, int amount)
     {
         if (amount > 0)
         {
-            Slot slot = GetFirstEmptySlot();
-            slot.AddItemInEmpty(itemID);
-
-            StackItem(itemID, amount - 1);
+            if (GetFirstEmptySlot() is Slot slot and not null)
+            {
+                slot.AddItemInEmpty(itemID);
+                StackItems(itemID, amount - 1);
+            }
         }
     }
 
-    public Slot GetFirstEmptySlot()
+    private Slot GetFirstEmptySlot()
     {
         foreach (Slot slot in slots)
         {
@@ -107,7 +104,7 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-    public Slot GetFirstNonFullSlot(int itemID)
+    private Slot GetFirstNonFullSlot(int itemID)
     {
         foreach (Slot slot in slots)
         {
