@@ -18,8 +18,8 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField]
     private GameObject slotPrefab;
-
     private List<Slot> slots = new();
+    private CanvasGroup group;
 
     public List<Slot> Slots
     {
@@ -36,6 +36,8 @@ public class InventoryManager : MonoBehaviour
             GameObject go = Instantiate(slotPrefab, transform);
             slots.Add(go.GetComponent<Slot>());
         }
+
+        group = GetComponent<CanvasGroup>();
     }
 
     private void Update()
@@ -49,6 +51,7 @@ public class InventoryManager : MonoBehaviour
             AddItems(2, 1);
         }
     }
+
 
     public void AddItems(int itemID, int amount)
     {
@@ -131,4 +134,10 @@ public class InventoryManager : MonoBehaviour
     {
 
     } 
+
+    public void OpenCloseUI()
+    {
+        group.alpha = group.alpha != 0 ? 0 : 1;
+        group.blocksRaycasts = !group.blocksRaycasts;
+    }
 }
