@@ -215,11 +215,13 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (!IsEmpty && eventData.button == PointerEventData.InputButton.Right)
         {
+            // Consumables are the ones with effects.
             if (Item.Type == ItemType.Consumable)
             {
                 foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Item.Id))
                 {
                     effect.Apply();
+                    Amount--;
                 }
             }
         }
