@@ -129,6 +129,11 @@ public class PlayerManager : MonoBehaviour
 
     #region Manage
 
+    public void Heal(int hp)
+    {
+        UpdateCurrentHealth(CurrentHealth + hp);
+    }
+
     public void TakeDamage(int damage)
     {
         UpdateCurrentHealth(CurrentHealth - damage);

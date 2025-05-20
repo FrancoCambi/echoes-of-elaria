@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
 {
     [SerializeField]
     private Image icon;
@@ -207,6 +207,20 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             else if (Item.Id != ItemDragManager.Instance.DraggedSlot.Item.Id)
             {
                 SwapSlots(ItemDragManager.Instance.DraggedSlot, this);
+            }
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!IsEmpty && eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (Item.Type == ItemType.Consumable)
+            {
+                foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Item.Id))
+                {
+                    effect.Apply();
+                }
             }
         }
     }
