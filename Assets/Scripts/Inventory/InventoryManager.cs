@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -34,10 +36,13 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < PlayerManager.Instance.InventorySpace; i++)
         {
             GameObject go = Instantiate(slotPrefab, transform);
-            slots.Add(go.GetComponent<Slot>());
+            Slot slot = go.GetComponent<Slot>();
+            slots.Add(slot);
         }
 
         group = GetComponent<CanvasGroup>();
+
+        LoadItemsFromDatabase();
     }
 
     private void Update()
@@ -63,6 +68,17 @@ public class InventoryManager : MonoBehaviour
         {
             AddItemsInEmpty(itemID, amount);
         }
+
+        SaveItemsToDatabase();
+    }
+
+    public void AddItemsInSlot(int itemID, int amount, int slotIndex)
+    {
+        Slot slot = slots[slotIndex];
+
+        if (!slot.IsEmpty) return;
+
+        slot.AddItemsInEmpty(itemID, amount);
     }
 
     private void StackItems(int itemID, int amount)
@@ -133,7 +149,49 @@ public class InventoryManager : MonoBehaviour
     public void RemoveItem(int itemID, int amount)
     {
 
-    } 
+    }
+    
+    public void LoadItemsFromDatabase()
+    {
+        string query = $"SELECT * FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        foreach (DataRow row in table.Rows)
+        {
+            int itemID = int.Parse(row["item_id"].ToString());
+            int amount = int.Parse(row["amount"].ToString());
+            int slotIndex = int.Parse(row["slot_index"].ToString());
+
+            AddItemsInSlot(itemID, amount, slotIndex);
+        }
+    }
+    public void SaveItemsToDatabase()
+    {
+        List<(int, int, int, int)> valuesList = new();
+
+        foreach (Slot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                valuesList.Add((GameManager.Instance.SelCharID, slot.Item.Id, slot.Amount, slot.SlotIndex));
+            }
+        }
+
+        string values = string.Join(",", valuesList);
+
+        string query = values != "" ? 
+            $"BEGIN TRANSACTION;" +
+            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID};" +
+            $"INSERT INTO characters_inventory(character_id, item_id, amount, slot_index)" +
+            $"VALUES" +
+            $"{values};" +
+            $"COMMIT;" 
+            : 
+            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID}";
+
+        DBManager.Instance.ExecuteQuery(query);
+    }
+
 
     public void OpenCloseUI()
     {

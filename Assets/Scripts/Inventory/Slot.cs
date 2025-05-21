@@ -47,13 +47,27 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         set
         {
             amount = value;
+            if (amount > item.MaxStack)
+            {
+                amount = item.MaxStack;
+            }
             UpdateText();
+
             if (amount <= 0)
             {
                 Clear();
             }
         }
     }
+
+    public int SlotIndex
+    {
+        get
+        {
+            return InventoryManager.Instance.Slots.IndexOf(this);
+        }
+    }
+
     public bool IsEmpty
     {
         get
@@ -76,7 +90,7 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         amountText = GetComponentInChildren<TextMeshProUGUI>();
         amount = 0;
@@ -85,6 +99,7 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void UpdateText()
     {
         amountText.text = amount.ToString();
+
     }
 
     #region methods
@@ -99,7 +114,7 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         Amount++;
     }
 
-    private void AddItemsInEmpty(int id, int amount)
+    public void AddItemsInEmpty(int id, int amount)
     {
         // Assuming this is an empty slot, add items.
         item = ItemsManager.Instance.GetItemByID(id);
@@ -153,6 +168,8 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         amountText.text = "";
         amount = 0;
         item = null;
+
+        InventoryManager.Instance.SaveItemsToDatabase();
     }
 
     #endregion
@@ -210,6 +227,8 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             {
                 SwapSlots(ins.DraggedSlot, this);
             }
+
+            InventoryManager.Instance.SaveItemsToDatabase();
         }
     }
 
@@ -228,6 +247,7 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 // Item will consume even if it does not have effects but..
                 // why would it be a consumable then?
                 Amount--;
+                InventoryManager.Instance.SaveItemsToDatabase();
             }
         }
     }
