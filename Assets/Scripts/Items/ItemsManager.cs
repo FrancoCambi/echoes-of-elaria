@@ -34,7 +34,7 @@ public class ItemsManager : MonoBehaviour
 
     public List<ItemEffect> GetEffectsByID(int id)
     {
-        string query = $"SELECT * FROM item_effects WHERE id = {id}";
+        string query = $"SELECT * FROM item_effects WHERE item_id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
         List<ItemEffect> effects = new();
 

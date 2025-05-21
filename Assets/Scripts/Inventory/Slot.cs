@@ -162,7 +162,7 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!IsEmpty)
+        if (!IsEmpty && eventData.button == PointerEventData.InputButton.Left)
         {
             ItemDragManager.Instance.StartDrag(item, amount, icon.sprite, this);
             icon.color = Color.gray;
@@ -189,24 +189,26 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnDrop(PointerEventData eventData)
     {
+        ItemDragManager ins = ItemDragManager.Instance;
+
         // If I'm dragging an item and not putting it in the same slot..
-        if (ItemDragManager.Instance.IsDragging && ItemDragManager.Instance.DraggedSlot != this)
+        if (ins.IsDragging && ins.DraggedSlot != this)
         {
             // If drop slot is empty, just put it there.
             if (IsEmpty)
             {
-                AddItemsInEmpty(ItemDragManager.Instance.DraggedItem.Id, ItemDragManager.Instance.DraggedAmount);
-                ItemDragManager.Instance.DraggedSlot.Clear();
+                AddItemsInEmpty(ins.DraggedItem.Id, ins.DraggedAmount);
+                ins.DraggedSlot.Clear();
             }
-            // If drop slot contains the same item, combine the stacks.
-            else if (Item.Id == ItemDragManager.Instance.DraggedSlot.Item.Id)
+            // If drop slot contains the same item and drop target is not full, combine the stacks.
+            else if (Item.Id == ins.DraggedSlot.Item.Id && !IsFull)
             {
-                CombineStacks(ItemDragManager.Instance.DraggedSlot, this);
+                CombineStacks(ins.DraggedSlot, this);
             }
-            // If drop slot contains a different item, swap places.
-            else if (Item.Id != ItemDragManager.Instance.DraggedSlot.Item.Id)
+            // If drop slot contains a different item or drop target is full and it's the same item, swap places.
+            else if (Item.Id != ins.DraggedSlot.Item.Id || (Item.Id == ins.DraggedSlot.Item.Id && IsFull))
             {
-                SwapSlots(ItemDragManager.Instance.DraggedSlot, this);
+                SwapSlots(ins.DraggedSlot, this);
             }
         }
     }
@@ -221,8 +223,11 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Item.Id))
                 {
                     effect.Apply();
-                    Amount--;
                 }
+
+                // Item will consume even if it does not have effects but..
+                // why would it be a consumable then?
+                Amount--;
             }
         }
     }
