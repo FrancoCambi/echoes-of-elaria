@@ -96,13 +96,13 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         amount = 0;
     }
 
+
+    #region methods
     public void UpdateText()
     {
         amountText.text = amount.ToString();
 
     }
-
-    #region methods
 
     public void AddItemInEmpty(int id)
     {
@@ -209,23 +209,23 @@ public class Slot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         ItemDragManager ins = ItemDragManager.Instance;
 
         // If I'm dragging an item and not putting it in the same slot..
-        if (ins.IsDragging && ins.DraggedSlot != this)
+        if (ins.IsDragging && ins.DraggedInventorySlot != this)
         {
             // If drop slot is empty, just put it there.
             if (IsEmpty)
             {
                 AddItemsInEmpty(ins.DraggedItem.Id, ins.DraggedAmount);
-                ins.DraggedSlot.Clear();
+                ins.DraggedInventorySlot.Clear();
             }
             // If drop slot contains the same item and drop target is not full, combine the stacks.
-            else if (Item.Id == ins.DraggedSlot.Item.Id && !IsFull)
+            else if (Item.Id == ins.DraggedInventorySlot.Item.Id && !IsFull)
             {
-                CombineStacks(ins.DraggedSlot, this);
+                CombineStacks(ins.DraggedInventorySlot, this);
             }
             // If drop slot contains a different item or drop target is full and it's the same item, swap places.
-            else if (Item.Id != ins.DraggedSlot.Item.Id || (Item.Id == ins.DraggedSlot.Item.Id && IsFull))
+            else if (Item.Id != ins.DraggedInventorySlot.Item.Id || (Item.Id == ins.DraggedInventorySlot.Item.Id && IsFull))
             {
-                SwapSlots(ins.DraggedSlot, this);
+                SwapSlots(ins.DraggedInventorySlot, this);
             }
 
             InventoryManager.Instance.SaveItemsToDatabase();

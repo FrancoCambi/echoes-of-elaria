@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 3b39e540b63363549b9dfadd96e353e0
+guid: f3c407caf14b38545ac88c273ffd8289
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8209086939063139740
-    second: ActionSlot-sheet_0
+      213: 1025731274907253640
+    second: ActionSlot-sheet-sheet_0
   - first:
-      213: -5879861040256593700
-    second: ActionSlot-sheet_1
+      213: -4414444680605325678
+    second: ActionSlot-sheet-sheet_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ActionSlot-sheet_0
+      name: ActionSlot-sheet-sheet_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 15
-        width: 34
-        height: 34
+        x: 14
+        y: 14
+        width: 36
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c9d3825d3198ce170800000000000000
-      internalID: 8209086939063139740
+      spriteID: 88bfad3f8212c3e00800000000000000
+      internalID: 1025731274907253640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ActionSlot-sheet_1
+      name: ActionSlot-sheet-sheet_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 15
-        width: 34
-        height: 34
+        x: 78
+        y: 14
+        width: 36
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd0d8d66989866ea0800000000000000
-      internalID: -5879861040256593700
+      spriteID: 29628e3a3fdbcb2c0800000000000000
+      internalID: -4414444680605325678
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4657ddb8ca3671c49aa300fac2f3c30b
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -172,9 +172,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      ActionSlot-sheet_0: 8209086939063139740
-      ActionSlot-sheet_1: -5879861040256593700
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

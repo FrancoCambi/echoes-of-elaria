@@ -18,7 +18,8 @@ public class ItemDragManager : MonoBehaviour
 
     public Item DraggedItem { get; private set; }
     public int DraggedAmount { get; private set; }
-    public Slot DraggedSlot { get; private set; }
+    public Slot DraggedInventorySlot { get; private set; }
+    public ActionSlot DraggedActionSlot { get; private set; }
 
     public bool IsDragging
     {
@@ -28,6 +29,21 @@ public class ItemDragManager : MonoBehaviour
         }
     }
 
+    public bool IsInventoryDrag
+    {
+        get
+        {
+            return IsDragging && DraggedInventorySlot != null;
+        }
+    }
+
+    public bool IsActionDrag
+    {
+        get
+        {
+            return IsDragging && DraggedActionSlot != null;
+        }
+    }
 
     private void Start()
     {
@@ -38,7 +54,16 @@ public class ItemDragManager : MonoBehaviour
     {
         DraggedItem = item;
         DraggedAmount = stack;
-        DraggedSlot = slot;
+        DraggedInventorySlot = slot;
+        draggedImage.sprite = icon;
+        draggedImage.enabled = true;
+    }
+
+    public void StartDrag(Item item, int stack, Sprite icon, ActionSlot slot)
+    {
+        DraggedItem = item;
+        DraggedAmount = stack;
+        DraggedActionSlot = slot;
         draggedImage.sprite = icon;
         draggedImage.enabled = true;
     }
