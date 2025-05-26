@@ -6189,10 +6189,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1215901332}
-  - component: {fileID: 1215901333}
   - component: {fileID: 1215901335}
   - component: {fileID: 1215901334}
   - component: {fileID: 1215901336}
+  - component: {fileID: 1215901337}
   m_Layer: 0
   m_Name: DragManager
   m_TagString: Untagged
@@ -6219,18 +6219,6 @@ RectTransform:
   m_AnchoredPosition: {x: -124, y: -28}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1215901333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215901331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ebee0fbd40c0048bfdc4871a109959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1215901334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6281,6 +6269,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1215901337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215901331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f2b35cab97eaf4b8d8d011c0d77741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1239671893
 GameObject:
   m_ObjectHideFlags: 0
