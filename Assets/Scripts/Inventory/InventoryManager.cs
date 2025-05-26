@@ -20,10 +20,10 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField]
     private GameObject slotPrefab;
-    private List<Slot> slots = new();
+    private List<InventorySlot> slots = new();
     private CanvasGroup group;
 
-    public List<Slot> Slots
+    public List<InventorySlot> Slots
     {
         get
         {
@@ -36,7 +36,7 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < PlayerManager.Instance.InventorySpace; i++)
         {
             GameObject go = Instantiate(slotPrefab, transform);
-            Slot slot = go.GetComponent<Slot>();
+            InventorySlot slot = go.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
 
@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            AddItems(1, 1);
+            AddItems(1, 3);
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
@@ -60,7 +60,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItems(int itemID, int amount)
     {
-        if (ItemInInventory(itemID))
+        if (ItemInInventory(itemID) && GetFirstNonFullSlot(itemID) != null)
         {
             StackItems(itemID, amount);
         }
@@ -72,48 +72,41 @@ public class InventoryManager : MonoBehaviour
         SaveItemsToDatabase();
     }
 
+    private void AddItemsInEmpty(int itemID, int amount)
+    {
+        if (amount > 0)
+        {
+            if (GetFirstEmptySlot() is InventorySlot slot and not null)
+            {
+                slot.AddItemsInEmpty(itemID, amount);
+            }
+        }
+    }
+
+    private void StackItems(int itemID, int amount)
+    {
+        if (amount > 0)
+        {
+            if (GetFirstNonFullSlot(itemID) is InventorySlot slot and not null)
+            {
+                slot.AddItemsInNonEmpty(itemID, amount);
+            }
+        }
+
+    }
+
     public void AddItemsInSlot(int itemID, int amount, int slotIndex)
     {
-        Slot slot = slots[slotIndex];
+        InventorySlot slot = slots[slotIndex];
 
         if (!slot.IsEmpty) return;
 
         slot.AddItemsInEmpty(itemID, amount);
     }
 
-    private void StackItems(int itemID, int amount)
+    public InventorySlot GetFirstEmptySlot()
     {
-        for (int i = 0; i < amount; i++)
-        {
-            Slot slot = GetFirstNonFullSlot(itemID);
-
-            if (slot)
-            {
-                slot.Amount++;
-            }
-            else
-            {
-                AddItemsInEmpty(itemID, amount - i);
-                return;
-            }
-        }
-    }
-
-    private void AddItemsInEmpty(int itemID, int amount)
-    {
-        if (amount > 0)
-        {
-            if (GetFirstEmptySlot() is Slot slot and not null)
-            {
-                slot.AddItemInEmpty(itemID);
-                StackItems(itemID, amount - 1);
-            }
-        }
-    }
-
-    private Slot GetFirstEmptySlot()
-    {
-        foreach (Slot slot in slots)
+        foreach (InventorySlot slot in slots)
         {
             if (slot.IsEmpty)
             {
@@ -123,11 +116,13 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-    private Slot GetFirstNonFullSlot(int itemID)
+    private InventorySlot GetFirstNonFullSlot(int itemID)
     {
-        foreach (Slot slot in slots)
+        foreach (InventorySlot slot in slots)
         {
-            if (!slot.IsEmpty && slot.Item.Id == itemID && !slot.IsFull)
+            Item contentItem = slot.Content as Item;
+
+            if (!slot.IsEmpty && contentItem.Id == itemID && !slot.IsFull)
             {
                 return slot;
             }
@@ -138,7 +133,10 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if (!slots[i].IsEmpty && slots[i].Item.Id == itemID)
+            InventorySlot slot = slots[i];
+            Item contentItem = slot.Content as Item;
+
+            if (!slot.IsEmpty && contentItem.Id == itemID)
             {
                 return true;
             }
@@ -169,11 +167,13 @@ public class InventoryManager : MonoBehaviour
     {
         List<(int, int, int, int)> valuesList = new();
 
-        foreach (Slot slot in slots)
+        foreach (InventorySlot slot in slots)
         {
             if (!slot.IsEmpty)
             {
-                valuesList.Add((GameManager.Instance.SelCharID, slot.Item.Id, slot.Amount, slot.SlotIndex));
+                Item contentItem = slot.Content as Item;
+
+                valuesList.Add((GameManager.Instance.SelCharID, contentItem.Id, slot.Amount, slot.GetSlotIndex()));
             }
         }
 

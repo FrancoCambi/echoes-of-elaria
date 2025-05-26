@@ -4,22 +4,27 @@ public enum ItemType
 {
     Consumable, Equipment, Material, Quest
 }
-public class Item
+public class Item : SlotContent
 {
 
-    public Item(int id, string name, int maxStack, int typeId)
+    public Item(int id, string name, int typeId, int maxStack) : base(Resources.Load<Sprite>($"Icons/Items/{name}"), maxStack)
     {
         this.Id = id;
         this.Name = name;
-        this.MaxStack = maxStack;
         this.Type = GetItemTypeById(typeId);
-        this.Icon = Resources.Load<Sprite>($"Icons/Items/{name}");
     }
     public int Id { get; private set; }
     public string Name { get; private set; }
-    public int MaxStack {  get; private set; }
     public ItemType Type { get; private set; }
-    public Sprite Icon { get; private set; }
+
+    public override bool CanStackWith(SlotContent other)
+    {
+        if (other is Item otherItem)
+        {
+            return Id == otherItem.Id;
+        }
+        return false;
+    }
 
     private ItemType GetItemTypeById(int id)
     {

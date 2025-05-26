@@ -119,20 +119,19 @@ public class ActionSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         if (!IsEmpty && eventData.button == PointerEventData.InputButton.Left)
         {
-            ItemDragManager.Instance.StartDrag(item, amount, icon.sprite, this);
             icon.color = Color.gray;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        ItemDragManager.Instance.MoveImage(Input.mousePosition);
+        DragManager.Instance.MoveImage(Input.mousePosition);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         icon.color = Color.white;
-        ItemDragManager.Instance.EndDrag();
+        DragManager.Instance.EndDrag();
 
         if (!EventSystem.current.IsPointerOverGameObject())
         {
@@ -142,7 +141,7 @@ public class ActionSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnDrop(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)

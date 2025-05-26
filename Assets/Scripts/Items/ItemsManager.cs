@@ -26,7 +26,7 @@ public class ItemsManager : MonoBehaviour
             string _name = table.Rows[0]["name"].ToString();
             int _maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
             int _typeId = int.Parse(table.Rows[0]["type_id"].ToString());
-            item = new(_id, _name, _maxStack, _typeId);
+            item = new(_id, _name, _typeId, _maxStack);
         }
 
         return item;
