@@ -58,9 +58,11 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     #endregion
 
-    private void Awake()
+    public virtual void Awake()
     {
         amountText = GetComponentInChildren<TextMeshProUGUI>();
+        amount = 0;
+
     }
 
     #region methods

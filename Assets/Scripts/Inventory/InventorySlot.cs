@@ -1,9 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEditor.Progress;
 
 public class InventorySlot : BaseSlot
 {
+
+    public event Action OnInventorySlotAmountChanged;
+
+    public override void AddAmount(int quantity)
+    {
+        base.AddAmount(quantity);
+
+        OnInventorySlotAmountChanged?.Invoke();
+        InventoryManager.Instance.SaveItemsToDatabase();
+    }
+
+    public override void Clear()
+    {
+        base.Clear();
+
+        OnInventorySlotAmountChanged?.Invoke();
+    }
+
     public void AddItemsInEmpty(int itemID, int quantity)
     {
         if (IsEmpty && quantity > 0)
@@ -74,7 +93,7 @@ public class InventorySlot : BaseSlot
     {
         BaseSlot fromSlot = DragManager.Instance.FromSlot;
 
-        if (fromSlot == this || fromSlot == null) return;
+        if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
 
         if (!IsEmpty && content.CanStackWith(fromSlot.Content))
         {
@@ -83,7 +102,7 @@ public class InventorySlot : BaseSlot
             AddAmount(transferAmount);
             fromSlot.AddAmount(-transferAmount);
         }
-        else if (!IsEmpty && !content.CanStackWith(fromSlot.Content))
+        else if ((!IsEmpty && !content.CanStackWith(fromSlot.Content)) || IsFull)
         {
             int tmpID = (content as Item).Id;
             int tmpAmount = amount;
@@ -98,6 +117,7 @@ public class InventorySlot : BaseSlot
             fromSlot.Clear();
         }
 
+        InventoryManager.Instance.SaveItemsToDatabase();
         DragManager.Instance.Drop();
     }
 
@@ -116,7 +136,6 @@ public class InventorySlot : BaseSlot
                 // Item will consume even if it does not have effects but..
                 // why would it be a consumable then?
                 AddAmount(-1);
-                InventoryManager.Instance.SaveItemsToDatabase();
             }
         }
     }

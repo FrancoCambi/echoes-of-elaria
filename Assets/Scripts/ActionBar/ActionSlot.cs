@@ -3,132 +3,92 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActionSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
+public class ActionSlot : BaseSlot
 {
     [SerializeField]
-    private Image icon;
+    private Sprite emptyBackground;
     [SerializeField]
-    private Image emptyBackground;
-    [SerializeField]
-    private Image filledBackground;
+    private Sprite fullBackground;
     private Image background;
-    private TextMeshProUGUI amountText;
 
-    private Item item;
+    private InventorySlot itemSlot;
 
-    private int amount;
-
-
-
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         background = GetComponent<Image>();
-        amountText = GetComponentInChildren<TextMeshProUGUI>();
-        amount = 0;
     }
-
-    private void UpdateText()
-    {
-        amountText.text = amount.ToString();
-    }
-
-    #region propierties
-
-    public Image Icon
-    {
-        get
-        {
-            return icon;
-        }
-        set
-        {
-            icon = value;
-        }
-    }
-    public Item Item
-    {
-        get
-        {
-            return item;
-        }
-        set
-        {
-            item = value;
-        }
-    }
-    public int Amount
-    {
-        get
-        {
-            return amount;
-        }
-        set
-        {
-            amount = value;
-            if (amount > item.MaxStack)
-            {
-                amount = item.MaxStack;
-            }
-            UpdateText();
-
-            if (amount <= 0)
-            {
-                Clear();
-            }
-        }
-    }
-
-    public bool IsEmpty
-    {
-        get
-        {
-            return item == null;
-        }
-    }
-
-    public bool IsFull
-    {
-        get
-        {
-            if (!IsEmpty)
-            {
-                return amount == item.MaxStack;
-            }
-            return false;
-        }
-    }
-
-    #endregion
 
     #region methods
 
-    private void Clear()
+    public override void SetContent(SlotContent newContent)
     {
-        icon.enabled = false;
-        amountText.text = "";
-        amount = 0;
-        item = null;
-        background = emptyBackground;
+        base.SetContent(newContent);
+
+        background.sprite = fullBackground;
+        UpdateText();
+    }
+
+    public override void UpdateText()
+    {
+        if (amountText == null || itemSlot == null) return;
+
+        amountText.text = itemSlot.Amount > 1 ? itemSlot.Amount.ToString() : "";
+    }
+
+    public override void Clear()
+    {
+        base.Clear();
+
+        background.sprite = emptyBackground;
+
+    }
+
+    public override int GetSlotIndex()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SetItemSlot(InventorySlot slot)
+    {
+        if (slot == null) return;
+        if (itemSlot != null)
+        {
+            itemSlot.OnInventorySlotAmountChanged -= ItemUsedFromInventory;
+        }
+
+        itemSlot = slot;
+        itemSlot.OnInventorySlotAmountChanged += ItemUsedFromInventory;
+    }
+
+    private void ItemUsedFromInventory()
+    {
+        UpdateText();
+        if (itemSlot.Amount <= 0)
+        {
+            Clear();
+        }
     }
 
     #endregion
 
     #region interfaces
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public override void OnBeginDrag(PointerEventData eventData)
     {
         if (!IsEmpty && eventData.button == PointerEventData.InputButton.Left)
         {
+            DragManager.Instance.StartDrag(content, icon.sprite, this);
             icon.color = Color.gray;
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public override void OnDrag(PointerEventData eventData)
     {
         DragManager.Instance.MoveImage(Input.mousePosition);
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public override void OnEndDrag(PointerEventData eventData)
     {
         icon.color = Color.white;
         DragManager.Instance.EndDrag();
@@ -139,15 +99,57 @@ public class ActionSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         }
     }
 
-    public void OnDrop(PointerEventData eventData)
+    public override void OnDrop(PointerEventData eventData)
     {
-        
+        BaseSlot fromSlot = DragManager.Instance.FromSlot;
+
+        if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
+
+        if (fromSlot is InventorySlot)
+        {
+            SetItemSlot(fromSlot as InventorySlot);
+            SetContent(fromSlot.Content);
+        }
+        else if (fromSlot is ActionSlot && IsEmpty)
+        {
+            Clear();
+            SetItemSlot((fromSlot as ActionSlot).itemSlot);
+            SetContent(fromSlot.Content);
+            fromSlot.Clear();
+        }
+        else if (fromSlot is ActionSlot && !IsEmpty)
+        {
+            SlotContent tmpContent = Content;
+            InventorySlot tmpSlot = itemSlot;
+            Clear();
+            SetItemSlot((fromSlot as ActionSlot).itemSlot);
+            SetContent(fromSlot.Content);
+
+            fromSlot.Clear();
+            (fromSlot as ActionSlot).SetItemSlot(tmpSlot);
+            fromSlot.SetContent(tmpContent);
+
+
+        }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        if (!IsEmpty && eventData.button == PointerEventData.InputButton.Right)
+        {
+            // Consumables are the ones with effects.
+            if (content is Item contentItem && contentItem.Type == ItemType.Consumable)
+            {
+                foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(contentItem.Id))
+                {
+                    effect.Apply();
+                }
+
+                itemSlot.AddAmount(-1);
+            }
+        }
     }
+
 
     #endregion
 }
