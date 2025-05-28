@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
 
     private void LoadStatsFromDatabase()
     {
+
         string query = $"SELECT * FROM characters WHERE character_id = {GameManager.Instance.SelCharID}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
 
@@ -59,6 +60,7 @@ public class PlayerManager : MonoBehaviour
             MaxRage = int.Parse(table.Rows[0]["max_rage"].ToString());
             CurrentRage = int.Parse(table.Rows[0]["current_rage"].ToString());
             InventorySpace = int.Parse(table.Rows[0]["inventory_space"].ToString());
+
 
         }
     }

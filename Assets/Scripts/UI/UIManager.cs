@@ -17,17 +17,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private List<Panel> panelList = new();
+ 
+    private void Awake()
+    {
+        panelList = new()
+        {
+            InventoryManager.Instance
+        };
+    }
 
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-         
+            foreach (Panel panel in panelList)
+            {
+                panel.Close();
+            }
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            InventoryManager.Instance.OpenCloseUI();
+            InventoryManager.Instance.OpenClose();
         }
     }
 }

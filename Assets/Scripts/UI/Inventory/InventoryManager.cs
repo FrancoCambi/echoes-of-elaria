@@ -4,7 +4,7 @@ using System.Data;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Panel
 {
 
     private static InventoryManager instance;
@@ -21,7 +21,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     private GameObject slotPrefab;
     private List<InventorySlot> slots = new();
-    private CanvasGroup group;
 
     public List<InventorySlot> Slots
     {
@@ -31,16 +30,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
+
         for (int i = 0; i < PlayerManager.Instance.InventorySpace; i++)
         {
             GameObject go = Instantiate(slotPrefab, transform);
             InventorySlot slot = go.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
-
-        group = GetComponent<CanvasGroup>();
 
         LoadItemsFromDatabase();
     }
@@ -191,16 +190,5 @@ public class InventoryManager : MonoBehaviour
 
         DBManager.Instance.ExecuteQuery(query);
     }
-    public void Close()
-    {
-        group.alpha = 0;
-        group.blocksRaycasts = false;
-    }
-    public void OpenCloseUI()
-    {
-        group.alpha = group.alpha != 0 ? 0 : 1;
-        group.blocksRaycasts = !group.blocksRaycasts;
-    }
 
-    
 }
