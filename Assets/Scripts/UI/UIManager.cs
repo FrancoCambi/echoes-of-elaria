@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -13,8 +17,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+         
+        }
         if (Input.GetKeyDown(KeyCode.B))
         {
             InventoryManager.Instance.OpenCloseUI();

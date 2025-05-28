@@ -191,11 +191,16 @@ public class InventoryManager : MonoBehaviour
 
         DBManager.Instance.ExecuteQuery(query);
     }
-
-
+    public void Close()
+    {
+        group.alpha = 0;
+        group.blocksRaycasts = false;
+    }
     public void OpenCloseUI()
     {
         group.alpha = group.alpha != 0 ? 0 : 1;
         group.blocksRaycasts = !group.blocksRaycasts;
     }
+
+    
 }
