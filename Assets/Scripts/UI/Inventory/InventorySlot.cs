@@ -128,10 +128,7 @@ public class InventorySlot : BaseSlot
             // Consumables are the ones with effects.
             if (content is Item contentItem && contentItem.Type == ItemType.Consumable)
             {
-                foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(contentItem.Id))
-                {
-                    effect.Apply();
-                }
+                contentItem.Use();
 
                 // Item will consume even if it does not have effects but..
                 // why would it be a consumable then?

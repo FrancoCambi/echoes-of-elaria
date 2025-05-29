@@ -16,6 +16,16 @@ public class Item : SlotContent
     public int Id { get; private set; }
     public string Name { get; private set; }
     public ItemType Type { get; private set; }
+    private ItemType GetItemTypeById(int id)
+    {
+        return id switch
+        {
+            1 => ItemType.Consumable,
+            2 => ItemType.Equipment,
+            3 => ItemType.Material,
+            _ => ItemType.Quest,
+        };
+    }
 
     public override bool CanStackWith(SlotContent other)
     {
@@ -26,14 +36,11 @@ public class Item : SlotContent
         return false;
     }
 
-    private ItemType GetItemTypeById(int id)
+    public void Use()
     {
-        return id switch
+        foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Id))
         {
-            1 => ItemType.Consumable,
-            2 => ItemType.Equipment,
-            3 => ItemType.Material,
-            _ => ItemType.Quest,
-        };
+            effect.Apply();
+        }
     }
 }

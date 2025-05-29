@@ -70,6 +70,14 @@ public class ActionSlot : BaseSlot
         }
     }
 
+    public void Use()
+    {
+        if (itemSlot != null)
+        {
+            (itemSlot.Content as Item).Use();
+        }
+    }
+
     #endregion
 
     #region interfaces
