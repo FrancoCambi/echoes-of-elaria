@@ -8,9 +8,6 @@ TextureImporter:
   - first:
       213: 5223370693312396623
     second: Inventory_1
-  - first:
-      213: 2955297733908575915
-    second: Inventory_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -122,13 +119,13 @@ TextureImporter:
       name: Inventory_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 13
-        width: 45
-        height: 38
+        x: 12
+        y: 35
+        width: 24
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 5, z: 3, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -144,12 +141,12 @@ TextureImporter:
       name: Inventory_1
       rect:
         serializedVersion: 2
-        x: 93
-        y: 29
-        width: 6
-        height: 6
+        x: 63
+        y: 40
+        width: 18
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,33 +159,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Inventory_2
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 32
-        width: 45
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ba6332391a3530920800000000000000
-      internalID: 2955297733908575915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3447ed3916a7ddc4fb6f679f70391ddd
+    spriteID: d5afb780336b1f442b1b2bef88b808bb
     internalID: 0
     vertices: []
     indices: 
@@ -200,7 +175,6 @@ TextureImporter:
     nameFileIdTable:
       Inventory_0: 739905185230883310
       Inventory_1: 5223370693312396623
-      Inventory_2: 2955297733908575915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -65,7 +65,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (playerAttack.Attacking)
         {
-            ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
+            ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir) + "_1");
         }
         else if (playerHealth.Invincible && !alreadyInvincible)
         {
@@ -96,7 +96,8 @@ public class PlayerAnimation : MonoBehaviour
                 ChangeAnimationState(currentState.Replace("walk_", "idle_"));
                 if (!playerAttack.Attacking)
                 {
-                    ChangeAnimationState(currentState.Replace("attack_", "idle_"));
+                    Debug.Log(currentState.Replace("attack_", "idle_").Replace("_1", ""));
+                    ChangeAnimationState(currentState.Replace("attack_", "idle_").Replace("_1", ""));
                 }
             }
         }
