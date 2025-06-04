@@ -1,9 +1,5 @@
 using System.Collections;
-using UnityEditor.Toolbars;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerMovement : MonoBehaviour
 {

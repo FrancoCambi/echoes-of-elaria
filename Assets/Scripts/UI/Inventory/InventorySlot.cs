@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 public class InventorySlot : BaseSlot
 {
