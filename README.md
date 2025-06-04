@@ -15,7 +15,7 @@
 - Smooth **8-directional movement** with dash ability.
 - **Dynamic combat** with enemy AI and item-based upgrades.
 - **Inventory and loot** system with item rarity and enhancements.
-- Interactive **NPC dialogues** and **quest system**.
+- **Quest system**.
 - **Shops and vendors** with item buying/selling mechanics.
 - **SQLite database integration** for world data.
 
