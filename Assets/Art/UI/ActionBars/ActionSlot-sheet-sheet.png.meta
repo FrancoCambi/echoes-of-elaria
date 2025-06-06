@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ActionSlot-sheet-sheet_0: 1025731274907253640
+      ActionSlot-sheet-sheet_1: -4414444680605325678
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
