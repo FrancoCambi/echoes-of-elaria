@@ -41,13 +41,4 @@ public class SwordHitbox : MonoBehaviour
 
     }
 
-    public void ActivateHitbox()
-    {
-        GetComponent<Collider2D>().enabled = true;
-    }
-
-    public void DeactivateHitbox()
-    {
-        GetComponent<Collider2D>().enabled = false;
-    }
 }

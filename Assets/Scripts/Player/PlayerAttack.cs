@@ -18,12 +18,14 @@ public class PlayerAttack : MonoBehaviour
 
     private Camera mainCamera;
 
-    private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
 
     private AttackDirection attackDir;
 
     private bool attacking;
+    private int comboIndex;
+    private float lastAttackTime;
+    private float comboResetTime;
 
 
     public AttackDirection AttackDir
@@ -42,13 +44,24 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public int ComboIndex
+    {
+        get
+        {
+            return comboIndex;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerAnimation = GetComponent<PlayerAnimation>();
         playerMovement = GetComponent<PlayerMovement>();
 
         mainCamera = Camera.main;
+
+        comboIndex = 0;
+        lastAttackTime = 0;
+        comboResetTime = 1f;
     }
 
 
@@ -61,11 +74,17 @@ public class PlayerAttack : MonoBehaviour
             playerMovement.StopMovement();
             Attack();
         }
+
+        if (Time.time - lastAttackTime > comboResetTime)
+        {
+            comboIndex = 0;
+        }
     }
 
 
     void Attack()
     {
+        lastAttackTime = Time.time;
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
 
@@ -94,6 +113,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
+        IncreaseComboIndex();
         attacking = true;
     }
 
@@ -119,6 +139,15 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             frontHitbox.enabled = true;
+        }
+    }
+
+    private void IncreaseComboIndex()
+    {
+        comboIndex += 1;
+        if (comboIndex > 3)
+        {
+            comboIndex = 1;
         }
     }
 
