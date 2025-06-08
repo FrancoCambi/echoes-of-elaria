@@ -9,13 +9,17 @@ public enum AttackDirection
 public class PlayerAttack : MonoBehaviour
 {
 
+    [SerializeField]
+    BoxCollider2D sideHitbox;
+    [SerializeField]
+    BoxCollider2D frontHitbox;
+    [SerializeField]
+    BoxCollider2D backHitbox;
+
     private Camera mainCamera;
-    private Animator animator;
 
     private PlayerAnimation playerAnimation;
     private PlayerMovement playerMovement;
-    private PlayerHealth playerHealth;
-    private SwordHitbox hitbox;
 
     private AttackDirection attackDir;
 
@@ -43,11 +47,8 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         playerMovement = GetComponent<PlayerMovement>();
-        playerHealth = GetComponent<PlayerHealth>();
-        hitbox = GetComponentInChildren<SwordHitbox>();
 
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
     }
 
 
@@ -94,23 +95,31 @@ public class PlayerAttack : MonoBehaviour
         }
 
         attacking = true;
-        Invoke(nameof(StopAttack), playerAnimation.FindAnimationByName("attack_" + TypeToStringAnimation(attackDir) + "_1").length);
     }
 
-    void StopAttack()
+    public void StopAttack()
     {
         attacking = false;
         playerMovement.CanMove = true;
+        sideHitbox.enabled = false;
+        backHitbox.enabled = false;
+        frontHitbox.enabled = false;
     }
 
-    private void ActivateHitbox()
+    public void ActivateHitbox()
     {
-        hitbox.ActivateHitbox();
-    }
-
-    private void DeactivateHitbox()
-    {
-        hitbox.DeactivateHitbox();
+        if (attackDir == AttackDirection.Right || attackDir == AttackDirection.Left)
+        {
+            sideHitbox.enabled = true;
+        }
+        else if (attackDir == AttackDirection.Up)
+        {
+            backHitbox.enabled = true;
+        }
+        else
+        {
+            frontHitbox.enabled = true;
+        }
     }
 
     public string TypeToStringAnimation(AttackDirection attackDirection)

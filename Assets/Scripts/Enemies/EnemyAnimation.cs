@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
+    private Material originalMaterial;
+    private Material flashMaterial;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private EnemyJumpAttack enemyAttack;
 
@@ -23,6 +27,9 @@ public class EnemyAnimation : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = Resources.Load<Material>("SRMaterials/Default");
+        flashMaterial = Resources.Load<Material>("SRMaterials/Flash");
 
         enemyAttack = GetComponent<EnemyJumpAttack>();
 
@@ -49,6 +56,20 @@ public class EnemyAnimation : MonoBehaviour
         animator.Play(newState);
 
         currentState = newState;
+    }
+
+    private IEnumerator HitAnimation()
+    {
+
+        float flashTime = 0.2f;
+
+        spriteRenderer.material = flashMaterial;
+        yield return new WaitForSeconds(flashTime);
+        spriteRenderer.material = originalMaterial;
+    }
+    public void StartFlash()
+    {
+        StartCoroutine(nameof(HitAnimation));
     }
 
     public AnimationClip FindAnimationByName(Animator animator, string name)

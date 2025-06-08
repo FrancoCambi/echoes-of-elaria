@@ -3,6 +3,13 @@ using UnityEngine;
 public class SwordHitbox : MonoBehaviour
 {
 
+    private BoxCollider2D hitbox;
+
+    private void Start()
+    {
+        hitbox = GetComponent<BoxCollider2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -10,6 +17,7 @@ public class SwordHitbox : MonoBehaviour
             int damage = CalculateDamage();
             int damageDealt = other.GetComponent<EnemyHealth>().OnHit(damage, Vector2.zero);
             PlayerManager.Instance.GainRage(CalculateRagePerAA(damageDealt));
+            hitbox.enabled = false;
         }
     }
 

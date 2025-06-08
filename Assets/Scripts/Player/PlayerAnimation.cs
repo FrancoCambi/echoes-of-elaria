@@ -5,9 +5,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    [SerializeField]
     private Material originalMaterial;
-    [SerializeField]
     private Material flashMaterial;
 
     private PlayerMovement playerMovement;
@@ -44,6 +42,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = Resources.Load<Material>("SRMaterials/Default");
+        flashMaterial = Resources.Load<Material>("SRMaterials/Flash");
 
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
