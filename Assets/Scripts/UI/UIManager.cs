@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     {
         panelList = new()
         {
-            InventoryManager.Instance
+            InventoryManager.Instance, MenuManager.Instance
         };
     }
 
@@ -32,9 +32,16 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            foreach (Panel panel in panelList)
+            if (AnyOpen())
             {
-                panel.Close();
+                foreach (Panel panel in panelList)
+                {
+                    panel.Close();
+                }
+            }
+            else
+            {
+                MenuManager.Instance.Open();
             }
         }
         if (Input.GetKeyDown(KeyCode.B))
@@ -42,4 +49,18 @@ public class UIManager : MonoBehaviour
             InventoryManager.Instance.OpenClose();
         }
     }
+
+    private bool AnyOpen()
+    {
+        foreach (Panel panel in panelList)
+        {
+            if (panel.IsOpen)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
