@@ -26,11 +26,25 @@ public class MenuManager : Panel
 
     public void KeysButton()
     {
-
+        if (KeyBindsManager.Instance.IsHearing)
+        {
+            KeyBindsManager.Instance.StopHearing();
+        }
+        else
+        {
+            KeyBindsManager.Instance.StartHearing();
+        }
     }
 
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public override void Close()
+    {
+        base.Close();
+
+        KeyBindsManager.Instance.StopHearing();
     }
 }

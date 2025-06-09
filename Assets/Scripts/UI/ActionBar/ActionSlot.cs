@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActionSlot : BaseSlot
+public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private Sprite emptyBackground;
@@ -72,9 +72,10 @@ public class ActionSlot : BaseSlot
 
     public void Use()
     {
-        if (itemSlot != null)
+        if (!IsEmpty && itemSlot != null)
         {
             (itemSlot.Content as Item).Use();
+            itemSlot.AddAmount(-1);
         }
     }
 
@@ -148,15 +149,26 @@ public class ActionSlot : BaseSlot
             // Consumables are the ones with effects.
             if (content is Item contentItem && contentItem.Type == ItemType.Consumable)
             {
-                foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(contentItem.Id))
-                {
-                    effect.Apply();
-                }
-
-                itemSlot.AddAmount(-1);
+                Use();
             }
         }
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (KeyBindsManager.Instance.IsHearing)
+        {
+            KeyBindsManager.Instance.Heard = this;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (KeyBindsManager.Instance.IsHearing)
+        {
+            KeyBindsManager.Instance.Heard = null;
+        }
+    }
+
 
 
     #endregion
