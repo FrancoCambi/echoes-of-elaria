@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private PlayerHealth playerHealth;
+    private PlayerAnimation playerAnimation;
 
     private Vector2 movementDirection;
 
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         playerHealth = GetComponent<PlayerHealth>();
+        playerAnimation = GetComponent<PlayerAnimation>();
 
         charID = GameManager.Instance.SelCharID;
 
@@ -86,9 +88,10 @@ public class PlayerMovement : MonoBehaviour
             movementDirection = new Vector2(horizontal, vertical).normalized;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        if (Input.GetKeyDown(KeyCode.Space) && canDash && canMove)
         {
             StartCoroutine(nameof(Dash));
+            playerAnimation.PlayDashAnimation();
         }
 
     }
@@ -139,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-
     public IEnumerator Dash()
     {
         canDash = false;
@@ -147,20 +149,20 @@ public class PlayerMovement : MonoBehaviour
         dashing = true;
         float dashForce = PlayerManager.Instance.DashForce;
 
-        if (horizontal < 0 && vertical == 0)
+        if (horizontal < 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side" && transform.localScale == new Vector3(-1, 1, 1)))
         {
             rb.linearVelocity = new Vector2(-dashForce, rb.linearVelocity.y);
         }
-        else if (horizontal > 0 && vertical == 0)
+        else if (horizontal > 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side" && transform.localScale == new Vector3(1, 1, 1)))
         {
             rb.linearVelocity = new Vector2(dashForce, rb.linearVelocity.y);
 
         }
-        else if (vertical > 0 && horizontal == 0)
+        else if (vertical > 0 && horizontal == 0 || (playerAnimation.CurrentState == "idle_back"))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, dashForce);
         }
-        else if (vertical < 0 && horizontal == 0)
+        else if (vertical < 0 && horizontal == 0 || (playerAnimation.CurrentState == "idle_front"))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -dashForce);
         }
@@ -189,6 +191,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(transform.localScale.x, 0) * dashForce;
         }
         yield return new WaitForSeconds(dashingTime);
+        playerAnimation.PlayIdleAfterDash();
         dashing = false;
         canMove = true;
         rb.linearVelocity = Vector2.zero;

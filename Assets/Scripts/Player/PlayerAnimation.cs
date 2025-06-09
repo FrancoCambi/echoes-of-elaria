@@ -58,7 +58,7 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playingHit || playerAttack.Attacking)
+        if (playingHit || playerAttack.Attacking || playerMovement.Dashing)
         {
             return;
         }
@@ -138,6 +138,16 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayIdleAfterAttack()
     {
         ChangeAnimationState("idle_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
+    }
+    
+    public void PlayDashAnimation()
+    {
+        ChangeAnimationState(currentState.Replace("idle_", "dash_").Replace("walk_", "dash_"));
+    }
+
+    public void PlayIdleAfterDash()
+    {
+        ChangeAnimationState(currentState.Replace("dash_", "idle_"));
     }
 
 
