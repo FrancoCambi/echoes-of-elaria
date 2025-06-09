@@ -58,16 +58,13 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playingHit)
+        if (playingHit || playerAttack.Attacking)
         {
             return;
         }
 
-        if (playerAttack.Attacking)
-        {
-            ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir) + "_" + playerAttack.ComboIndex);
-        }
-        else if (playerHealth.Invincible && !alreadyInvincible)
+
+        if (playerHealth.Invincible && !alreadyInvincible)
         {
             StartCoroutine(nameof(HitAnimation));
  
@@ -94,11 +91,6 @@ public class PlayerAnimation : MonoBehaviour
             else
             {
                 ChangeAnimationState(currentState.Replace("walk_", "idle_"));
-                if (!playerAttack.Attacking)
-                {
-                    Debug.Log("idle_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
-                    ChangeAnimationState("idle_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
-                }
             }
         }
 
@@ -136,6 +128,16 @@ public class PlayerAnimation : MonoBehaviour
 
         spriteRenderer.color = originalColor;
         alreadyInvincible = false;
+    }
+
+    public void PlayAttackAnimation()
+    {
+        ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir) + "_" + playerAttack.ComboIndex);
+    }
+
+    public void PlayIdleAfterAttack()
+    {
+        ChangeAnimationState("idle_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
     }
 
 

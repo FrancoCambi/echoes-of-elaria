@@ -19,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
     private Camera mainCamera;
 
     private PlayerMovement playerMovement;
+    private PlayerAnimation playerAnimation;
 
     private AttackDirection attackDir;
 
@@ -56,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        playerAnimation = GetComponent<PlayerAnimation>();
 
         mainCamera = Camera.main;
 
@@ -115,6 +117,7 @@ public class PlayerAttack : MonoBehaviour
 
         IncreaseComboIndex();
         attacking = true;
+        playerAnimation.PlayAttackAnimation();
     }
 
     public void StopAttack()
@@ -124,6 +127,7 @@ public class PlayerAttack : MonoBehaviour
         sideHitbox.enabled = false;
         backHitbox.enabled = false;
         frontHitbox.enabled = false;
+        playerAnimation.PlayIdleAfterAttack();
     }
 
     public void ActivateHitbox()
