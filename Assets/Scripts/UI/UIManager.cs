@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (KeyBindsManager.Instance.Listening) return;
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

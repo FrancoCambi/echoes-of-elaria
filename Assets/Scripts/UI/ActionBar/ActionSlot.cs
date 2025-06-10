@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
@@ -10,13 +11,43 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
     [SerializeField]
     private Sprite fullBackground;
     private Image background;
+    [SerializeField]
+    private TextMeshProUGUI bindingText;
+
 
     private InventorySlot itemSlot;
+    private KeyBinding keybind;
+
+    public KeyBinding KeyBind
+    {
+        get
+        {
+            return keybind;
+        }
+    }
 
     public override void Awake()
     {
         base.Awake();
         background = GetComponent<Image>();
+
+    }
+
+    private void Start()
+    {
+        keybind = KeyBindsManager.Instance.LoadBinding(GetSlotIndex());
+        UpdateBindingText();
+    }
+
+    private void OnEnable()
+    {
+        ActionBarManager.Instance.Slots.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActionBarManager.Instance.Slots.Remove(this);
+
     }
 
     #region methods
@@ -36,18 +67,6 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
         amountText.text = itemSlot.Amount > 1 ? itemSlot.Amount.ToString() : "";
     }
 
-    public override void Clear()
-    {
-        base.Clear();
-
-        background.sprite = emptyBackground;
-
-    }
-
-    public override int GetSlotIndex()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void SetItemSlot(InventorySlot slot)
     {
@@ -77,6 +96,39 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
             (itemSlot.Content as Item).Use();
             itemSlot.AddAmount(-1);
         }
+    }
+
+    public void SetKeybind(KeyBinding binding)
+    {
+        keybind = binding;
+        UpdateBindingText();
+    }
+
+    public void RemoveKeybind()
+    {
+        keybind.key = Key.None;
+        keybind.modifiers = EventModifiers.None;
+        UpdateBindingText();
+    }
+
+    private void UpdateBindingText()
+    {
+        if (bindingText)
+        {
+            bindingText.text = keybind.ToString();
+        }
+    }
+
+    public override void Clear()
+    {
+        base.Clear();
+
+        background.sprite = emptyBackground;
+
+    }
+    public override int GetSlotIndex()
+    {
+        return ActionBarManager.Instance.Slots.IndexOf(this);
     }
 
     #endregion
@@ -155,21 +207,19 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (KeyBindsManager.Instance.IsHearing)
+        if (KeyBindsManager.Instance.Listening)
         {
-            KeyBindsManager.Instance.Heard = this;
+            KeyBindsManager.Instance.HoveredSlot = this;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (KeyBindsManager.Instance.IsHearing)
+        if (KeyBindsManager.Instance.Listening)
         {
-            KeyBindsManager.Instance.Heard = null;
+            KeyBindsManager.Instance.HoveredSlot = null;
         }
     }
-
-
 
     #endregion
 }

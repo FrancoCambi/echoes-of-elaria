@@ -2,16 +2,78 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.UIElements;
 
-public struct Binding
+public struct KeyBinding
 {
+    public Key key;
     public EventModifiers modifiers;
-    public KeyCode key;
 
-    public Binding(EventModifiers modifiers, KeyCode key)
+    public bool IsEmpty
     {
-        this.modifiers = modifiers;
-        this.key = key;
+        get
+        {
+            return key == Key.None;
+        }
+    }
+    public bool Matches(Keyboard kb)
+    {
+        if (!kb[key].wasPressedThisFrame) return false;
+
+        bool shift = (modifiers & EventModifiers.Shift) != 0;
+        bool ctrl = (modifiers & EventModifiers.Control) != 0;
+        bool alt = (modifiers & EventModifiers.Alt) != 0;
+
+        return
+            kb[Key.LeftShift].isPressed == shift &&
+            kb[Key.LeftCtrl].isPressed == ctrl &&
+            kb[Key.LeftAlt].isPressed == alt;
+    }
+
+    public override string ToString()
+    {
+        string mod = "";
+        if ((modifiers & EventModifiers.Control) != 0) mod += "C";
+        if ((modifiers & EventModifiers.Shift) != 0) mod += "S";
+        if ((modifiers & EventModifiers.Alt) != 0) mod += "A";
+
+        string stringKey = NormalizeKey(key);
+        return $"{mod}{stringKey}";
+    }
+
+    private string NormalizeKey(Key key)
+    {
+        switch (key)
+        {
+            // Special characters
+            case Key.Semicolon: return ";";
+            case Key.Quote: return "'";
+            case Key.Comma: return ",";
+            case Key.Period: return ".";
+            case Key.Slash: return "/";
+            case Key.Backslash: return "\\";
+            case Key.LeftBracket: return "[";
+            case Key.RightBracket: return "]";
+            case Key.Minus: return "-";
+            case Key.Equals: return "=";
+            case Key.Backquote: return "`";
+            case Key.NumpadDivide: return "/";
+            case Key.NumpadMultiply: return "*";
+            case Key.NumLock: return "NLock";
+            case Key.Insert: return "Ins";
+            case Key.PageUp: return "PagUP";
+            case Key.PageDown: return "PagDn";
+            case Key.End: return "End";
+            case Key.ScrollLock: return "Bloq";
+            case Key.PrintScreen: return "Impr";
+            case Key.None: return "";
+
+            default:
+                return key.ToString().Replace("Digit", "").Replace("Numpad", "");
+        }
+
     }
 }
 
@@ -28,117 +90,110 @@ public class KeyBindsManager : MonoBehaviour
         }
     }
 
-    private Dictionary<Binding, ActionSlot> bindings = new();
+    private bool listening;
 
-    private bool hearing;
+    private ActionSlot hoveredSlot;
 
-    private ActionSlot heard;
-
-    public bool IsHearing
+    public bool Listening
     {
         get
         {
-            return hearing;
+            return listening;
         }
     }
 
-    public ActionSlot Heard
+    public ActionSlot HoveredSlot
     {
         get
         {
-            return heard;
+            return hoveredSlot;
         }
         set
         {
-            heard = value;
+            hoveredSlot = value;
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        //bindings.Add(new Binding(EventModifiers.None, KeyCode.Alpha1), );
-    }
-
-    public void BindKey(Binding binding, ActionSlot slot)
-    {
-        if (bindings.ContainsKey(binding))
+        if (listening && hoveredSlot != null)
         {
-            bindings[binding] = slot;
-        }
-        else
-        {
-            bindings.Add(binding, slot);
-        }
-
-        Debug.Log(binding.key);
-    }
-
-    public void UnbindKey(Binding binding)
-    {
-        if (bindings.ContainsKey(binding))
-        {
-            bindings.Remove(binding);
-        }
-    }
-
-    public void StartHearing()
-    {
-        hearing = true;
-    }
-
-    public void StopHearing()
-    {
-        hearing = false;
-    }
-
-    private bool CheckValidKey(KeyCode code)
-    {
-        return code != KeyCode.None &&
-            code != KeyCode.LeftShift &&
-            code != KeyCode.RightShift &&
-            code != KeyCode.LeftControl &&
-            code != KeyCode.RightControl &&
-            code != KeyCode.AltGr &&
-            code != KeyCode.LeftAlt &&
-            code != KeyCode.RightAlt &&
-            code != KeyCode.LeftCommand && 
-            code != KeyCode.RightCommand &&
-            code != KeyCode.Numlock &&
-            code != KeyCode.CapsLock;
-    }
-
-    private void OnGUI()
-    {
-        if (!Event.current.isKey) return;
-
-
-        if (!hearing)
-        {
-            if (Event.current.type == EventType.KeyDown && Event.current.keyCode != KeyCode.None)
+            foreach (KeyControl key in Keyboard.current.allKeys)
             {
-                Binding binding = new(Event.current.modifiers, Event.current.keyCode);
-                if (bindings.ContainsKey(binding))
+                if (key != null && key.wasPressedThisFrame)
                 {
-                    bindings[binding].Use();
+                    if (IsModifier(key.keyCode)) return;
+                    if (key.keyCode == Key.Escape)
+                    {
+                        hoveredSlot.RemoveKeybind();
+                        return;
+                    }
+
+                    KeyBinding binding = new KeyBinding
+                    {
+                        key = key.keyCode,
+                        modifiers = GetModifiers()
+                    };
+
+                    hoveredSlot.SetKeybind(binding);
+                    SaveBinding(hoveredSlot.GetSlotIndex(), binding);
 
                 }
-
             }
-
         }
-        else
+        else if (!listening)
         {
-            if (Event.current.type == EventType.KeyDown && Event.current.keyCode != KeyCode.None && CheckValidKey(Event.current.keyCode) && heard != null)
+            foreach (ActionSlot slot in ActionBarManager.Instance.Slots)
             {
-                Binding binding = new(Event.current.modifiers, Event.current.keyCode);
+                KeyBinding binding = slot.KeyBind;
 
-                UnbindKey(binding);
-
-                BindKey(binding, heard);
-
-
+                if (!binding.IsEmpty && Keyboard.current[binding.key].wasPressedThisFrame && binding.Matches(Keyboard.current))
+                {
+                    slot.Use();
+                }
             }
         }
+    }
+
+    private bool IsModifier(Key key)
+    {
+        return key == Key.LeftCtrl || key == Key.RightCtrl ||
+               key == Key.LeftShift || key == Key.RightShift ||
+               key == Key.LeftAlt || key == Key.RightAlt;
+    }
+
+    private EventModifiers GetModifiers()
+    {
+        var kb = Keyboard.current;
+        EventModifiers mods = 0;
+        if (kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed) mods |= EventModifiers.Shift;
+        if (kb.leftCtrlKey.isPressed || kb.rightCtrlKey.isPressed) mods |= EventModifiers.Control;
+        if (kb.leftAltKey.isPressed || kb.rightAltKey.isPressed) mods |= EventModifiers.Alt;
+        return mods;
+    }
+
+    private void SaveBinding(int index, KeyBinding binding)
+    {
+        string json = JsonUtility.ToJson(binding);
+        PlayerPrefs.SetString($"keybind_{index}", json);
+        PlayerPrefs.Save();
+    }
+
+    public KeyBinding LoadBinding(int index)
+    {
+        string json = PlayerPrefs.GetString($"keybind_{index}", "");
+        if (string.IsNullOrEmpty(json)) return default;
+        return JsonUtility.FromJson<KeyBinding>(json);
+    }
+
+    public void StartListening()
+    {
+        listening = true;
+    }
+
+    public void StopListening()
+    {
+        listening = false;
     }
 
 }

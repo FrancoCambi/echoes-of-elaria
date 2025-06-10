@@ -26,13 +26,13 @@ public class MenuManager : Panel
 
     public void KeysButton()
     {
-        if (KeyBindsManager.Instance.IsHearing)
+        if (KeyBindsManager.Instance.Listening)
         {
-            KeyBindsManager.Instance.StopHearing();
+            KeyBindsManager.Instance.StopListening();
         }
         else
         {
-            KeyBindsManager.Instance.StartHearing();
+            KeyBindsManager.Instance.StartListening();
         }
     }
 
@@ -45,6 +45,6 @@ public class MenuManager : Panel
     {
         base.Close();
 
-        KeyBindsManager.Instance.StopHearing();
+        KeyBindsManager.Instance.StopListening();
     }
 }
