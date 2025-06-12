@@ -1,6 +1,6 @@
-# 🧝‍♂️ RPG GAME (Haven't come up with a name yet :'))
+# 🧝‍♂️ Echoes of Elaria
 
-**RPG GAMEs** is a 2D pixel-art action RPG currently in development. Explore a dynamic fantasy world filled with quests, enemies, loot, and deep character progression.
+*Echoes of Elaria** is a 2D pixelart action RPG created in Unity where the player explores floating islands fragmented by a magical cataclysm known as The Shattering of Echoes. In this world divided between those born with magic and those without, echoes of the past still resonate in swords, ruins, and forgotten beings.
 
 ---
 
@@ -12,7 +12,7 @@
 
 ## 🕹️ Features
 
-- Smooth **8-directional movement** with dash ability.
+- Smooth **4-directional movement** with dash ability.
 - **Dynamic combat** with enemy AI and item-based upgrades.
 - **Inventory and loot** system with item rarity and enhancements.
 - **Quest system**.
