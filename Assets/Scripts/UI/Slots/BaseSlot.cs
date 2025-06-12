@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
+public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     protected Image icon;
@@ -121,6 +121,21 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public abstract void OnDrop(PointerEventData eventData);
 
     public abstract void OnPointerClick(PointerEventData eventData);
+    public virtual void OnPointerEnter(PointerEventData eventData)
+    {
+        if (content != null)
+        {
+            TooltipManager.Instance.ShowTooltip(this);
+        }
+    }
+    public virtual void OnPointerExit(PointerEventData eventData)
+    {
+        if (content != null)
+        { 
+            TooltipManager.Instance.HideTooltip();
+        }
+    }
+
 
     #endregion
 }

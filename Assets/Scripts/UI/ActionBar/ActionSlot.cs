@@ -205,19 +205,28 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
             }
         }
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerEnter(PointerEventData eventData)
     {
+
         if (KeyBindsManager.Instance.Listening)
         {
             KeyBindsManager.Instance.HoveredSlot = this;
         }
+        else
+        {
+           base.OnPointerEnter(eventData);
+        }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
         if (KeyBindsManager.Instance.Listening)
         {
             KeyBindsManager.Instance.HoveredSlot = null;
+        }
+        else
+        {
+            base.OnPointerExit(eventData);
         }
     }
 

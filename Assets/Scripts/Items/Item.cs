@@ -26,6 +26,13 @@ public class Item : SlotContent
             _ => ItemType.Quest,
         };
     }
+    public void Use()
+    {
+        foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Id))
+        {
+            effect.Apply();
+        }
+    }
 
     public override bool CanStackWith(SlotContent other)
     {
@@ -36,11 +43,8 @@ public class Item : SlotContent
         return false;
     }
 
-    public void Use()
+    public override string GetDescription()
     {
-        foreach (ItemEffect effect in ItemsManager.Instance.GetEffectsByID(Id))
-        {
-            effect.Apply();
-        }
+        return string.Format("{0}aaaaaaaaaaaaaaaaaa\n" , Name);
     }
 }

@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class SlotContent 
+public abstract class SlotContent : ITooltipable
 {
     private Sprite icon;
 
@@ -33,4 +33,5 @@ public abstract class SlotContent
 
     public abstract bool CanStackWith(SlotContent other);
 
+    public abstract string GetDescription();
 }
