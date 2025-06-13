@@ -90,6 +90,7 @@ public class InventorySlot : BaseSlot
 
     public override void OnDrop(PointerEventData eventData)
     {
+
         BaseSlot fromSlot = DragManager.Instance.FromSlot;
 
         if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
@@ -118,6 +119,7 @@ public class InventorySlot : BaseSlot
 
         InventoryManager.Instance.SaveItemsToDatabase();
         DragManager.Instance.Drop();
+        base.OnDrop(eventData);
     }
 
     public override void OnPointerClick(PointerEventData eventData)

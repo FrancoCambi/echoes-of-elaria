@@ -162,6 +162,7 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
 
     public override void OnDrop(PointerEventData eventData)
     {
+
         BaseSlot fromSlot = DragManager.Instance.FromSlot;
 
         if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
@@ -192,6 +193,7 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
 
 
         }
+        base.OnDrop(eventData);
     }
 
     public override void OnPointerClick(PointerEventData eventData)

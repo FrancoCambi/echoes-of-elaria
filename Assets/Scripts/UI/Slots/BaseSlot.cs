@@ -104,6 +104,11 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         amount = 0;
         UpdateText();
         amountText.enabled = false;
+
+        if (TooltipManager.Instance.HoveredSlot == this)
+        {
+            TooltipManager.Instance.HideTooltip();
+        }
     }
 
     public abstract int GetSlotIndex();
@@ -118,7 +123,14 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public abstract void OnEndDrag(PointerEventData eventData);
 
-    public abstract void OnDrop(PointerEventData eventData);
+    public virtual void OnDrop(PointerEventData eventData)
+    {
+        if (content != null)
+        {
+            TooltipManager.Instance.HideTooltip();
+            TooltipManager.Instance.ShowTooltip(this);
+        }
+    }
 
     public abstract void OnPointerClick(PointerEventData eventData);
     public virtual void OnPointerEnter(PointerEventData eventData)
@@ -130,11 +142,11 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (content != null)
-        { 
-            TooltipManager.Instance.HideTooltip();
-        }
+        
+        TooltipManager.Instance.HideTooltip();
+        
     }
+
 
 
     #endregion
