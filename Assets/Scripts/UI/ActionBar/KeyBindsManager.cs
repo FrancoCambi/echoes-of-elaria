@@ -75,6 +75,18 @@ public struct KeyBinding
         }
 
     }
+
+    public override readonly bool Equals(object obj)
+    {
+        if (obj == null || obj is not KeyBinding) return false;
+
+        return key == ((KeyBinding) obj).key && modifiers == ((KeyBinding) obj).modifiers;
+    }
+
+    public override readonly int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }
 
 public class KeyBindsManager : MonoBehaviour
@@ -123,17 +135,25 @@ public class KeyBindsManager : MonoBehaviour
                 if (key != null && key.wasPressedThisFrame)
                 {
                     if (IsModifier(key.keyCode)) return;
+
+                    KeyBinding binding;
                     if (key.keyCode == Key.Escape)
                     {
                         hoveredSlot.RemoveKeybind();
-                        return;
+                        binding = new KeyBinding { key = Key.None, modifiers = EventModifiers.None };
                     }
-
-                    KeyBinding binding = new KeyBinding
+                    else
                     {
-                        key = key.keyCode,
-                        modifiers = GetModifiers()
-                    };
+                        binding = new KeyBinding { key = key.keyCode, modifiers = GetModifiers() };
+
+                        // Checks if there is another slot with the same binding and remove it.
+                        if (ActionBarManager.Instance.Slots.Find(x => x.KeyBind.Equals(binding)) is ActionSlot slot and not null)
+                        {
+                            slot.RemoveKeybind();
+                            KeyBinding emptyBinding = new KeyBinding { key = Key.None, modifiers = EventModifiers.None };
+                            SaveBinding(slot.GetSlotIndex(), emptyBinding);
+                        }
+                    }
 
                     hoveredSlot.SetKeybind(binding);
                     SaveBinding(hoveredSlot.GetSlotIndex(), binding);

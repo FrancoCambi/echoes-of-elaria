@@ -50,6 +50,7 @@ public class TooltipManager : MonoBehaviour
 
         Vector2 anchoredPos = GetAnchoredPositionInCanvas(slot.GetComponent<RectTransform>());
         AdjustPivotAndPosition(anchoredPos, slot);
+
     }
 
     public void HideTooltip()

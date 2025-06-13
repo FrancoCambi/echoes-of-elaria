@@ -24,9 +24,12 @@ public class ItemsManager : MonoBehaviour
         {
             int _id = int.Parse(table.Rows[0]["id"].ToString());
             string _name = table.Rows[0]["name"].ToString();
+            int _requiredLevel = int.Parse(table.Rows[0]["required_level"].ToString());
+            int _itemLevel = int.Parse(table.Rows[0]["item_level"].ToString());
+            int _rarity = int.Parse(table.Rows[0]["rarity"].ToString());
             int _maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
             int _typeId = int.Parse(table.Rows[0]["type_id"].ToString());
-            item = new(_id, _name, _typeId, _maxStack);
+            item = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId);
         }
 
         return item;
