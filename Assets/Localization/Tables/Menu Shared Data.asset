@@ -13,8 +13,28 @@ MonoBehaviour:
   m_Name: Menu Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Menu
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: ad0cec67300b72a489d10b9ec963ccf4
+  m_Entries:
+  - m_Id: 5738434560
+    m_Key: PlayButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81873440768
+    m_Key: OptionsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117038485504
+    m_Key: KeybindsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 197141303296
+    m_Key: QuitButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 781672091648
+    m_Key: MenuButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

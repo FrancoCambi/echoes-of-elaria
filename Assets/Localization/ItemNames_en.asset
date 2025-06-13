@@ -17,7 +17,15 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: a2f40a25753a7334aa3beae7572aa8d8, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 11631431680
+    m_Localized: Minor healing potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 179525226496
+    m_Localized: Test item
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

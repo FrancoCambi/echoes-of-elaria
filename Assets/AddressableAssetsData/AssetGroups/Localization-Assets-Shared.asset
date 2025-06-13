@@ -14,8 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
   m_GUID: 7a02ca0ded092504a9dbe32a3a5f5304
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 84a2eccb6b1b92d439903a3a8fd9d917
+    m_Address: Assets/Localization/Tables/ItemsTooltip Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2f40a25753a7334aa3beae7572aa8d8
+    m_Address: Assets/Localization/ItemNames Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad0cec67300b72a489d10b9ec963ccf4
+    m_Address: Assets/Localization/Tables/Menu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 90bd4761183061d4584d97a6e19d0008, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: b9e9963556692734daec56fd39adbff7, type: 2}
+    - {fileID: 11400000, guid: 79a6f9dd592c99b4ebbe7b7d16cfe729, type: 2}

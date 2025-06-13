@@ -14,8 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 1f5d714a344c58845be58d9faa25b0ce
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 824ca879ee319a8478254f6f6005ae3b
+    m_Address: Tooltip_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a3c06e8594a1234dbbf0c853ad81de4
+    m_Address: Menu_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c56c2cc2dba475c4898aa2f821c8ee04
+    m_Address: ItemNames_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 90bd4761183061d4584d97a6e19d0008, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: ed0a328d54bd9eb40b5328aa8a798dbc, type: 2}
+    - {fileID: 11400000, guid: 29d957dc47653ab42aba4618c475c479, type: 2}

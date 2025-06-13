@@ -17,7 +17,27 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: ad0cec67300b72a489d10b9ec963ccf4, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 5738434560
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81873440768
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117038485504
+    m_Localized: Atajos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 197141303296
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 781672091648
+    m_Localized: "Men\xFA"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: ItemNames Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: ItemNames
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: a2f40a25753a7334aa3beae7572aa8d8
+  m_Entries:
+  - m_Id: 11631431680
+    m_Key: 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 179525226496
+    m_Key: 2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
