@@ -1,6 +1,6 @@
 # 🧝‍♂️ Echoes of Elaria
 
-*Echoes of Elaria** is a 2D pixelart action RPG created in Unity where the player explores floating islands fragmented by a magical cataclysm known as The Shattering of Echoes. In this world divided between those born with magic and those without, echoes of the past still resonate in swords, ruins, and forgotten beings.
+**Echoes of Elaria** is a 2D pixelart action RPG created in Unity where the player explores floating islands fragmented by a magical cataclysm known as The Shattering of Echoes. In this world divided between those born with magic and those without, echoes of the past still resonate in swords, ruins, and forgotten beings.
 
 ---
 
