@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public int Level { get; private set; }
+    public int CurrentXp { get; private set; }
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
     public float MovementSpeed { get; private set; }
@@ -28,11 +29,12 @@ public class PlayerManager : MonoBehaviour
 
     public int InventorySpace {  get; private set; }    
 
+    public static event Action OnLevelUp;
+    public static event Action OnXpGained;
     public static event Action<int> OnCurrentHealthChanged;
     public static event Action<int> OnMaxHealthChanged;
     public static event Action<int> OnCurrentRageChanged;
     //public static event Action<int> OnMaxRageChanged;
-    public static event Action<int> OnLevelUp;
 
 
     private void Awake()
@@ -50,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         if (table.Rows.Count > 0)
         {
             Level = int.Parse(table.Rows[0]["level"].ToString());
+            CurrentXp = int.Parse(table.Rows[0]["current_xp"].ToString());
             MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
             DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
             DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
@@ -71,8 +74,16 @@ public class PlayerManager : MonoBehaviour
     {
         Level = newLevel;
         SaveStatToDatabase("level", newLevel);
-        OnLevelUp?.Invoke(Level);
+        OnLevelUp?.Invoke();
     }
+
+    public void UpdateCurrentXp(int newXp)
+    {
+        CurrentXp = newXp;
+        SaveStatToDatabase("current_xp", CurrentXp);
+        OnXpGained?.Invoke();
+    }
+
     public void UpdateMovementSpeed(float newSpeed)
     {
         MovementSpeed = newSpeed;
@@ -87,7 +98,7 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateCurrentHealth(int newHealth)
     {
-        CurrentHealth = Mathf.Clamp(newHealth, 0, MaxHealth);
+        CurrentHealth = newHealth;
         SaveStatToDatabase("current_health", CurrentHealth);
         OnCurrentHealthChanged?.Invoke(CurrentHealth);
     }
@@ -121,7 +132,7 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateCurrentRage(int newRage)
     {
-        CurrentRage = Mathf.Clamp(newRage, 0, MaxRage);
+        CurrentRage = newRage;
         SaveStatToDatabase("current_rage", CurrentRage);
         OnCurrentRageChanged?.Invoke(CurrentRage);
 
@@ -130,15 +141,36 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     #region Manage
+    public void LevelUp()
+    {
+        UpdateLevel(++Level);
+
+        CurrentXp = 0;
+    }
+
+    public void GainXp(int xp)
+    {
+        int maxXp = XpManager.Instance.CalculateMaxXp(Level);
+        int xpToGain = xp;
+
+        if (CurrentXp + xp >= maxXp)
+        {
+            xpToGain = xp - (maxXp - CurrentXp);
+            LevelUp();
+            maxXp = XpManager.Instance.CalculateMaxXp(Level);
+        }
+
+        UpdateCurrentXp(Mathf.Clamp(CurrentXp + xpToGain, 0, maxXp));
+    }
 
     public void Heal(int hp)
     {
-        UpdateCurrentHealth(CurrentHealth + hp);
+        UpdateCurrentHealth(Mathf.Clamp(CurrentHealth + hp, 0, MaxHealth));
     }
 
     public void TakeDamage(int damage)
     {
-        UpdateCurrentHealth(CurrentHealth - damage);
+        UpdateCurrentHealth(Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth));
 
         // Gain rage (This formula probably needs to change in the future)
         int rageGained =  (int)Mathf.Ceil((damage * 3) / (float)(Level * 8));
@@ -147,14 +179,10 @@ public class PlayerManager : MonoBehaviour
 
     public void GainRage(int amount)
     {
-        UpdateCurrentRage(CurrentRage += amount);
+        UpdateCurrentRage(Mathf.Clamp(CurrentRage += amount, 0, MaxRage));
 
     }
 
-    public void LevelUp()
-    {
-        UpdateLevel(Level++);
-    }
 
     #endregion
 

@@ -13,11 +13,11 @@ public class PlayerLevelText : MonoBehaviour
     }
     private void Start()
     {
-        UpdateText(PlayerManager.Instance.Level);
+        UpdateText();
     }
-    private void UpdateText(int newLevel)
+    private void UpdateText()
     {
-        text.text = newLevel.ToString();
+        text.text = PlayerManager.Instance.Level.ToString();
     }
 
     private void OnDisable()

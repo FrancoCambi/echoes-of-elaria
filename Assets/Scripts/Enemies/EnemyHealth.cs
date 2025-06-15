@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private string enemyName;
     private float knockbackTime;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,11 +28,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public int OnHit(int damage, Vector2 knockback)
     {
         enemyAnimation.StartFlash();
@@ -70,7 +64,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void Death()
     {
+        PlayerManager.Instance.GainXp(Enemy.CalculateXpReward(id));
         Destroy(gameObject);
+
     }
 
 }

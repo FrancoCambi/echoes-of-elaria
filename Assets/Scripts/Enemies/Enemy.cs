@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public static class Enemy 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static int CalculateXpReward(int id)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return 415;
     }
 }
