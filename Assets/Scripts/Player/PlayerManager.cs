@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -146,6 +147,9 @@ public class PlayerManager : MonoBehaviour
         UpdateLevel(++Level);
 
         CurrentXp = 0;
+
+        string alertLocalized = LocalizationSettings.StringDatabase.GetLocalizedString("Ui", "AlertLevelUp");
+        AlertManager.Instance.ThrowAlert(alertLocalized);
     }
 
     public void GainXp(int xp)

@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: XpBar
     m_Metadata:
       m_Items: []
+  - m_Id: 203556032974848
+    m_Key: AlertLevelUp
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

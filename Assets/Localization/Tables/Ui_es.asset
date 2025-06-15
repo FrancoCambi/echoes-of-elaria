@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: MA
     m_Metadata:
       m_Items: []
+  - m_Id: 203556032974848
+    m_Localized: Tu nivel ha aumentado!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
