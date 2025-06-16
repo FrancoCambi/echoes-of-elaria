@@ -14,7 +14,6 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
     [SerializeField]
     private TextMeshProUGUI bindingText;
 
-
     private InventorySlot itemSlot;
     private KeyBinding keybind;
 
@@ -37,17 +36,7 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
     {
         keybind = KeyBindsManager.Instance.LoadBinding(GetSlotIndex());
         UpdateBindingText();
-    }
-
-    private void OnEnable()
-    {
-        ActionBarManager.Instance.Slots.Add(this);
-    }
-
-    private void OnDisable()
-    {
-        ActionBarManager.Instance.Slots.Remove(this);
-
+        LoadContent();
     }
 
     #region methods
@@ -78,6 +67,7 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
 
         itemSlot = slot;
         itemSlot.OnInventorySlotAmountChanged += ItemUsedFromInventory;
+        SaveContent(slot.GetSlotIndex());
     }
 
     private void ItemUsedFromInventory()
@@ -124,11 +114,29 @@ public class ActionSlot : BaseSlot, IPointerEnterHandler, IPointerExitHandler
         base.Clear();
 
         background.sprite = emptyBackground;
+        PlayerPrefs.DeleteKey($"action_{GetSlotIndex()}");
 
     }
     public override int GetSlotIndex()
     {
         return ActionBarManager.Instance.Slots.IndexOf(this);
+    }
+
+    private void SaveContent(int index)
+    {
+        PlayerPrefs.SetInt($"action_{GetSlotIndex()}", index);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadContent()
+    {
+        int index = PlayerPrefs.GetInt($"action_{GetSlotIndex()}", -1);
+        if (index == -1) return;
+       
+        InventorySlot slot = InventoryManager.Instance.Slots[index];
+        SetItemSlot(slot);
+        SetContent(slot.Content);
+
     }
 
     #endregion

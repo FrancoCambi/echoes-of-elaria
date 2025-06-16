@@ -14,11 +14,16 @@ public class ActionBarManager : MonoBehaviour
         }
     }
 
-
     [SerializeField]
-    private GameObject slotPrefab;
+    private List<ActionSlot> slots;
 
-    public List<ActionSlot> Slots = new();
+    public List<ActionSlot> Slots
+    {
+        get
+        {
+            return slots;
+        }
+    }
 
 
 }
