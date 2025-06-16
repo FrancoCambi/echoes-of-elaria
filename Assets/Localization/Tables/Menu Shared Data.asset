@@ -35,6 +35,30 @@ MonoBehaviour:
     m_Key: MenuButton
     m_Metadata:
       m_Items: []
+  - m_Id: 847137265520640
+    m_Key: OptionsMusicText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847207826296832
+    m_Key: OptionsEffectsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847208652574720
+    m_Key: OptionsLanguageText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847307956916224
+    m_Key: OptionsDifficultyText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847422201368576
+    m_Key: OptionsLanguageButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847573645103104
+    m_Key: OptionsTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

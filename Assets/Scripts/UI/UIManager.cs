@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     {
         panelList = new()
         {
-            InventoryManager.Instance, MenuManager.Instance
+            InventoryManager.Instance, MenuManager.Instance, OptionsManager.Instance
         };
     }
 

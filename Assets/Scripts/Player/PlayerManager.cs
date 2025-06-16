@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
     private void LoadStatsFromDatabase()
     {
 
-        string query = $"SELECT * FROM characters WHERE character_id = {GameManager.Instance.SelCharID}";
+        string query = $"SELECT * FROM characters WHERE character_id = {GameManager.SelCharID}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
 
         if (table.Rows.Count > 0)
@@ -192,7 +192,7 @@ public class PlayerManager : MonoBehaviour
 
     private void SaveStatToDatabase(string statName, float value)
     {
-        string query = $"UPDATE characters SET {statName} = {value} WHERE character_id = {GameManager.Instance.SelCharID}";
+        string query = $"UPDATE characters SET {statName} = {value} WHERE character_id = {GameManager.SelCharID}";
         DBManager.Instance.ExecuteQuery(query);
     }
 

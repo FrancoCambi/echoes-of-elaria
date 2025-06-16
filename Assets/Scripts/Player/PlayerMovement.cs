@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
-        charID = GameManager.Instance.SelCharID;
+        charID = GameManager.SelCharID;
 
         canMove = true;
         canDash = true;

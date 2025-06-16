@@ -168,7 +168,7 @@ TextureImporter:
         width: 14
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 4, z: 3, w: 3}
       customData: 
       outline: []
@@ -177,6 +177,72 @@ TextureImporter:
       bones: []
       spriteID: ca9954bfd0c4a7542a52b4a003e6e5e2
       internalID: 1064446947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EscMenu_3
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 97
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 4, z: 2, w: 2}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23313d7d6b12a0a498d2e93cae43d76f
+      internalID: 305246635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EscMenu_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 84
+        width: 30
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb56c76a1df904c46aa632ff8c88dff6
+      internalID: -145137919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EscMenu_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 97
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9fc41d78b8f03b4ab9d2541993a3355
+      internalID: 538848609
       vertices: []
       indices: 
       edges: []
@@ -198,6 +264,9 @@ TextureImporter:
       EscMenu_0: 7968795097302638362
       EscMenu_1: 596262798515423179
       EscMenu_2: 1064446947
+      EscMenu_3: 305246635
+      EscMenu_4: -145137919
+      EscMenu_5: 538848609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

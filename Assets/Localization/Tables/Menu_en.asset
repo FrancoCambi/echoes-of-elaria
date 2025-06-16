@@ -38,6 +38,30 @@ MonoBehaviour:
     m_Localized: "Menu\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 847137265520640
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847207826296832
+    m_Localized: Sound Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847208652574720
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847307956916224
+    m_Localized: Difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847422201368576
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 847573645103104
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

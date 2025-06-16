@@ -150,7 +150,7 @@ public class InventoryManager : Panel
     
     public void LoadItemsFromDatabase()
     {
-        string query = $"SELECT * FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID}";
+        string query = $"SELECT * FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
 
         foreach (DataRow row in table.Rows)
@@ -172,7 +172,7 @@ public class InventoryManager : Panel
             {
                 Item contentItem = slot.Content as Item;
 
-                valuesList.Add((GameManager.Instance.SelCharID, contentItem.Id, slot.Amount, slot.GetSlotIndex()));
+                valuesList.Add((GameManager.SelCharID, contentItem.Id, slot.Amount, slot.GetSlotIndex()));
             }
         }
 
@@ -180,13 +180,13 @@ public class InventoryManager : Panel
 
         string query = values != "" ? 
             $"BEGIN TRANSACTION;" +
-            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID};" +
+            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.SelCharID};" +
             $"INSERT INTO characters_inventory(character_id, item_id, amount, slot_index)" +
             $"VALUES" +
             $"{values};" +
             $"COMMIT;" 
             : 
-            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.Instance.SelCharID}";
+            $"DELETE FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
 
         DBManager.Instance.ExecuteQuery(query);
     }

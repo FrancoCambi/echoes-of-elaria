@@ -21,7 +21,7 @@ public class MenuManager : Panel
 
     public void OptionsButton()
     {
-        
+        OptionsManager.Instance.Open();
     }
 
     public void KeysButton()

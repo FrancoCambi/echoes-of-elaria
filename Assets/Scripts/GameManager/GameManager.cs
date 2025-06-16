@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
+public enum Language { English, Spanish }
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -15,21 +18,56 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private int selCharID;
-    public int SelCharID
-    {
-        get
-        {
-            return selCharID;
-        }
-        set
-        {
-            selCharID = value;
-        }
-    }
+    public static int SelCharID { get; set; }
+
+    public static Language CurrentLanguage { get; set; }
 
     private void Awake()
     {
-        selCharID = 1;
+        SelCharID = 1;
+        LoadLanguage();
+    }
+
+    public static void SwitchLanguage(Language newLanguage)
+    {
+        if (newLanguage == Language.English)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+        }
+        else
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+        }
+        CurrentLanguage = newLanguage;
+        SaveLanguage();
+    }
+
+    private static void SaveLanguage()
+    {
+        if (CurrentLanguage == Language.English)
+        {
+            PlayerPrefs.SetInt("language", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("language", 1);
+        }
+        PlayerPrefs.Save();
+    }
+
+    private void LoadLanguage()
+    {
+        int languageIndex = PlayerPrefs.GetInt("language", -1);
+        if (languageIndex == -1) return;
+
+        if (languageIndex == 0)
+        {
+            SwitchLanguage(Language.English);
+        }
+        else
+        {
+            SwitchLanguage(Language.Spanish);
+        }
+
     }
 }
