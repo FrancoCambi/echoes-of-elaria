@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -25,7 +26,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SelCharID = 1;
-        LoadLanguage();
+
+        StartCoroutine(nameof(LoadLanguage));
     }
 
     public static void SwitchLanguage(Language newLanguage)
@@ -55,10 +57,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void LoadLanguage()
+    private IEnumerator LoadLanguage()
     {
+        yield return LocalizationSettings.InitializationOperation;
         int languageIndex = PlayerPrefs.GetInt("language", -1);
-        if (languageIndex == -1) return;
+        if (languageIndex == -1) yield return null;
 
         if (languageIndex == 0)
         {
