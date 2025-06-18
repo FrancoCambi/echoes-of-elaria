@@ -15,13 +15,24 @@ public class SoundFXManager : MonoBehaviour
 
     [SerializeField] private AudioSource soundFXObject;
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume = 1f, bool randomPitch = true)
     {
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
         audioSource.clip = audioClip;
 
         audioSource.volume = volume;
+
+        if (randomPitch)
+        {
+            float rand = Random.Range(0.9f, 1.1f);
+            SoundMixerManager.Instance.SetSoundFXPitch(rand);
+
+        }
+        else
+        {
+            SoundMixerManager.Instance.SetSoundFXPitch(1);
+        }
 
         audioSource.Play();
 
@@ -30,7 +41,7 @@ public class SoundFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
-    public void PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume)
+    public void PlayRandomSoundFXClip(AudioClip[] audioClips, Transform spawnTransform, float volume = 1f)
     {
         int rand = Random.Range(0, audioClips.Length);
 

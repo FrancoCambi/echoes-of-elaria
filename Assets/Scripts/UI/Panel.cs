@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class Panel : MonoBehaviour
 {
-    protected CanvasGroup group;
+    private CanvasGroup group;
+    [SerializeField] private AudioClip openClip;
 
     public virtual void Awake()
     {
@@ -21,17 +22,29 @@ public abstract class Panel : MonoBehaviour
     {
         group.alpha = 0;
         group.blocksRaycasts = false;
+
     }
 
     public virtual void Open()
     {
         group.alpha = 1;
         group.blocksRaycasts = true;
+
+        if (openClip != null)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(openClip, transform);
+        }
     }
 
     public virtual void OpenClose()
     {
-        group.alpha = group.alpha != 0 ? 0 : 1;
-        group.blocksRaycasts = !group.blocksRaycasts;
+        if (group.alpha == 1)
+        {
+            Close();
+        }
+        else
+        {
+            Open();
+        }
     }
 }

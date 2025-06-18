@@ -38,7 +38,10 @@ public class UIManager : MonoBehaviour
             {
                 foreach (Panel panel in panelList)
                 {
-                    panel.Close();
+                    if (panel.IsOpen)
+                    {
+                        panel.Close();
+                    }
                 }
             }
             else

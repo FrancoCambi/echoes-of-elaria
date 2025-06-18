@@ -4,6 +4,18 @@ using UnityEngine.UI;
 
 public class SoundMixerManager : MonoBehaviour
 {
+
+    private static SoundMixerManager instance;
+
+    public static SoundMixerManager Instance
+    {
+        get
+        {
+            instance = instance != null ? instance : FindAnyObjectByType<SoundMixerManager>();
+            return instance;
+        }
+    }
+
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider soundFXSlider;
@@ -30,6 +42,13 @@ public class SoundMixerManager : MonoBehaviour
     {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(level) * 20f);
         SaveMusicVolume();
+    }
+
+    public void SetSoundFXPitch(float level)
+    {
+        audioMixer.SetFloat("SoundFXPitch", level);
+        audioMixer.GetFloat("SoundFXPitch", out float pitch);
+        Debug.Log(pitch);
     }
 
     private void SaveMasterVolume()

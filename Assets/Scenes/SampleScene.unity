@@ -1613,6 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7337a03d561ac45ba5ebfc5362ea5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openClip: {fileID: 8300000, guid: 7fb257ea6ebf8d747b3f13927f5df336, type: 3}
   slotPrefab: {fileID: 9053519431746025036, guid: 464f285af505e2b41bac0e2d20100fd1, type: 3}
 --- !u!114 &200682223
 MonoBehaviour:
@@ -14787,6 +14788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7790b9a22d2c15947a7e7d178e9db3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openClip: {fileID: 8300000, guid: 40e5eb89929e47440b6a0b6816d34ca8, type: 3}
 --- !u!225 &1745882200
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -15605,6 +15607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6207f34fc3019f8449ad063b0d77941c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openClip: {fileID: 8300000, guid: 40e5eb89929e47440b6a0b6816d34ca8, type: 3}
 --- !u!225 &1857685439
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -173,7 +173,7 @@ public class PlayerManager : MonoBehaviour
 
         AudioClip healSoundClip = Resources.Load<AudioClip>("Audio/Clips/Heal");
 
-        SoundFXManager.Instance.PlaySoundFXClip(healSoundClip, transform, 1f);
+        SoundFXManager.Instance.PlaySoundFXClip(healSoundClip, transform);
     }
 
     public void TakeDamage(int damage)

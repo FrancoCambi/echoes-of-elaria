@@ -40,7 +40,6 @@ public class InventoryManager : Panel
             InventorySlot slot = go.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
-
         LoadItemsFromDatabase();
     }
 
@@ -142,26 +141,6 @@ public class InventoryManager : Panel
         }
         return false;
     }
-    
-    public void RemoveItem(int itemID, int amount)
-    {
-
-    }
-    
-    public void LoadItemsFromDatabase()
-    {
-        string query = $"SELECT * FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        foreach (DataRow row in table.Rows)
-        {
-            int itemID = int.Parse(row["item_id"].ToString());
-            int amount = int.Parse(row["amount"].ToString());
-            int slotIndex = int.Parse(row["slot_index"].ToString());
-
-            AddItemsInSlot(itemID, amount, slotIndex);
-        }
-    }
     public void SaveItemsToDatabase()
     {
         List<(int, int, int, int)> valuesList = new();
@@ -189,6 +168,21 @@ public class InventoryManager : Panel
             $"DELETE FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
 
         DBManager.Instance.ExecuteQuery(query);
+    }
+    
+    public void LoadItemsFromDatabase()
+    {
+        string query = $"SELECT * FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        foreach (DataRow row in table.Rows)
+        {
+            int itemID = int.Parse(row["item_id"].ToString());
+            int amount = int.Parse(row["amount"].ToString());
+            int slotIndex = int.Parse(row["slot_index"].ToString());
+
+            AddItemsInSlot(itemID, amount, slotIndex);
+        }
     }
 
 }

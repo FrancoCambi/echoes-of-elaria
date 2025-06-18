@@ -8,10 +8,14 @@ public class VolumePercentageText : MonoBehaviour
     [SerializeField] private Slider slider;
     private TextMeshProUGUI percentageText;
 
-    private void Start()
+    private void Awake()
     {
         percentageText = GetComponent<TextMeshProUGUI>();
 
+    }
+
+    private void Start()
+    {
         UpdateText();
     }
 
