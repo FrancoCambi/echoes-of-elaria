@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Bow_0: 950898674789716370
+      Shirt_Green_Bow_1: 9179080158228125742
+      Shirt_Green_Bow_2: 3632156314291337147
+      Shirt_Green_Bow_3: 7289316149242716329
+      Shirt_Green_Bow_4: 2395444629641197649
+      Shirt_Green_Bow_5: 1540102410506999243
+      Shirt_Green_Bow_6: 6034865358496789545
+      Shirt_Green_Bow_7: 5637321605771111826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

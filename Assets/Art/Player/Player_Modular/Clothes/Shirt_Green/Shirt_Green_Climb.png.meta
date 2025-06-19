@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Climb_0: 9082205707739130530
+      Shirt_Green_Climb_1: -6467419079821011584
+      Shirt_Green_Climb_2: 4450219863429063808
+      Shirt_Green_Climb_3: 8872804608602047769
+      Shirt_Green_Climb_4: -447578180241809126
+      Shirt_Green_Climb_5: -3223601227942198699
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

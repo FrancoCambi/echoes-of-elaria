@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shoes_Brown_WateringCan_0: -8064286935220355937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

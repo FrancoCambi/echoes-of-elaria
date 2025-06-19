@@ -647,7 +647,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Torch_Running_0: -3932912859475554317
+      Hands_Bare_Torch_Running_1: 2709952555341530386
+      Hands_Bare_Torch_Running_10: -1716997158742967734
+      Hands_Bare_Torch_Running_11: 4288002212842001171
+      Hands_Bare_Torch_Running_12: -8077596894225631405
+      Hands_Bare_Torch_Running_13: 3712427487093248402
+      Hands_Bare_Torch_Running_14: 7396925077184939362
+      Hands_Bare_Torch_Running_15: 5844165238644207888
+      Hands_Bare_Torch_Running_16: -966369622798635850
+      Hands_Bare_Torch_Running_17: -509272998405752269
+      Hands_Bare_Torch_Running_18: -1756655992773435298
+      Hands_Bare_Torch_Running_19: 754174648748650112
+      Hands_Bare_Torch_Running_2: -6701860539251701426
+      Hands_Bare_Torch_Running_20: 4498050579011402404
+      Hands_Bare_Torch_Running_3: -4175559000842086971
+      Hands_Bare_Torch_Running_4: -252141792308414877
+      Hands_Bare_Torch_Running_5: 6673793822846419459
+      Hands_Bare_Torch_Running_6: 7712973980207495804
+      Hands_Bare_Torch_Running_7: 2345163454071008860
+      Hands_Bare_Torch_Running_8: -3153766082742695888
+      Hands_Bare_Torch_Running_9: 8511102764906594630
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

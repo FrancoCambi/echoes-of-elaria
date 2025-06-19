@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Running_0: -4243386014463429683
+      Hands_Bare_Running_1: 2243061531444177559
+      Hands_Bare_Running_2: 1098465923854828382
+      Hands_Bare_Running_3: -6322287052370124412
+      Hands_Bare_Running_4: 4676503186263444211
+      Hands_Bare_Running_5: 4790111287077391345
+      Hands_Bare_Running_6: -4089277903753189306
+      Hands_Bare_Running_7: -5407750771360935160
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

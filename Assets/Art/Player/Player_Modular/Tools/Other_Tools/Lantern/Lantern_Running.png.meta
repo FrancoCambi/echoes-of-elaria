@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lantern_Running_0: 4706109445770488169
+      Lantern_Running_1: 5764504611818616729
+      Lantern_Running_10: 7461357040252144144
+      Lantern_Running_11: 1554313274663067583
+      Lantern_Running_12: 194835308550710005
+      Lantern_Running_13: -1551265743937424469
+      Lantern_Running_14: -6499197139845893967
+      Lantern_Running_15: -3270939627607827222
+      Lantern_Running_16: 6744841379545910955
+      Lantern_Running_17: 1968719090996627309
+      Lantern_Running_2: -1888563645151841299
+      Lantern_Running_3: 184746676211894242
+      Lantern_Running_4: -31546282433359627
+      Lantern_Running_5: 4333866100379289801
+      Lantern_Running_6: 3956429008355696924
+      Lantern_Running_7: 5484345129308602220
+      Lantern_Running_8: 7193521807833583389
+      Lantern_Running_9: 1276381441856283734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

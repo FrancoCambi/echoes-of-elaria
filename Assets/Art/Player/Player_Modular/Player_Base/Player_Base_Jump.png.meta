@@ -797,7 +797,34 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player_Base_Jump_0: 8620595756600505364
+      Player_Base_Jump_1: 6608490861798711359
+      Player_Base_Jump_10: 6524130802499078044
+      Player_Base_Jump_11: -4553681425672688477
+      Player_Base_Jump_12: 7823304441271711378
+      Player_Base_Jump_13: 4841630762235072024
+      Player_Base_Jump_14: 900379377529999701
+      Player_Base_Jump_15: 6425752717131304623
+      Player_Base_Jump_16: 3927948572134542223
+      Player_Base_Jump_17: -8520526429578698264
+      Player_Base_Jump_18: -2493600102809570824
+      Player_Base_Jump_19: 4628302075719988588
+      Player_Base_Jump_2: -4556507869703576085
+      Player_Base_Jump_20: 988060650942594557
+      Player_Base_Jump_21: -6110244030601486953
+      Player_Base_Jump_22: 5859927756480527557
+      Player_Base_Jump_23: -8419482421381358324
+      Player_Base_Jump_24: -5550510854901409263
+      Player_Base_Jump_25: 615653009967448973
+      Player_Base_Jump_26: -3345395933466977815
+      Player_Base_Jump_3: 2896799847956847037
+      Player_Base_Jump_4: -7794734521475360820
+      Player_Base_Jump_5: 977530369733630073
+      Player_Base_Jump_6: -3754770797463777662
+      Player_Base_Jump_7: -7435080698596775825
+      Player_Base_Jump_8: -6413657662275935374
+      Player_Base_Jump_9: 7585676285217847697
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

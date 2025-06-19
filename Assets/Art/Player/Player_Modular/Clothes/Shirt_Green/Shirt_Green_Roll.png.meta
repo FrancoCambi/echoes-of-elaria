@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Roll_0: 7530884464694856759
+      Shirt_Green_Roll_1: -188874101789857327
+      Shirt_Green_Roll_2: 3014044838946061528
+      Shirt_Green_Roll_3: 8885483000745817652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

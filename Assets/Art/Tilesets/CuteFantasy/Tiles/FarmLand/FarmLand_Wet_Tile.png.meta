@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FarmLand_Wet_Tile_0: 5610385612084593228
+      FarmLand_Wet_Tile_1: 8158670078252447221
+      FarmLand_Wet_Tile_2: -7890057014233389154
+      FarmLand_Wet_Tile_3: 7042695545425960597
+      FarmLand_Wet_Tile_4: -7665817778320928230
+      FarmLand_Wet_Tile_5: -8091119991103756802
+      FarmLand_Wet_Tile_6: -3306948508049573734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

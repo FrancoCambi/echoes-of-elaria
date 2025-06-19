@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Medium_Hair_Brown_Climb_0: -2704074345727396212
+      Medium_Hair_Brown_Climb_1: -5707732552878550569
+      Medium_Hair_Brown_Climb_2: 3688438312983479299
+      Medium_Hair_Brown_Climb_3: -5637543571151258321
+      Medium_Hair_Brown_Climb_4: -7375529213937360377
+      Medium_Hair_Brown_Climb_5: 7711287314882605935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

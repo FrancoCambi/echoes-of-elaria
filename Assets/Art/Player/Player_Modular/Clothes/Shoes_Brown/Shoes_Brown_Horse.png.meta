@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shoes_Brown_Horse_0: -3737388982776802940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -872,7 +872,37 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Torch_Idle_0: -2645159422999641911
+      Hands_Bare_Torch_Idle_1: 2135409846940773621
+      Hands_Bare_Torch_Idle_10: 4740401054737985075
+      Hands_Bare_Torch_Idle_11: 4608328509667166101
+      Hands_Bare_Torch_Idle_12: 5580422454809303669
+      Hands_Bare_Torch_Idle_13: 2818633528986864091
+      Hands_Bare_Torch_Idle_14: 7185865575234444128
+      Hands_Bare_Torch_Idle_15: 6684568078029504801
+      Hands_Bare_Torch_Idle_16: -4767384496980225197
+      Hands_Bare_Torch_Idle_17: -7104668855638192582
+      Hands_Bare_Torch_Idle_18: -5574713273741022255
+      Hands_Bare_Torch_Idle_19: -8275564731464347958
+      Hands_Bare_Torch_Idle_2: -737889786983856617
+      Hands_Bare_Torch_Idle_20: -5556778528938886073
+      Hands_Bare_Torch_Idle_21: -8803213298949507762
+      Hands_Bare_Torch_Idle_22: 4187372389042933217
+      Hands_Bare_Torch_Idle_23: 6048392948154701899
+      Hands_Bare_Torch_Idle_24: -1393803922503356777
+      Hands_Bare_Torch_Idle_25: 4636420701557606799
+      Hands_Bare_Torch_Idle_26: 1109259229051523819
+      Hands_Bare_Torch_Idle_27: -6079851146699045164
+      Hands_Bare_Torch_Idle_28: -6479191986805456686
+      Hands_Bare_Torch_Idle_29: -7823394582170117319
+      Hands_Bare_Torch_Idle_3: -6927816075795949915
+      Hands_Bare_Torch_Idle_4: -2770469787602780873
+      Hands_Bare_Torch_Idle_5: -4281990677989272960
+      Hands_Bare_Torch_Idle_6: 6292779434258004400
+      Hands_Bare_Torch_Idle_7: -2800749125004752504
+      Hands_Bare_Torch_Idle_8: -1860296933050857485
+      Hands_Bare_Torch_Idle_9: 4921388558340463228
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

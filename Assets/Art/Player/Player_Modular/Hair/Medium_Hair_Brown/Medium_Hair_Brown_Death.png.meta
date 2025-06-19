@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Medium_Hair_Brown_Death_0: -8883693413763056061
+      Medium_Hair_Brown_Death_1: 1666453236221419715
+      Medium_Hair_Brown_Death_2: -3695906346079837916
+      Medium_Hair_Brown_Death_3: 6925742056827121376
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rails_0: 7783117930852802827
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

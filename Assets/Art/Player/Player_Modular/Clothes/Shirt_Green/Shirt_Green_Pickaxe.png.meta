@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Pickaxe_0: -3220525954914790725
+      Shirt_Green_Pickaxe_1: 8938163819675662066
+      Shirt_Green_Pickaxe_2: -1428392885909366862
+      Shirt_Green_Pickaxe_3: -5363380923108750074
+      Shirt_Green_Pickaxe_4: 5545471711668657958
+      Shirt_Green_Pickaxe_5: -6363022560921033123
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

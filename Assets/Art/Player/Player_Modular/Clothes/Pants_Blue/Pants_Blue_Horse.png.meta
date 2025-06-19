@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pants_Blue_Horse_0: -3603011977958642141
+      Pants_Blue_Horse_1: 6069973536021603678
+      Pants_Blue_Horse_2: -4127246158318442340
+      Pants_Blue_Horse_3: -4870456850433243630
+      Pants_Blue_Horse_4: -1095197113211820708
+      Pants_Blue_Horse_5: -5395276490127513800
+      Pants_Blue_Horse_6: 3969679369115410012
+      Pants_Blue_Horse_7: -5808154898180132711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

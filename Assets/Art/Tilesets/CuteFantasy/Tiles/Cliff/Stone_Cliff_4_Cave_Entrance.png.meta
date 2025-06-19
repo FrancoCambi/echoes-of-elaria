@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stone_Cliff_4_Cave_Entrance_0: -7285715420674310928
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

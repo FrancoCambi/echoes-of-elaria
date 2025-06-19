@@ -497,7 +497,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Iron_Pickaxe_0: -3788526117380394678
+      Iron_Pickaxe_1: -5078986805398044764
+      Iron_Pickaxe_10: -7296705358356151430
+      Iron_Pickaxe_11: -5818498233211087818
+      Iron_Pickaxe_12: 9168076343757975992
+      Iron_Pickaxe_13: 4535745707176007247
+      Iron_Pickaxe_14: 4621257526843061509
+      Iron_Pickaxe_2: 5502875285271841615
+      Iron_Pickaxe_3: -7720260225122892279
+      Iron_Pickaxe_4: -4603485017170669986
+      Iron_Pickaxe_5: -6133908358360529104
+      Iron_Pickaxe_6: 5442756925852693910
+      Iron_Pickaxe_7: -2553633754298534591
+      Iron_Pickaxe_8: 8662987369459750391
+      Iron_Pickaxe_9: -1827007942347688053
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Hoe_0: -2472917913089584763
+      Shirt_Green_Hoe_1: -6598188811359261978
+      Shirt_Green_Hoe_2: 4803135054434216913
+      Shirt_Green_Hoe_3: 2797441871718388447
+      Shirt_Green_Hoe_4: 5322472708796707637
+      Shirt_Green_Hoe_5: -7919882583465168488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

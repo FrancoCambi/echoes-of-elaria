@@ -1072,7 +1072,45 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Attack_0: 6019744557557995866
+      Hands_Bare_Attack_1: -3388282473236733706
+      Hands_Bare_Attack_10: -97824294658300273
+      Hands_Bare_Attack_11: -314188652596793272
+      Hands_Bare_Attack_12: 4542618913428306846
+      Hands_Bare_Attack_13: -6974992346124327449
+      Hands_Bare_Attack_14: 6527487238701305879
+      Hands_Bare_Attack_15: -1829059983256370011
+      Hands_Bare_Attack_16: 8764737535563038439
+      Hands_Bare_Attack_17: 5312898479631230548
+      Hands_Bare_Attack_18: -2011519422301396848
+      Hands_Bare_Attack_19: -5229996272044793777
+      Hands_Bare_Attack_2: -1772599346226518122
+      Hands_Bare_Attack_20: -2205162754255124310
+      Hands_Bare_Attack_21: 5772661320882893555
+      Hands_Bare_Attack_22: -8802661321125728421
+      Hands_Bare_Attack_23: 1479703314806636246
+      Hands_Bare_Attack_24: 3269603426570462757
+      Hands_Bare_Attack_25: 7939436879977844978
+      Hands_Bare_Attack_26: -8696352195172635164
+      Hands_Bare_Attack_27: -5238843707692095429
+      Hands_Bare_Attack_28: 6043625447587513054
+      Hands_Bare_Attack_29: 8989229814654165174
+      Hands_Bare_Attack_3: -1747334231693698323
+      Hands_Bare_Attack_30: 2296790484756571418
+      Hands_Bare_Attack_31: -2078426918830244698
+      Hands_Bare_Attack_32: 4683077524368701381
+      Hands_Bare_Attack_33: -7930848854992107091
+      Hands_Bare_Attack_34: 5028662790251418901
+      Hands_Bare_Attack_35: -6546658864244732193
+      Hands_Bare_Attack_36: 140891070959305514
+      Hands_Bare_Attack_37: -5089506394468564927
+      Hands_Bare_Attack_4: 7834030476725698314
+      Hands_Bare_Attack_5: -8511520771623162584
+      Hands_Bare_Attack_6: 7707958696778937065
+      Hands_Bare_Attack_7: 1552939769345502416
+      Hands_Bare_Attack_8: 7237413084019311473
+      Hands_Bare_Attack_9: -7312400152398321171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

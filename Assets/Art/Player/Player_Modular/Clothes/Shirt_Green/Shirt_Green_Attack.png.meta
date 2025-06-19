@@ -647,7 +647,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Attack_0: -4635087459935930943
+      Shirt_Green_Attack_1: 2570258393508672790
+      Shirt_Green_Attack_10: -1293598243462568617
+      Shirt_Green_Attack_11: -4350999230668531992
+      Shirt_Green_Attack_12: 4919553207850749883
+      Shirt_Green_Attack_13: 914367538321676655
+      Shirt_Green_Attack_14: 5433070336290180395
+      Shirt_Green_Attack_15: 2305102252573344432
+      Shirt_Green_Attack_16: -1750826415484996221
+      Shirt_Green_Attack_17: 8801811352736702065
+      Shirt_Green_Attack_18: -7165688988535575872
+      Shirt_Green_Attack_19: -7417953237367559323
+      Shirt_Green_Attack_2: -4341243643960587420
+      Shirt_Green_Attack_20: 4048689254017443191
+      Shirt_Green_Attack_3: -3404070519444728525
+      Shirt_Green_Attack_4: 4144202971908600268
+      Shirt_Green_Attack_5: -4806779941367103099
+      Shirt_Green_Attack_6: -6781562687720922652
+      Shirt_Green_Attack_7: 1558519656636187479
+      Shirt_Green_Attack_8: 5069423983376097414
+      Shirt_Green_Attack_9: -3420348980148596192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Death_0: 6524817300570692713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -722,7 +722,31 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Idle_0: -1336758780857433701
+      Hands_Bare_Idle_1: 6034062090422544938
+      Hands_Bare_Idle_10: -2640608324785833992
+      Hands_Bare_Idle_11: 5096443625312363107
+      Hands_Bare_Idle_12: -7364423592677749563
+      Hands_Bare_Idle_13: 7498490992335144429
+      Hands_Bare_Idle_14: 4747206348821125706
+      Hands_Bare_Idle_15: -4085293444842695089
+      Hands_Bare_Idle_16: -5238437493221863380
+      Hands_Bare_Idle_17: 7871983068343148473
+      Hands_Bare_Idle_18: -2028743709830121701
+      Hands_Bare_Idle_19: 610805665773182044
+      Hands_Bare_Idle_2: 2930731169758509988
+      Hands_Bare_Idle_20: -1190991893025995632
+      Hands_Bare_Idle_21: 6417246303169897457
+      Hands_Bare_Idle_22: 1902399509914069584
+      Hands_Bare_Idle_23: -3999192824790890548
+      Hands_Bare_Idle_3: 262592736356472525
+      Hands_Bare_Idle_4: -2498102643808467322
+      Hands_Bare_Idle_5: 3501683915104509856
+      Hands_Bare_Idle_6: 3182565429564832553
+      Hands_Bare_Idle_7: -2015579343196739143
+      Hands_Bare_Idle_8: 3049421080961362792
+      Hands_Bare_Idle_9: 6342298160478135791
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

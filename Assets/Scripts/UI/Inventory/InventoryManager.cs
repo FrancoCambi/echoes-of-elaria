@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class InventoryManager : Panel

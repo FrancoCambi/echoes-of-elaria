@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pants_Blue_WateringCan_0: -3290755165702801142
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

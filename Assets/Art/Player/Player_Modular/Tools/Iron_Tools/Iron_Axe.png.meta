@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Iron_Axe_0: 9047117553740066839
+      Iron_Axe_1: 2965910939634963060
+      Iron_Axe_10: -5118620025499549971
+      Iron_Axe_11: -5364496641152487104
+      Iron_Axe_12: -6900329811545929837
+      Iron_Axe_13: 5677529388199376586
+      Iron_Axe_14: 7266162901739560844
+      Iron_Axe_15: -3919001294312975076
+      Iron_Axe_16: -3130419583638819690
+      Iron_Axe_17: 3797067005159346139
+      Iron_Axe_2: 5900332552338516459
+      Iron_Axe_3: 6915444578843453103
+      Iron_Axe_4: -5705932420237858599
+      Iron_Axe_5: -5267126456664129682
+      Iron_Axe_6: -7885577888480295246
+      Iron_Axe_7: -1052634653442876981
+      Iron_Axe_8: -1878694653810571420
+      Iron_Axe_9: 7135626586580194021
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

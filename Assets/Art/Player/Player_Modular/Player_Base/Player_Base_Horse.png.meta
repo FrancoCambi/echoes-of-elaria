@@ -1122,7 +1122,47 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player_Base_Horse_0: 8464372071168909885
+      Player_Base_Horse_1: 7611515233557774136
+      Player_Base_Horse_10: 8026291249485019597
+      Player_Base_Horse_11: -2873216400754413387
+      Player_Base_Horse_12: 7350129573279423274
+      Player_Base_Horse_13: -6611412025608381028
+      Player_Base_Horse_14: -5500177636309232430
+      Player_Base_Horse_15: 604472399831878238
+      Player_Base_Horse_16: -6533442725015404674
+      Player_Base_Horse_17: 1516508273373722613
+      Player_Base_Horse_18: 7647432703233587287
+      Player_Base_Horse_19: 734673271575127298
+      Player_Base_Horse_2: -2050971311806203579
+      Player_Base_Horse_20: 1334227567984124623
+      Player_Base_Horse_21: 8943966264418709248
+      Player_Base_Horse_22: -4946286791699353318
+      Player_Base_Horse_23: -8695112393291787962
+      Player_Base_Horse_24: 1906645175344054214
+      Player_Base_Horse_25: 7488916114503554466
+      Player_Base_Horse_26: -6797982098812432118
+      Player_Base_Horse_27: 2227048994351543411
+      Player_Base_Horse_28: -4041259403055612581
+      Player_Base_Horse_29: -7437063072938002857
+      Player_Base_Horse_3: -1263081993709876989
+      Player_Base_Horse_30: 7257866932367964507
+      Player_Base_Horse_31: -552898297924756870
+      Player_Base_Horse_32: 4460892852001105584
+      Player_Base_Horse_33: 7090821137736241883
+      Player_Base_Horse_34: -3291461513576921973
+      Player_Base_Horse_35: -7299696721889111949
+      Player_Base_Horse_36: 1219023157580929167
+      Player_Base_Horse_37: -788326561521977646
+      Player_Base_Horse_38: 5682664324888105222
+      Player_Base_Horse_39: -4905220535750527433
+      Player_Base_Horse_4: -6241544025097053381
+      Player_Base_Horse_5: -5235869648289659096
+      Player_Base_Horse_6: 2042052769061670218
+      Player_Base_Horse_7: 558292487112439233
+      Player_Base_Horse_8: -4380343148970590534
+      Player_Base_Horse_9: -3466245140524550027
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

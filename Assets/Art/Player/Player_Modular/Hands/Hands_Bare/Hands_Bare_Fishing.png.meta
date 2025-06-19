@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Fishing_0: -8191202012815633392
+      Hands_Bare_Fishing_1: -6918868028756929792
+      Hands_Bare_Fishing_10: 5697769821146709225
+      Hands_Bare_Fishing_11: 2232837488810323788
+      Hands_Bare_Fishing_12: 5518648305396393496
+      Hands_Bare_Fishing_13: -2743130646994521211
+      Hands_Bare_Fishing_14: -3340053570752191036
+      Hands_Bare_Fishing_15: 5364485804863752015
+      Hands_Bare_Fishing_16: -8129362875410706475
+      Hands_Bare_Fishing_17: 2489647501750696592
+      Hands_Bare_Fishing_2: -3695305152390632480
+      Hands_Bare_Fishing_3: 3707479535319558420
+      Hands_Bare_Fishing_4: 3732223873397825206
+      Hands_Bare_Fishing_5: -5784629426950663854
+      Hands_Bare_Fishing_6: -7964109002350219257
+      Hands_Bare_Fishing_7: -7262856280344908650
+      Hands_Bare_Fishing_8: -6411643970924675825
+      Hands_Bare_Fishing_9: -4214236171536019396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

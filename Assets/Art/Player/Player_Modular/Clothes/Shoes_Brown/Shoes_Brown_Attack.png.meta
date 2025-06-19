@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shoes_Brown_Attack_0: -8148688219089198351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

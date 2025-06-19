@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bridge_Stone_Horizontal_0: -3609805151438244274
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

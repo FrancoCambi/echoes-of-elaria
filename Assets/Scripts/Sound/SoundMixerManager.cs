@@ -48,7 +48,6 @@ public class SoundMixerManager : MonoBehaviour
     {
         audioMixer.SetFloat("SoundFXPitch", level);
         audioMixer.GetFloat("SoundFXPitch", out float pitch);
-        Debug.Log(pitch);
     }
 
     private void SaveMasterVolume()

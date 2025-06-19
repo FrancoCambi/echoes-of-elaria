@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Axe_0: 2828169634423875613
+      Shirt_Green_Axe_1: -6726881409308200125
+      Shirt_Green_Axe_2: -5521028038836689969
+      Shirt_Green_Axe_3: 9031366227052206369
+      Shirt_Green_Axe_4: 7974647700494542335
+      Shirt_Green_Axe_5: -8968864025991093904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shoes_Brown_Hoe_0: 8295420589377189445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

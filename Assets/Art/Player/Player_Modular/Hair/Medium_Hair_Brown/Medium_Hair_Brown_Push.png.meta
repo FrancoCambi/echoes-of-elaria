@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Medium_Hair_Brown_Push_0: 3291034659839910160
+      Medium_Hair_Brown_Push_1: 4625149335375206930
+      Medium_Hair_Brown_Push_10: -2474566557085387599
+      Medium_Hair_Brown_Push_11: 4409161484064005941
+      Medium_Hair_Brown_Push_12: 3694502250757803052
+      Medium_Hair_Brown_Push_13: -1566747391864500986
+      Medium_Hair_Brown_Push_14: -430418242956741362
+      Medium_Hair_Brown_Push_15: -2286040374269884350
+      Medium_Hair_Brown_Push_16: -930985505016482157
+      Medium_Hair_Brown_Push_17: -3712778074774096822
+      Medium_Hair_Brown_Push_2: -7547356720395822212
+      Medium_Hair_Brown_Push_3: -8712953068861902569
+      Medium_Hair_Brown_Push_4: 2882403876240115069
+      Medium_Hair_Brown_Push_5: 5978182062357654264
+      Medium_Hair_Brown_Push_6: 6923503148019067369
+      Medium_Hair_Brown_Push_7: 7579508181287278399
+      Medium_Hair_Brown_Push_8: -7907536757720151189
+      Medium_Hair_Brown_Push_9: -7460028221136213501
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

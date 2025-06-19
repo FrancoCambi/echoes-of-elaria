@@ -1022,7 +1022,43 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Holding_Idle_0: 1812311557540006486
+      Hands_Bare_Holding_Idle_1: 7605051885782869356
+      Hands_Bare_Holding_Idle_10: 7086106308723290689
+      Hands_Bare_Holding_Idle_11: -5008489472258774835
+      Hands_Bare_Holding_Idle_12: 8480231929540651532
+      Hands_Bare_Holding_Idle_13: 8674121440021778029
+      Hands_Bare_Holding_Idle_14: -7602915936699760655
+      Hands_Bare_Holding_Idle_15: 314088671090260931
+      Hands_Bare_Holding_Idle_16: -5643667881256197616
+      Hands_Bare_Holding_Idle_17: 6489699232079505332
+      Hands_Bare_Holding_Idle_18: 429133012957433163
+      Hands_Bare_Holding_Idle_19: -9128665918789387797
+      Hands_Bare_Holding_Idle_2: -3600674230311062297
+      Hands_Bare_Holding_Idle_20: 8947274599603208613
+      Hands_Bare_Holding_Idle_21: 6814277209818891078
+      Hands_Bare_Holding_Idle_22: -243470995629443910
+      Hands_Bare_Holding_Idle_23: -1175091287256198595
+      Hands_Bare_Holding_Idle_24: -6179536796636123346
+      Hands_Bare_Holding_Idle_25: -9081374140793833235
+      Hands_Bare_Holding_Idle_26: 2101595593620644668
+      Hands_Bare_Holding_Idle_27: -424284222819430179
+      Hands_Bare_Holding_Idle_28: 1961273924424908795
+      Hands_Bare_Holding_Idle_29: 5245536853134765943
+      Hands_Bare_Holding_Idle_3: 6876193616512412504
+      Hands_Bare_Holding_Idle_30: 5060583681976008957
+      Hands_Bare_Holding_Idle_31: -7919079355104242185
+      Hands_Bare_Holding_Idle_32: 6562304062946412928
+      Hands_Bare_Holding_Idle_33: -63925046270777993
+      Hands_Bare_Holding_Idle_34: 6390812461597666622
+      Hands_Bare_Holding_Idle_35: 3447739704493158426
+      Hands_Bare_Holding_Idle_4: 8255761545855457272
+      Hands_Bare_Holding_Idle_5: 6197942905786955706
+      Hands_Bare_Holding_Idle_6: 2926991115203989878
+      Hands_Bare_Holding_Idle_7: 511088421282254396
+      Hands_Bare_Holding_Idle_8: -6832335890168526666
+      Hands_Bare_Holding_Idle_9: 1883131728815309800
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

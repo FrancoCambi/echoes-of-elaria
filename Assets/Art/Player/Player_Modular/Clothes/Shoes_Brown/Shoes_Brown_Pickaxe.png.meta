@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shoes_Brown_Pickaxe_0: 5345788652031754294
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

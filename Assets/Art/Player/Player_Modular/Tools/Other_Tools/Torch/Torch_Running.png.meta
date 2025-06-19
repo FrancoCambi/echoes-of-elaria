@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Torch_Running_0: -3449744674382470569
+      Torch_Running_1: -1768457705656085648
+      Torch_Running_10: -2376162585016384037
+      Torch_Running_11: -7119070797666536882
+      Torch_Running_12: -8753536582022321825
+      Torch_Running_13: 2564617713917242735
+      Torch_Running_14: 708138631215920629
+      Torch_Running_15: 1709993229260821738
+      Torch_Running_16: -4281504309857835904
+      Torch_Running_17: 8213215279980333521
+      Torch_Running_2: -325507809755506420
+      Torch_Running_3: -5188179784654072858
+      Torch_Running_4: -461654990321030316
+      Torch_Running_5: 2007431970487415825
+      Torch_Running_6: -5180608715402812740
+      Torch_Running_7: -1327033648444502778
+      Torch_Running_8: 6115144509001155782
+      Torch_Running_9: -6610902188604795719
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

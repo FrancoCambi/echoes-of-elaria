@@ -422,7 +422,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Climb_0: -6337862785220269335
+      Hands_Bare_Climb_1: -2094870696436610208
+      Hands_Bare_Climb_10: -5781974581100180891
+      Hands_Bare_Climb_11: 1990635152385462727
+      Hands_Bare_Climb_2: 754224648155064607
+      Hands_Bare_Climb_3: -2225861108495618740
+      Hands_Bare_Climb_4: 1296792112412139328
+      Hands_Bare_Climb_5: 4793465770123395197
+      Hands_Bare_Climb_6: 6259333171266170315
+      Hands_Bare_Climb_7: -5999497305329617054
+      Hands_Bare_Climb_8: 5831934291765699249
+      Hands_Bare_Climb_9: 4238878709377350387
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

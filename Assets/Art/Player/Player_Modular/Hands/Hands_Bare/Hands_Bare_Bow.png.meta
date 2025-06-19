@@ -497,7 +497,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Bow_0: -1475781034204524007
+      Hands_Bare_Bow_1: 3519343402280452942
+      Hands_Bare_Bow_10: -6142996578765317660
+      Hands_Bare_Bow_11: -5243866347280006001
+      Hands_Bare_Bow_12: -2722322881716278258
+      Hands_Bare_Bow_13: 8728724496009487348
+      Hands_Bare_Bow_14: 6566394009701306583
+      Hands_Bare_Bow_2: 2522089217035525366
+      Hands_Bare_Bow_3: -1082069272494842852
+      Hands_Bare_Bow_4: 7089580505843099625
+      Hands_Bare_Bow_5: -6251548021419328976
+      Hands_Bare_Bow_6: 361549601138375207
+      Hands_Bare_Bow_7: -5117662888594801801
+      Hands_Bare_Bow_8: 5167198305122346316
+      Hands_Bare_Bow_9: 99280993897897014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

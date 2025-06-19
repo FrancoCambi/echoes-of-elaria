@@ -572,7 +572,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Hoe_0: -8076360294960421569
+      Hands_Bare_Hoe_1: 2745423818410023524
+      Hands_Bare_Hoe_10: 1767401231512917327
+      Hands_Bare_Hoe_11: 6418988402941216469
+      Hands_Bare_Hoe_12: 2914705852253897026
+      Hands_Bare_Hoe_13: -3714158277207102091
+      Hands_Bare_Hoe_14: -1369497140970405203
+      Hands_Bare_Hoe_15: 5575792280100876699
+      Hands_Bare_Hoe_16: 1993910149756224890
+      Hands_Bare_Hoe_17: -7347588296457503263
+      Hands_Bare_Hoe_2: 2575914492045822777
+      Hands_Bare_Hoe_3: -5321245633301886892
+      Hands_Bare_Hoe_4: -2332596064032767840
+      Hands_Bare_Hoe_5: -2767907013933858879
+      Hands_Bare_Hoe_6: 1732851048529225769
+      Hands_Bare_Hoe_7: -429596937835385810
+      Hands_Bare_Hoe_8: 5626023704063883445
+      Hands_Bare_Hoe_9: -5275932382684559284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

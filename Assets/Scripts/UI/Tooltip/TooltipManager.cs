@@ -1,8 +1,6 @@
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class TooltipManager : MonoBehaviour
 {

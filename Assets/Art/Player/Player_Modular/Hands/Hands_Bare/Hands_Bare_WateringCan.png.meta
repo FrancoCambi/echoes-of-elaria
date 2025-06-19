@@ -422,7 +422,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_WateringCan_0: -6389309209472871785
+      Hands_Bare_WateringCan_1: 1961807316418648549
+      Hands_Bare_WateringCan_10: -2251580526379747681
+      Hands_Bare_WateringCan_11: -7736182096401752184
+      Hands_Bare_WateringCan_2: 1218503400790009922
+      Hands_Bare_WateringCan_3: 731297353984401582
+      Hands_Bare_WateringCan_4: 7814817314770834325
+      Hands_Bare_WateringCan_5: -5866160620639491054
+      Hands_Bare_WateringCan_6: 903219208348927858
+      Hands_Bare_WateringCan_7: -1688170344335261463
+      Hands_Bare_WateringCan_8: 3683757670592501592
+      Hands_Bare_WateringCan_9: -3143974959523046737
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

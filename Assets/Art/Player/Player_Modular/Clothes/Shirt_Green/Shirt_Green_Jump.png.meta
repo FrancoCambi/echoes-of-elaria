@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Shirt_Green_Jump_0: 7778849175985469812
+      Shirt_Green_Jump_1: 5864939321586886465
+      Shirt_Green_Jump_2: 5778608880292261907
+      Shirt_Green_Jump_3: -3947208416245866177
+      Shirt_Green_Jump_4: 5390374423847224175
+      Shirt_Green_Jump_5: 1888715469259780448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

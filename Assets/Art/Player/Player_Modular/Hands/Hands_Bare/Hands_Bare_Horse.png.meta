@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hands_Bare_Horse_0: 6320710694190064118
+      Hands_Bare_Horse_1: 5168983906316657499
+      Hands_Bare_Horse_2: -4488831194992524552
+      Hands_Bare_Horse_3: -5771963858008545801
+      Hands_Bare_Horse_4: 4024314156299831943
+      Hands_Bare_Horse_5: -6442975317075565111
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

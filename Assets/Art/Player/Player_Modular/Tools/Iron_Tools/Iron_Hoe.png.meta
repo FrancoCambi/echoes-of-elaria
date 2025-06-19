@@ -497,7 +497,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Iron_Hoe_0: 7024101399423044171
+      Iron_Hoe_1: -5900429234333640108
+      Iron_Hoe_10: 761225889784579985
+      Iron_Hoe_11: 4553596190924464025
+      Iron_Hoe_12: -4588965967122977804
+      Iron_Hoe_13: 1966849567632726045
+      Iron_Hoe_14: -4649610287353692768
+      Iron_Hoe_2: -9044559173447970406
+      Iron_Hoe_3: 1595635333303454684
+      Iron_Hoe_4: 8535093306561798782
+      Iron_Hoe_5: -7470056099858158388
+      Iron_Hoe_6: -1591337474198238398
+      Iron_Hoe_7: 194338944185250582
+      Iron_Hoe_8: -5032488012466960670
+      Iron_Hoe_9: 4361521337318713194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

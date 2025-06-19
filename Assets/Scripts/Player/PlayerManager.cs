@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 public class PlayerManager : MonoBehaviour
@@ -174,6 +173,7 @@ public class PlayerManager : MonoBehaviour
         AudioClip healSoundClip = Resources.Load<AudioClip>("Audio/Clips/Heal");
 
         SoundFXManager.Instance.PlaySoundFXClip(healSoundClip, transform);
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Heal, $"+{hp}", transform.position, new Vector2(0.5f,1));
     }
 
     public void TakeDamage(int damage)
