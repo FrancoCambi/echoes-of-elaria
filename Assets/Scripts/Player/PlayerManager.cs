@@ -164,6 +164,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         UpdateCurrentXp(Mathf.Clamp(CurrentXp + xpToGain, 0, maxXp));
+
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Xp, $"+{xp}xp", transform.position, new Vector2(-1, 0.5f));
     }
 
     public void Heal(int hp)
@@ -173,7 +175,7 @@ public class PlayerManager : MonoBehaviour
         AudioClip healSoundClip = Resources.Load<AudioClip>("Audio/Clips/Heal");
 
         SoundFXManager.Instance.PlaySoundFXClip(healSoundClip, transform);
-        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Heal, $"+{hp}", transform.position, new Vector2(0.5f,1));
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Heal, $"+{hp}", transform.position, new Vector2(0,0));
     }
 
     public void TakeDamage(int damage)
@@ -183,6 +185,8 @@ public class PlayerManager : MonoBehaviour
         // Gain rage (This formula probably needs to change in the future)
         int rageGained =  (int)Mathf.Ceil((damage * 3) / (float)(Level * 8));
         GainRage(rageGained);
+
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Damage, $"-{damage}", transform.position, new Vector2(0, 0));
     }
 
     public void GainRage(int amount)

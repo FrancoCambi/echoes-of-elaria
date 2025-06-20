@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FloatingTextType
 {
-    Damage, Heal, Crit, None
+    Damage, Heal, Crit, Xp, None
 }
 
 public class FloatingTextManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class FloatingTextManager : MonoBehaviour
     private GameObject floatingTextPrefab;
     private List<GameObject> pool;
 
-    private readonly float textDuration = 0.5f;
+    private readonly float textDuration = 1f;
 
     public float TextDuration
     {
@@ -75,12 +75,20 @@ public class FloatingTextManager : MonoBehaviour
 
     private void SetFloatingText(FloatingText floating, FloatingTextType type, string text, Vector2 position, Vector2 offset)
     {
+        floating.Text = text;
+        floating.Position = position;
+        floating.Offset = offset;
         if (type == FloatingTextType.Heal)
         {
-            floating.Text = text;
             floating.TextColor = Color.green;
-            floating.Position = position;
-            floating.Offset = offset;
+        }
+        else if (type == FloatingTextType.Damage)
+        {
+            floating.TextColor = Color.red;
+        }
+        else if (type == FloatingTextType.Xp)
+        {
+            floating.TextColor = Color.cyan;
         }
     }
 }

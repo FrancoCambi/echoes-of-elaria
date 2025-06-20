@@ -44,6 +44,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             StartCoroutine(nameof(RestoreMovement));
         }
 
+        // This may go to another place
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Damage, $"-{damage}", transform.position, new Vector2(0, 0));
+
         return damage;
     }
 
