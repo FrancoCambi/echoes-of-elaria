@@ -26,4 +26,11 @@ public class EnemyLoot : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            LootManager.Instance.ShowLootTable(Dropped);
+        }
+    }
 }

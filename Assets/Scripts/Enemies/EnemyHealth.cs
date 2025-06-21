@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
+    private CapsuleCollider2D capsuleCollider;
 
     private EnemyChaseZone enemyChaseZone;
     private EnemyAnimation enemyAnimation;
@@ -26,6 +28,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
 
         enemyChaseZone = GetComponentInChildren<EnemyChaseZone>();
         enemyAnimation = GetComponent<EnemyAnimation>();
@@ -79,11 +82,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void Death()
     {
-        PlayerManager.Instance.GainXp(Enemy.CalculateXpReward(id));
-        enemyLoot.Dropped = LootManager.Instance.CreateLootTableByMobID(id);
-        LootManager.Instance.ShowLootTable(enemyLoot.Dropped);
-        //Destroy(gameObject);
+        rb.linearVelocity = Vector2.zero;
+        capsuleCollider.enabled = false;
+        enemyAnimation.DeathAnimation();
 
+        PlayerManager.Instance.GainXp(Enemy.CalculateXpReward(id));
+
+        enemyLoot.Dropped = LootManager.Instance.CreateLootTableByMobID(id);
+
+        //Destroy(gameObject);
     }
+
 
 }

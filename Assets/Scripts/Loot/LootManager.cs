@@ -88,12 +88,15 @@ public class LootManager : Panel
 
     public void ShowLootTable(List<DroppedLoot> lootList)
     {
+        Close();
+
         foreach (DroppedLoot dLoot in lootList)
         {
             Loot loot = Instantiate(lootPrefab, transform).GetComponent<Loot>();
             currentLoot.Add(loot);
             loot.SetUpLoot(ItemsManager.Instance.GetItemByID(dLoot.Id), dLoot.Amount);
         }
+
         Open();
     }
 
@@ -105,6 +108,8 @@ public class LootManager : Panel
         {
             Destroy(loot.gameObject);
         }
+
+        currentLoot = new();
     }
 
 }

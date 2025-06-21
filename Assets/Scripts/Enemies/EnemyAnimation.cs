@@ -9,6 +9,7 @@ public class EnemyAnimation : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private EnemyJumpAttack enemyAttack;
+    private EnemyHealth enemyHealth;
 
     private string currentState;
 
@@ -32,6 +33,7 @@ public class EnemyAnimation : MonoBehaviour
         flashMaterial = Resources.Load<Material>("SRMaterials/Flash");
 
         enemyAttack = GetComponent<EnemyJumpAttack>();
+        enemyHealth = GetComponent<EnemyHealth>();
 
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
     }
@@ -39,6 +41,8 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!enemyHealth.IsAlive) return;
+
         if (enemyAttack.Attacking)
         {
             ChangeAnimationState(ATTACK_FRONT);
@@ -49,7 +53,12 @@ public class EnemyAnimation : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(string newState)
+    public void DeathAnimation()
+    {
+        ChangeAnimationState("death");
+    }
+
+    private void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
 
