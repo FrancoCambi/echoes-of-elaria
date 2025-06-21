@@ -12,6 +12,7 @@ public class EnemyData
     public AttackType AttackType;
     public float JumpForce;
     public float AttackCD;
+    public float AttackRange;
     public int MinDamage;
     public int MaxDamage;
 

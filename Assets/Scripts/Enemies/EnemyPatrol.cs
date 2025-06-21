@@ -5,7 +5,7 @@ public class EnemyPatrol : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    private EnemyChaseZone enemyChaseZone;
+    private EnemyChase enemyChaseZone;
     private EnemyAttackZone enemyAttackZone;
     private EnemyHealth enemyHealth;
     private EnemyData data;
@@ -20,7 +20,7 @@ public class EnemyPatrol : MonoBehaviour
         rb = GetComponentInParent<Rigidbody2D>();
 
         enemyAttackZone = GetComponentInChildren<EnemyAttackZone>();
-        enemyChaseZone = GetComponentInChildren<EnemyChaseZone>();
+        enemyChaseZone = GetComponentInChildren<EnemyChase>();
         enemyHealth = GetComponent<EnemyHealth>();
 
 
@@ -71,7 +71,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool CanKeepPatrolling()
     {
-        return !enemyAttackZone.PlayerCollider && !enemyChaseZone.PlayerCollider;
+        return !enemyAttackZone.PlayerInRange && !enemyChaseZone.PlayerInSight;
     }
 
     /*private Vector2 GetRandomPointInsideCircunference(CircleCollider2D circle, Vector2 centre)

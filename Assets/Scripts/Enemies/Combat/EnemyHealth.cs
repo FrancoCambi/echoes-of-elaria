@@ -8,13 +8,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider;
 
-    private EnemyChaseZone enemyChaseZone;
+    private EnemyChase enemyChaseZone;
     private EnemyAnimation enemyAnimation;
     private EnemyLoot enemyLoot;
+    private EnemyData data;
 
     private int id;
     private int health;
-    private string enemyName;
     private float knockbackTime;
 
     public bool IsAlive
@@ -30,14 +30,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-        enemyChaseZone = GetComponentInChildren<EnemyChaseZone>();
+        enemyChaseZone = GetComponentInChildren<EnemyChase>();
         enemyAnimation = GetComponent<EnemyAnimation>();
         enemyLoot = GetComponentInChildren<EnemyLoot>();
 
-        enemyName = gameObject.name.Replace("(Clone)", "");
-        id = EnemyDataLoader.Instance.GetIdByName(enemyName);
-        health = EnemyDataLoader.Instance.GetHealth(id);
-
+        id = EnemyDatabase.GetIdByName(gameObject.name);
+        data = EnemyDatabase.GetEnemyData(id);
+        health = data.MaxHealth;
+        
     }
 
     public int OnHit(int damage, Vector2 knockback)
@@ -83,7 +83,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void Death()
     {
         rb.linearVelocity = Vector2.zero;
-        capsuleCollider.enabled = false;
+        capsuleCollider.isTrigger = true;
         enemyAnimation.DeathAnimation();
 
         PlayerManager.Instance.GainXp(415);

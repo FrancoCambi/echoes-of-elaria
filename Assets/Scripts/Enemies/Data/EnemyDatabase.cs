@@ -34,6 +34,7 @@ public static class EnemyDatabase
             AttackType = StringToAttackType(table.Rows[0]["attack_type"].ToString()),
             JumpForce = float.Parse(table.Rows[0]["jump_force"].ToString()),
             AttackCD = float.Parse(table.Rows[0]["attack_cd"].ToString()),
+            AttackRange = float.Parse(table.Rows[0]["attack_range"].ToString()),
             MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString()),
             MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString()),
 

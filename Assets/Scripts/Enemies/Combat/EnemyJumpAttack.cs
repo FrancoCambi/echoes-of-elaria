@@ -8,13 +8,10 @@ public class EnemyJumpAttack : MonoBehaviour
 
     private EnemyAttackZone attackZone;
     private EnemyHealth enemyHealth;
+    private EnemyData data;
 
     private int id;
-    private float jumpForce;
-    private int minDamage;
-    private int maxDamage;
-    private float knockbackForce;
-    private int attackCD;
+
     private bool attacking;
     private bool canAttack;
 
@@ -32,15 +29,11 @@ public class EnemyJumpAttack : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-        attackZone = GetComponentInChildren<EnemyAttackZone>();
-        enemyHealth = GetComponentInParent<EnemyHealth>();
+        attackZone = GetComponent<EnemyAttackZone>();
+        enemyHealth = GetComponent<EnemyHealth>();
 
-        id = EnemyDataLoader.Instance.GetIdByName(gameObject.name);
-        jumpForce = EnemyDataLoader.Instance.GetJumpForce(id);
-        minDamage = EnemyDataLoader.Instance.GetMinDamage(id);
-        maxDamage = EnemyDataLoader.Instance.GetMaxDamage(id);
-        knockbackForce = EnemyDataLoader.Instance.GetKnockbackForce(id);
-        attackCD = EnemyDataLoader.Instance.GetAttackCD(id);
+        id = EnemyDatabase.GetIdByName(gameObject.name);
+        data = EnemyDatabase.GetEnemyData(id);
 
         attacking = false;
         canAttack = true;
@@ -49,7 +42,7 @@ public class EnemyJumpAttack : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyHealth.IsAlive && attackZone.PlayerCollider != null && canAttack && !attacking)
+        if (enemyHealth.IsAlive && attackZone.PlayerInRange && canAttack && !attacking)
         {
             StartCoroutine(nameof(JumpAttack));
         }
@@ -60,10 +53,10 @@ public class EnemyJumpAttack : MonoBehaviour
         attacking = true;
         canAttack = false;
 
-        Vector3 directionVector = (attackZone.PlayerCollider.transform.position - transform.position).normalized;
-        rb.linearVelocity = directionVector * jumpForce;
+        Vector3 directionVector = (PlayerManager.Instance.transform.position - transform.position).normalized;
+        rb.linearVelocity = directionVector * data.JumpForce;
 
-        yield return new WaitForSeconds(attackCD);
+        yield return new WaitForSeconds(data.AttackCD);
         canAttack = true;
     }
 
@@ -79,8 +72,8 @@ public class EnemyJumpAttack : MonoBehaviour
         {
             IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
             Vector2 direction = (Vector2)(col.gameObject.transform.position - transform.position).normalized;
-            Vector2 knockback = direction * knockbackForce;
-            int damage = Random.Range(minDamage, maxDamage + 1);
+            Vector2 knockback = direction * data.KnockbackForce;
+            int damage = Random.Range(data.MinDamage, data.MaxDamage + 1);
             damageable.OnHit(damage, knockback);
             capsuleCollider.enabled = false;
             capsuleCollider.enabled = true;

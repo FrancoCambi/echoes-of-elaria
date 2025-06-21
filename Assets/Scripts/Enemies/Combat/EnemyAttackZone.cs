@@ -1,37 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackType
+{
+    Jump, Throw, Melee, None
+}
 public class EnemyAttackZone : MonoBehaviour
 {
-    private List<Collider2D> detectedObjs;
+    EnemyData data;
 
-    public Collider2D PlayerCollider
+    private bool playerInRange;
+
+    private readonly float checkCooldown = 0.25f;
+    private float timeElapsed = 0f;
+    public bool PlayerInRange
     {
         get
         {
-            foreach(Collider2D obj in detectedObjs)
-            {
-                if (obj.gameObject.CompareTag("Player"))
-                {
-                    return obj;
-                }
-            }
-            return null;
+            return playerInRange;
         }
+    }
+
+    private void Awake()
+    {
+        playerInRange = false;
     }
 
     private void Start()
     {
-        detectedObjs = new List<Collider2D>();
+        data = EnemyDatabase.GetEnemyData(EnemyDatabase.GetIdByName(gameObject.name));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        detectedObjs.Add(collision);
+        timeElapsed += Time.deltaTime;
+        if (timeElapsed >= checkCooldown)
+        {
+            timeElapsed = 0f;
+            CheckPlayerInRange();
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void CheckPlayerInRange()
     {
-        detectedObjs.Remove(collision);
+
+        if (Vector3.Distance(transform.position, PlayerManager.Instance.transform.position) <= data.AttackRange)
+        {
+            playerInRange = true;
+        }
+        else
+        {
+            playerInRange = false;
+        }
     }
 }
