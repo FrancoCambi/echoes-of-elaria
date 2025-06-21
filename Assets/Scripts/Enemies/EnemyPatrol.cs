@@ -3,41 +3,34 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    private CircleCollider2D patrolZone;
     private Rigidbody2D rb;
-    private GameObject parent;
 
     private EnemyChaseZone enemyChaseZone;
     private EnemyAttackZone enemyAttackZone;
     private EnemyHealth enemyHealth;
-
-    private Vector2 initialCentre;
+    private EnemyData data;
 
     private int id;
-    private int maxPatrolCD;
-    private float patrolSpeed;
     private bool canPatrol = true;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 respawnPoint;
+
     void Start()
     {
-        patrolZone = GetComponent<CircleCollider2D>();
         rb = GetComponentInParent<Rigidbody2D>();
-        parent = transform.parent.gameObject;
 
-        enemyAttackZone = transform.parent.Find("AttackZone").GetComponent<EnemyAttackZone>();
-        enemyChaseZone = transform.parent.Find("ChaseZone").GetComponent<EnemyChaseZone>();
-        enemyHealth = GetComponentInParent<EnemyHealth>();
+        enemyAttackZone = GetComponentInChildren<EnemyAttackZone>();
+        enemyChaseZone = GetComponentInChildren<EnemyChaseZone>();
+        enemyHealth = GetComponent<EnemyHealth>();
 
-        initialCentre = parent.transform.position;
 
-        id = EnemyDataLoader.Instance.GetIdByName(parent.name);
-        maxPatrolCD = EnemyDataLoader.Instance.GetMaxPatrolCD(id);
-        patrolSpeed = EnemyDataLoader.Instance.GetPatrolSpeed(id);
+        id = EnemyDatabase.GetIdByName(gameObject.name);
+        data = EnemyDatabase.GetEnemyData(id);
+
+        respawnPoint = transform.position;
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (enemyHealth.IsAlive && canPatrol && CanKeepPatrolling())
@@ -49,22 +42,39 @@ public class EnemyPatrol : MonoBehaviour
     private IEnumerator Wander()
     {
         canPatrol = false;
-        Vector3 wanderPoint = GetRandomPointInsideCircunference(patrolZone, initialCentre);
-        Vector3 direction = (wanderPoint - parent.transform.position).normalized;
+        Vector3 wanderPoint = GetRandomPointByMaxDistance(3);
+        Vector3 direction = (wanderPoint - transform.position).normalized;
 
-        while (Vector3.Distance(wanderPoint, parent.transform.position) > 0.05f && CanKeepPatrolling())
+        while (Vector3.Distance(wanderPoint, transform.position) > 0.05f && CanKeepPatrolling())
         {
-            rb.linearVelocity = (patrolSpeed * direction);
+            rb.linearVelocity = (data.PatrolSpeed * direction);
             yield return null;
         }
 
         rb.linearVelocity = Vector3.zero;
-        float wanderCd = UnityEngine.Random.Range(0, maxPatrolCD + 1);
+        float wanderCd = Random.Range(0, data.MaxPatrolCD + 1);
         yield return new WaitForSeconds(wanderCd);
         canPatrol = true;
     }
 
-    private Vector2 GetRandomPointInsideCircunference(CircleCollider2D circle, Vector2 centre)
+    private Vector2 GetRandomPointByMaxDistance(float maxDistance)
+    {
+        float randomX = Random.Range(-maxDistance, maxDistance);
+
+        float maxY = Mathf.Sqrt(Mathf.Pow(maxDistance, 2) - Mathf.Pow(randomX, 2));
+
+        float randomY = Random.Range(-maxY, maxY);
+
+        return respawnPoint + new Vector3(randomX, randomY);
+    }
+
+
+    private bool CanKeepPatrolling()
+    {
+        return !enemyAttackZone.PlayerCollider && !enemyChaseZone.PlayerCollider;
+    }
+
+    /*private Vector2 GetRandomPointInsideCircunference(CircleCollider2D circle, Vector2 centre)
     {
         float randomX = UnityEngine.Random.Range(-circle.radius, circle.radius);
 
@@ -74,12 +84,6 @@ public class EnemyPatrol : MonoBehaviour
 
         return centre + new Vector2(randomX, randomY);
     }
-
-    private bool CanKeepPatrolling()
-    {
-        return !enemyAttackZone.PlayerCollider && !enemyChaseZone.PlayerCollider;
-    }
-
     private Vector2 GetRandomPointInCircunference(CircleCollider2D circle)
     {
 
@@ -90,5 +94,5 @@ public class EnemyPatrol : MonoBehaviour
         float y = localCentre.y + circle.radius * Mathf.Sin(angle);
 
         return new Vector2(x, y);
-    }
+    }*/
 }

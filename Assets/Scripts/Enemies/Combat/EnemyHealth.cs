@@ -86,7 +86,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;
         enemyAnimation.DeathAnimation();
 
-        PlayerManager.Instance.GainXp(Enemy.CalculateXpReward(id));
+        PlayerManager.Instance.GainXp(415);
 
         enemyLoot.Dropped = LootManager.Instance.CreateLootTableByMobID(id);
 

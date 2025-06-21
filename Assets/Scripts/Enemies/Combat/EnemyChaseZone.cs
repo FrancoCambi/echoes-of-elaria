@@ -54,6 +54,12 @@ public class EnemyChaseZone : MonoBehaviour
         movementSpeed = EnemyDataLoader.Instance.GetMovementSpeed(id);
         canChase = true;
     }
+
+    private void Update()
+    {
+        //Debug.Log(Vector3.Distance(parent.transform.position, PlayerManager.Instance.transform.position));
+    }
+
     private void FixedUpdate()
     {
         if (enemyHealth.IsAlive && canChase && PlayerCollider != null && !enemyAttack.Attacking)

@@ -26,7 +26,6 @@ public class PlayerManager : MonoBehaviour
     public int CurrentHealth { get; private set; }
     public int MaxRage { get; private set; }
     public int CurrentRage { get; private set; }
-
     public int InventorySpace {  get; private set; }    
 
     public static event Action OnLevelUp;
@@ -41,7 +40,6 @@ public class PlayerManager : MonoBehaviour
     {
         LoadStatsFromDatabase();
     }
-
 
     private void LoadStatsFromDatabase()
     {
