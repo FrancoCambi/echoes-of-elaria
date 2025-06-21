@@ -7,6 +7,7 @@ public class EnemyJumpAttack : MonoBehaviour
     private CapsuleCollider2D capsuleCollider;
 
     private EnemyAttackZone attackZone;
+    private EnemyHealth enemyHealth;
 
     private int id;
     private float jumpForce;
@@ -32,6 +33,7 @@ public class EnemyJumpAttack : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
         attackZone = GetComponentInChildren<EnemyAttackZone>();
+        enemyHealth = GetComponentInParent<EnemyHealth>();
 
         id = EnemyDataLoader.Instance.GetIdByName(gameObject.name);
         jumpForce = EnemyDataLoader.Instance.GetJumpForce(id);
@@ -47,7 +49,7 @@ public class EnemyJumpAttack : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (attackZone.PlayerCollider != null && canAttack && !attacking)
+        if (enemyHealth.IsAlive && attackZone.PlayerCollider != null && canAttack && !attacking)
         {
             StartCoroutine(nameof(JumpAttack));
         }

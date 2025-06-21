@@ -9,6 +9,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private EnemyChaseZone enemyChaseZone;
     private EnemyAttackZone enemyAttackZone;
+    private EnemyHealth enemyHealth;
 
     private Vector2 initialCentre;
 
@@ -26,6 +27,7 @@ public class EnemyPatrol : MonoBehaviour
 
         enemyAttackZone = transform.parent.Find("AttackZone").GetComponent<EnemyAttackZone>();
         enemyChaseZone = transform.parent.Find("ChaseZone").GetComponent<EnemyChaseZone>();
+        enemyHealth = GetComponentInParent<EnemyHealth>();
 
         initialCentre = parent.transform.position;
 
@@ -38,7 +40,7 @@ public class EnemyPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canPatrol && CanKeepPatrolling())
+        if (enemyHealth.IsAlive && canPatrol && CanKeepPatrolling())
         {
             StartCoroutine(nameof(Wander));
         }

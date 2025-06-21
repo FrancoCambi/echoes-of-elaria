@@ -54,7 +54,7 @@ public class InventoryManager : Panel
     }
 
 
-    public void AddItems(int itemID, int amount)
+    public bool AddItems(int itemID, int amount)
     {
         if (ItemInInventory(itemID) && GetFirstNonFullSlot(itemID) != null)
         {
@@ -66,6 +66,7 @@ public class InventoryManager : Panel
         }
 
         SaveItemsToDatabase();
+        return true;
     }
 
     private void AddItemsInEmpty(int itemID, int amount)

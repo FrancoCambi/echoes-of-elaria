@@ -8,11 +8,20 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private EnemyChaseZone enemyChaseZone;
     private EnemyAnimation enemyAnimation;
+    private EnemyLoot enemyLoot;
 
     private int id;
     private int health;
     private string enemyName;
     private float knockbackTime;
+
+    public bool IsAlive
+    {
+        get
+        {
+            return health > 0;
+        }
+    }
 
     void Start()
     {
@@ -20,6 +29,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         enemyChaseZone = GetComponentInChildren<EnemyChaseZone>();
         enemyAnimation = GetComponent<EnemyAnimation>();
+        enemyLoot = GetComponentInChildren<EnemyLoot>();
 
         enemyName = gameObject.name.Replace("(Clone)", "");
         id = EnemyDataLoader.Instance.GetIdByName(enemyName);
@@ -29,10 +39,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public int OnHit(int damage, Vector2 knockback)
     {
+        if (!IsAlive) return 0;
+
         enemyAnimation.StartFlash();
         health -= damage;
         if (health <= 0)
         {
+            health = 0;
             Death();
         }
 
@@ -67,7 +80,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void Death()
     {
         PlayerManager.Instance.GainXp(Enemy.CalculateXpReward(id));
-        Destroy(gameObject);
+        enemyLoot.Dropped = LootManager.Instance.CreateLootTableByMobID(id);
+        LootManager.Instance.ShowLootTable(enemyLoot.Dropped);
+        //Destroy(gameObject);
 
     }
 

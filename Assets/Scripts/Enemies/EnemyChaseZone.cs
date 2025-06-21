@@ -8,6 +8,7 @@ public class EnemyChaseZone : MonoBehaviour
     private List<Collider2D> detectedObjs;
 
     private EnemyJumpAttack enemyAttack;
+    private EnemyHealth enemyHealth;
 
     private int id;
     private float movementSpeed;
@@ -47,6 +48,7 @@ public class EnemyChaseZone : MonoBehaviour
         detectedObjs = new List<Collider2D>();
 
         enemyAttack = GetComponentInParent<EnemyJumpAttack>();
+        enemyHealth = GetComponentInParent<EnemyHealth>();
 
         id = EnemyDataLoader.Instance.GetIdByName(parent.name);
         movementSpeed = EnemyDataLoader.Instance.GetMovementSpeed(id);
@@ -54,9 +56,8 @@ public class EnemyChaseZone : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (canChase && PlayerCollider != null && !enemyAttack.Attacking)
+        if (enemyHealth.IsAlive && canChase && PlayerCollider != null && !enemyAttack.Attacking)
         {
-
             Vector2 direction = (PlayerCollider.transform.position - transform.position).normalized;
 
             rb.linearVelocity = direction * movementSpeed;
