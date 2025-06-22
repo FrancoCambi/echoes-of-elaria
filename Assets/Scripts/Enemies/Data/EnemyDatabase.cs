@@ -7,16 +7,6 @@ public static class EnemyDatabase
 {
     private static Dictionary<int, EnemyData> enemyDataCache = new();
 
-    public static EnemyData GetEnemyData(int id)
-    {
-        if (!enemyDataCache.ContainsKey(id))
-        {
-            enemyDataCache[id] = LoadFromDB(id);
-        }
-
-        return enemyDataCache[id];
-    }
-
     private static EnemyData LoadFromDB(int id)
     {
         string query = $"SELECT * FROM mobs_data WHERE id = '{id}'";
@@ -37,8 +27,19 @@ public static class EnemyDatabase
             AttackRange = float.Parse(table.Rows[0]["attack_range"].ToString()),
             MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString()),
             MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString()),
+            RespawnTime = int.Parse(table.Rows[0]["respawn_time"].ToString()),
 
         };
+    }
+
+    public static EnemyData GetEnemyData(int id)
+    {
+        if (!enemyDataCache.ContainsKey(id))
+        {
+            enemyDataCache[id] = LoadFromDB(id);
+        }
+
+        return enemyDataCache[id];
     }
 
     public static int GetIdByName(string name)
@@ -48,6 +49,20 @@ public static class EnemyDatabase
 
         int id = int.Parse(table.Rows[0]["id"].ToString());
         return id;
+    }
+
+    public static List<string> GetBehaviorsByID(int id)
+    {
+        List<string> behaviors = new();
+        string query = $"SELECT * from mobs_behaviors WHERE mob_id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        foreach (DataRow row in table.Rows)
+        {
+            behaviors.Add(row["behavior"].ToString());
+        }
+
+        return behaviors;
     }
 
     private static AttackType StringToAttackType(string type)

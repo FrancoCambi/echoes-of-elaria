@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -12,6 +11,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private EnemyAnimation enemyAnimation;
     private EnemyLoot enemyLoot;
     private EnemyData data;
+    private RespawnData respawnData;
 
     private int id;
     private int health;
@@ -30,12 +30,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-        enemyChaseZone = GetComponentInChildren<EnemyChase>();
+        enemyChaseZone = GetComponent<EnemyChase>();
         enemyAnimation = GetComponent<EnemyAnimation>();
-        enemyLoot = GetComponentInChildren<EnemyLoot>();
-
+        enemyLoot = GetComponent<EnemyLoot>();
         id = EnemyDatabase.GetIdByName(gameObject.name);
         data = EnemyDatabase.GetEnemyData(id);
+        respawnData = GetComponent<RespawnData>();
         health = data.MaxHealth;
         
     }
@@ -89,6 +89,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         PlayerManager.Instance.GainXp(415);
 
         enemyLoot.Dropped = LootManager.Instance.CreateLootTableByMobID(id);
+        MobRespawnManager.NotifyDeath(respawnData);
 
         //Destroy(gameObject);
     }

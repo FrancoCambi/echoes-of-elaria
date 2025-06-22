@@ -29,6 +29,18 @@ public class GameManager : MonoBehaviour
         StartCoroutine(nameof(LoadLanguage));
     }
 
+    /*TESTING*/
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            MobFactory.SpawnMob(1, new Vector3(3, 3, 0));
+        }
+    }
+
+    /*TESTING*/
+
     public static void SwitchLanguage(Language newLanguage)
     {
         if (newLanguage == Language.English)

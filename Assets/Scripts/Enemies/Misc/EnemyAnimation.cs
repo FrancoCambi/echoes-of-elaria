@@ -6,10 +6,12 @@ public class EnemyAnimation : MonoBehaviour
     private Material originalMaterial;
     private Material flashMaterial;
     private Animator animator;
+    private RuntimeAnimatorController controller;
     private SpriteRenderer spriteRenderer;
 
     private EnemyJumpAttack enemyAttack;
     private EnemyHealth enemyHealth;
+    private EnemyData enemyData;
 
     private string currentState;
 
@@ -24,8 +26,7 @@ public class EnemyAnimation : MonoBehaviour
     private const string ATTACK_BACK = "attack_back";
     private const string HIT = "hit";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,11 +35,13 @@ public class EnemyAnimation : MonoBehaviour
 
         enemyAttack = GetComponent<EnemyJumpAttack>();
         enemyHealth = GetComponent<EnemyHealth>();
+        enemyData = EnemyDatabase.GetEnemyData(EnemyDatabase.GetIdByName(gameObject.name));
 
+        controller = Resources.Load<RuntimeAnimatorController>($"AnimationControllers/{enemyData.Name}");
+        animator.runtimeAnimatorController = controller;
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!enemyHealth.IsAlive) return;

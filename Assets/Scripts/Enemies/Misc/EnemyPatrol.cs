@@ -43,10 +43,10 @@ public class EnemyPatrol : MonoBehaviour
     {
         canPatrol = false;
         Vector3 wanderPoint = GetRandomPointByMaxDistance(3);
-        Vector3 direction = (wanderPoint - transform.position).normalized;
 
         while (Vector3.Distance(wanderPoint, transform.position) > 0.05f && CanKeepPatrolling())
         {
+            Vector3 direction = (wanderPoint - transform.position).normalized;
             rb.linearVelocity = (data.PatrolSpeed * direction);
             yield return null;
         }

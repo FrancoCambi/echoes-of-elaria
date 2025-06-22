@@ -15,5 +15,6 @@ public class EnemyData
     public float AttackRange;
     public int MinDamage;
     public int MaxDamage;
+    public float RespawnTime;
 
 }
