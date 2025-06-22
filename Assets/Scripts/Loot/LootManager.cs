@@ -16,7 +16,10 @@ public class LootManager : Panel
     }
 
     private GameObject lootPrefab;
+
     private List<Loot> currentLoot;
+    private EnemyLoot fromEnemy;
+
 
     public List<Loot> CurrentLoot
     {
@@ -86,15 +89,18 @@ public class LootManager : Panel
 
     }
 
-    public void ShowLootTable(List<DroppedLoot> lootList)
+    public void ShowLootTable(List<DroppedLoot> lootList, EnemyLoot enemyLoot)
     {
         Close();
+
+        fromEnemy = enemyLoot;
+        fromEnemy.BeingLooted = true;
 
         foreach (DroppedLoot dLoot in lootList)
         {
             Loot loot = Instantiate(lootPrefab, transform).GetComponent<Loot>();
             currentLoot.Add(loot);
-            loot.SetUpLoot(ItemsManager.Instance.GetItemByID(dLoot.Id), dLoot.Amount);
+            loot.SetUpLoot(ItemsManager.Instance.GetItemByID(dLoot.Id), dLoot.Amount, dLoot, enemyLoot);
         }
 
         Open();
@@ -103,6 +109,12 @@ public class LootManager : Panel
     public override void Close()
     {
         base.Close();
+
+        if (fromEnemy != null)
+        {
+            fromEnemy.BeingLooted = false;
+            fromEnemy = null;
+        }
 
         foreach (Loot loot in currentLoot)
         {

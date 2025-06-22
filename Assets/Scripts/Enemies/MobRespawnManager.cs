@@ -24,6 +24,7 @@ public class MobRespawnManager : MonoBehaviour
                 respawnData.RespawnTimeElapsed = 0f;
                 MobFactory.SpawnMob(respawnData.ID, respawnData.RespawnPosition);
                 respawns.Remove(respawnData);
+                Destroy(respawnData.gameObject);
             }
         }
     }
