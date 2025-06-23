@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyJumpAttack : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private CapsuleCollider2D capsuleCollider;
+    private Collider2D collider;
 
     private EnemyAttackZone attackZone;
     private EnemyHealth enemyHealth;
@@ -27,7 +27,7 @@ public class EnemyJumpAttack : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        collider = GetComponent<Collider2D>();
 
         attackZone = GetComponent<EnemyAttackZone>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -75,8 +75,8 @@ public class EnemyJumpAttack : MonoBehaviour
             Vector2 knockback = direction * data.KnockbackForce;
             int damage = Random.Range(data.MinDamage, data.MaxDamage + 1);
             damageable.OnHit(damage, knockback);
-            capsuleCollider.enabled = false;
-            capsuleCollider.enabled = true;
+            collider.enabled = false;
+            collider.enabled = true;
         }
     }
 

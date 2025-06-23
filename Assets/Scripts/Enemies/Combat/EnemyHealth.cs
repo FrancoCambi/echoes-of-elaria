@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
-    private CapsuleCollider2D capsuleCollider;
+    private Collider2D collider;
 
     private EnemyChase enemyChaseZone;
     private EnemyAnimation enemyAnimation;
@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        collider = GetComponent<Collider2D>();
 
         enemyChaseZone = GetComponent<EnemyChase>();
         enemyAnimation = GetComponent<EnemyAnimation>();
@@ -83,7 +83,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void Death()
     {
         rb.linearVelocity = Vector2.zero;
-        capsuleCollider.isTrigger = true;
+        collider.isTrigger = true;
         enemyAnimation.DeathAnimation();
 
         PlayerManager.Instance.GainXp(415);
