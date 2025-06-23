@@ -51,6 +51,7 @@ public class TooltipManager : MonoBehaviour
 
     }
 
+
     public void HideTooltip()
     {
         hoveredSlot = null;

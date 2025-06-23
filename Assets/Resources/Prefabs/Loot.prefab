@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.49999997, y: 0.5000014}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2189403328597190044
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -86,8 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efee3c6ec58377498f7a86a777d6793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1954509923901103956}
-  amountText: {fileID: 1475388974410070759}
   itemName: {fileID: 7933888758546693761}
 --- !u!1 &4609552837948162692
 GameObject:
@@ -100,6 +98,7 @@ GameObject:
   - component: {fileID: 7876767364017186276}
   - component: {fileID: 4213594267253967616}
   - component: {fileID: 5019087342737011021}
+  - component: {fileID: 679901390650595949}
   m_Layer: 5
   m_Name: LootSlot
   m_TagString: Untagged
@@ -127,7 +126,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &4213594267253967616
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -166,6 +165,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &679901390650595949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609552837948162692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0a54832833c334ba1f2d2053e1ecfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1954509923901103956}
 --- !u!1 &6950027602190685826
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0967, y: 0.0000058264}
+  m_AnchoredPosition: {x: 0.09670019, y: 0.000005722046}
   m_SizeDelta: {x: 8.1935, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4146290463211950035

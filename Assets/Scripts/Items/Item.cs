@@ -78,7 +78,7 @@ public class Item : SlotContent
         };
     }
 
-    private string GetRarityColor(ItemRarity rarity)
+    public static string GetRarityColor(ItemRarity rarity)
     {
         return rarity switch
         {
