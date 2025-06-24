@@ -1,5 +1,8 @@
+using System;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public enum AttackDirection
 {
@@ -8,14 +11,6 @@ public enum AttackDirection
 
 public class PlayerAttack : MonoBehaviour
 {
-
-    [SerializeField]
-    BoxCollider2D sideHitbox;
-    [SerializeField]
-    BoxCollider2D frontHitbox;
-    [SerializeField]
-    BoxCollider2D backHitbox;
-
     private Camera mainCamera;
 
     private PlayerMovement playerMovement;
@@ -74,7 +69,7 @@ public class PlayerAttack : MonoBehaviour
         {
             playerMovement.CanMove = false;
             playerMovement.StopMovement();
-            Attack();
+            SetUpAttack();
         }
 
         if (Time.time - lastAttackTime > comboResetTime)
@@ -84,8 +79,9 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    void Attack()
+    private void SetUpAttack()
     {
+        attacking = true;
         lastAttackTime = Time.time;
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
@@ -116,34 +112,115 @@ public class PlayerAttack : MonoBehaviour
         }
 
         IncreaseComboIndex();
-        attacking = true;
         playerAnimation.PlayAttackAnimation();
+
     }
+
+    private void Attack()
+    {
+
+        (Vector3 range, Vector3 offset, int angle) = CalculateHitBoxAndAngle();
+        Vector3 size = range;
+
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position + offset, size, angle, LayerMask.GetMask("Enemies"));
+
+        foreach (Collider2D col in hitEnemies)
+        {
+            int damage = CalculateDamage();
+            int damageDealt = col.GetComponent<EnemyHealth>().OnHit(damage, Vector2.zero);
+            PlayerManager.Instance.GainRage(CalculateRagePerAA(damageDealt));
+        }
+
+    }
+
+    private int CalculateRagePerAA(int damageDealt)
+    {
+        // This probably needs to change
+        return (30 * damageDealt) / (4 * PlayerManager.Instance.Level + 20);
+    }
+
+    private int CalculateDamage()
+    {
+        int minDamage = PlayerManager.Instance.MinDamage;
+        int maxDamage = PlayerManager.Instance.MaxDamage;
+        int rage = PlayerManager.Instance.CurrentRage;
+
+        int randomDamage = UnityEngine.Random.Range(minDamage, maxDamage + 1);
+        int rageAmplifiedDamage = (int)Mathf.Round(randomDamage * (1 + (float)rage / 500));
+
+        return rageAmplifiedDamage;
+
+    }
+
+    private Tuple<Vector3, Vector3, int> CalculateHitBoxAndAngle()
+    {
+
+        float xRange;
+        float yRange;
+        float xOffset;
+        float yOffset;
+        int angle;
+
+        if (attackDir == AttackDirection.Up)
+        {
+            xRange = 1f;
+            yRange = 1.75f;
+            xOffset = 0;
+            yOffset = 0.5f;
+            angle = 90;
+        }
+        else if (attackDir == AttackDirection.Down)
+        {
+            xRange = 1f;
+            yRange = 1.75f;
+            xOffset = 0;
+            yOffset = -0.5f;
+            angle = 90;
+
+        }
+        else if (attackDir == AttackDirection.Left)
+        {
+            xRange = 1.75f;
+            yRange = 1f;
+            xOffset = -0.5f;
+            yOffset = 0f;
+            angle = 0;
+
+        }
+        else
+        {
+            xRange = 1.75f;
+            yRange = 1f;
+            xOffset = 0.5f;
+            yOffset = 0f;
+            angle = 0;
+
+        }
+
+        return new Tuple<Vector3, Vector3, int>(new Vector3(xRange, yRange), new Vector3(xOffset, yOffset), angle);
+    }
+
+    /*private void OnDrawGizmos()
+    {
+        Vector3 range = new(1.5f, 1, 0);
+        Vector3 size = range;
+        Vector3 offset = new(0.5f, 0f, 0f);
+
+        var oldMatrix = Gizmos.matrix;
+
+        // create a matrix which translates an object by "position", rotates it by "rotation" and scales it by "halfExtends * 2"
+        Gizmos.matrix = Matrix4x4.TRS(transform.position + offset, Quaternion.AngleAxis(90, new Vector3(0,0,1)), range);
+        // Then use it one a default cube which is not translated nor scaled
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(1, 1));
+
+        Gizmos.matrix = oldMatrix;
+    }*/
 
     public void StopAttack()
     {
         attacking = false;
         playerMovement.CanMove = true;
-        sideHitbox.enabled = false;
-        backHitbox.enabled = false;
-        frontHitbox.enabled = false;
         playerAnimation.PlayIdleAfterAttack();
-    }
-
-    public void ActivateHitbox()
-    {
-        if (attackDir == AttackDirection.Right || attackDir == AttackDirection.Left)
-        {
-            sideHitbox.enabled = true;
-        }
-        else if (attackDir == AttackDirection.Up)
-        {
-            backHitbox.enabled = true;
-        }
-        else
-        {
-            frontHitbox.enabled = true;
-        }
     }
 
     private void IncreaseComboIndex()
