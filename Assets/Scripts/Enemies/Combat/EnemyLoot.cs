@@ -31,6 +31,7 @@ public class EnemyLoot : MonoBehaviour
 
     private void Update()
     {
+
         if (BeingLooted && !PlayerInLootRange())
         {
             LootManager.Instance.Close();

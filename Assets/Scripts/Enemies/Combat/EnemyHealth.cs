@@ -5,13 +5,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     private EnemyChase enemyChaseZone;
     private EnemyAnimation enemyAnimation;
     private EnemyLoot enemyLoot;
     private EnemyData data;
     private RespawnData respawnData;
+    private EnemyUI enemyUI;
 
     private int id;
     private int health;
@@ -29,22 +30,21 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
-
         enemyChaseZone = GetComponent<EnemyChase>();
         enemyAnimation = GetComponent<EnemyAnimation>();
         enemyLoot = GetComponent<EnemyLoot>();
+        respawnData = GetComponent<RespawnData>();
+        enemyUI = GetComponent<EnemyUI>();
+
         id = EnemyDatabase.GetIdByName(gameObject.name);
         data = EnemyDatabase.GetEnemyData(id);
-        respawnData = GetComponent<RespawnData>();
+
         health = data.MaxHealth;
         
     }
 
-    public int OnHit(int damage, Vector2 knockback)
+    private void ReceiveDamage(int damage)
     {
-        if (!IsAlive) return 0;
-
-        enemyAnimation.StartFlash();
         health -= damage;
         if (health <= 0)
         {
@@ -52,6 +52,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             Death();
         }
 
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Damage, $"-{damage}", transform.position, new Vector2(0, 0));
+    }
+
+    private void ApplyKnockback(Vector2 knockback)
+    {
         if (knockback != Vector2.zero)
         {
             knockbackTime = CalculateKnockbackTime(knockback);
@@ -59,9 +64,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             enemyChaseZone.CanChase = false;
             StartCoroutine(nameof(RestoreMovement));
         }
+    }
 
-        // This may go to another place
-        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Damage, $"-{damage}", transform.position, new Vector2(0, 0));
+    public int OnHit(int damage, Vector2 knockback)
+    {
+        if (!IsAlive) return 0;
+
+        enemyAnimation.StartFlash();
+        ReceiveDamage(damage);
+        ApplyKnockback(knockback);
 
         return damage;
     }

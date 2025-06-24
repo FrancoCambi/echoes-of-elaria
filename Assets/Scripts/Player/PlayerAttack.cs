@@ -1,8 +1,6 @@
 using System;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public enum AttackDirection
 {
@@ -22,7 +20,6 @@ public class PlayerAttack : MonoBehaviour
     private int comboIndex;
     private float lastAttackTime;
     private float comboResetTime;
-
 
     public AttackDirection AttackDir
     {
@@ -47,10 +44,9 @@ public class PlayerAttack : MonoBehaviour
             return comboIndex;
         }
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
@@ -62,7 +58,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !attacking && !playerMovement.Dashing)

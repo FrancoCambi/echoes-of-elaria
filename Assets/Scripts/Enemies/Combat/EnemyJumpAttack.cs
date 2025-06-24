@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyJumpAttack : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     private EnemyAttackZone attackZone;
     private EnemyHealth enemyHealth;
