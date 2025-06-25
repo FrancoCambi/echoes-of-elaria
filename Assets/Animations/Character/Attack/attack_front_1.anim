@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -3796593151376779655, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
+      value: {fileID: 8590934629451431717, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
     - time: 0.11666667
-      value: {fileID: -2117733330006916345, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
-    - time: 0.23333333
-      value: {fileID: -1217365399848997999, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
-    - time: 0.35
-      value: {fileID: 8875181877302479121, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
+      value: {fileID: 3810199243941872987, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
+    - time: 0.21666667
+      value: {fileID: -8992476975807704067, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
+    - time: 0.33333334
+      value: {fileID: 8590934629451431717, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -3796593151376779655, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
-    - {fileID: -2117733330006916345, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
-    - {fileID: -1217365399848997999, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
-    - {fileID: 8875181877302479121, guid: 2c2d8f98df29a2448a6920955fe64a03, type: 3}
+    - {fileID: 8590934629451431717, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
+    - {fileID: 3810199243941872987, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
+    - {fileID: -8992476975807704067, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
+    - {fileID: 8590934629451431717, guid: 6edf87ae90cfa1a40ab4b4eb602c6464, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.36666667
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,7 +86,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.35
+  - time: 0.33333334
     functionName: StopAttack
     data: 
     objectReferenceParameter: {fileID: 0}

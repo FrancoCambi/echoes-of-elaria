@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     private PlayerHealth playerHealth;
     private PlayerAnimation playerAnimation;
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         playerHealth = GetComponent<PlayerHealth>();
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -103,11 +105,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (horizontal > 0)
             {
-                transform.localScale = new Vector2(1, 1);
+                spriteRenderer.flipX = false;
             }
             else if (horizontal < 0)
             {
-                transform.localScale = new Vector2(-1, 1);
+                spriteRenderer.flipX = true;
+
             }
 
 
@@ -149,11 +152,11 @@ public class PlayerMovement : MonoBehaviour
         dashing = true;
         float dashForce = PlayerManager.Instance.DashForce;
 
-        if (horizontal < 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side" && transform.localScale == new Vector3(-1, 1, 1)))
+        if (horizontal < 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side"))
         {
             rb.linearVelocity = new Vector2(-dashForce, rb.linearVelocity.y);
         }
-        else if (horizontal > 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side" && transform.localScale == new Vector3(1, 1, 1)))
+        else if (horizontal > 0 && vertical == 0 || (playerAnimation.CurrentState == "idle_side"))
         {
             rb.linearVelocity = new Vector2(dashForce, rb.linearVelocity.y);
 
@@ -188,7 +191,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = new Vector2(transform.localScale.x, 0) * dashForce;
+            int x = spriteRenderer.flipX ? -1 : 1;
+            
+            rb.linearVelocity = new Vector2(x, 0) * dashForce;
         }
         yield return new WaitForSeconds(dashingTime);
         playerAnimation.PlayIdleAfterDash();

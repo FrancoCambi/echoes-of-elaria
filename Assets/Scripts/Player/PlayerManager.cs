@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     public int CurrentXp { get; private set; }
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
+    public float BasicAttackRange { get; private set; }
     public float MovementSpeed { get; private set; }
     public float DashForce { get; private set; }
     public float DashCD { get; private set; }
@@ -56,6 +57,7 @@ public class PlayerManager : MonoBehaviour
             DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
             MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
             MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
+            BasicAttackRange = float.Parse(table.Rows[0]["basic_attack_range"].ToString());
             MaxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
             CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
             MaxRage = int.Parse(table.Rows[0]["max_rage"].ToString());

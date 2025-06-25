@@ -4,12 +4,21 @@ using UnityEngine.EventSystems;
 
 public enum AttackDirection
 {
-    Left, Right, Up, Down
+    Up,
+    Down,
+    Left,
+    Right,
+    UpLeft,
+    UpRight,
+    DownLeft,
+    DownRight
 }
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] LayerMask enemyMask;
     private Camera mainCamera;
+    private SpriteRenderer spriteRenderer;
 
     private PlayerMovement playerMovement;
     private PlayerAnimation playerAnimation;
@@ -46,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
     }
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -78,33 +88,13 @@ public class PlayerAttack : MonoBehaviour
     {
         attacking = true;
         lastAttackTime = Time.time;
+
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
-
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            if (direction.x > 0)
-            {
-                transform.localScale = new Vector2(1, 1);
-                attackDir = AttackDirection.Right;
-            }
-            else
-            {
-                transform.localScale = new Vector2(-1, 1);
-                attackDir = AttackDirection.Left;
-            }
-        }
-        else
-        {
-            if (direction.y > 0)
-            {
-                attackDir = AttackDirection.Up;
-            }
-            else
-            {
-                attackDir = AttackDirection.Down;
-            }
-        }
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = (angle + 360f) % 360f;
+        attackDir = GetAttackDirectionByAngle(angle);
+        FlipRendererByDirection();
 
         IncreaseComboIndex();
         playerAnimation.PlayAttackAnimation();
@@ -114,18 +104,72 @@ public class PlayerAttack : MonoBehaviour
     private void Attack()
     {
 
-        (Vector3 range, Vector3 offset, int angle) = CalculateHitBoxAndAngle();
-        Vector3 size = range;
-
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position + offset, size, angle, LayerMask.GetMask("Enemies"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, PlayerManager.Instance.BasicAttackRange, enemyMask);
 
         foreach (Collider2D col in hitEnemies)
         {
-            int damage = CalculateDamage();
-            int damageDealt = col.GetComponent<EnemyHealth>().OnHit(damage, Vector2.zero);
-            PlayerManager.Instance.GainRage(CalculateRagePerAA(damageDealt));
+            Vector3 direction = (col.transform.position - transform.position).normalized;
+
+            if (CheckEnemyDirection(attackDir, direction) || comboIndex == 3)
+            {
+                int damage = CalculateDamage();
+                int damageDealt = col.GetComponent<EnemyHealth>().OnHit(damage, Vector2.zero);
+                PlayerManager.Instance.GainRage(CalculateRagePerAA(damageDealt));
+            }
+
         }
 
+    }
+
+    private bool CheckEnemyDirection(AttackDirection attackDirection, Vector3 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = (angle + 360f) % 360f;
+
+        if (GetAttackDirectionByAngle(angle) == attackDirection)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private AttackDirection GetAttackDirectionByAngle(float angle)
+    {
+        Debug.Log(angle);
+        AttackDirection dir;
+
+        if (angle >= 337.5f || angle < 22.5f)
+            dir = AttackDirection.Right;
+        else if (angle < 67.5f)
+            dir = AttackDirection.UpRight;
+        else if (angle < 112.5f)
+            dir = AttackDirection.Up;
+        else if (angle < 157.5f)
+            dir = AttackDirection.UpLeft;
+        else if (angle < 202.5f)
+            dir = AttackDirection.Left;
+        else if (angle < 247.5f)
+            dir = AttackDirection.DownLeft;
+        else if (angle < 292.5f)
+            dir = AttackDirection.Down;
+        else
+            dir = AttackDirection.DownRight;
+
+        return dir;
+    }
+
+    private void FlipRendererByDirection()
+    {
+        if (attackDir == AttackDirection.Left || attackDir == AttackDirection.UpLeft
+            || attackDir == AttackDirection.DownLeft)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     private int CalculateRagePerAA(int damageDealt)
@@ -147,59 +191,12 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    private Tuple<Vector3, Vector3, int> CalculateHitBoxAndAngle()
-    {
-
-        float xRange;
-        float yRange;
-        float xOffset;
-        float yOffset;
-        int angle;
-
-        if (attackDir == AttackDirection.Up)
-        {
-            xRange = 1f;
-            yRange = 1.75f;
-            xOffset = 0;
-            yOffset = 0.5f;
-            angle = 90;
-        }
-        else if (attackDir == AttackDirection.Down)
-        {
-            xRange = 1f;
-            yRange = 1.75f;
-            xOffset = 0;
-            yOffset = -0.5f;
-            angle = 90;
-
-        }
-        else if (attackDir == AttackDirection.Left)
-        {
-            xRange = 1.75f;
-            yRange = 1f;
-            xOffset = -0.5f;
-            yOffset = 0f;
-            angle = 0;
-
-        }
-        else
-        {
-            xRange = 1.75f;
-            yRange = 1f;
-            xOffset = 0.5f;
-            yOffset = 0f;
-            angle = 0;
-
-        }
-
-        return new Tuple<Vector3, Vector3, int>(new Vector3(xRange, yRange), new Vector3(xOffset, yOffset), angle);
-    }
 
     /*private void OnDrawGizmos()
     {
-        Vector3 range = new(1.5f, 1, 0);
+        Vector3 range = new(1f, 0.25f, 0);
         Vector3 size = range;
-        Vector3 offset = new(0.5f, 0f, 0f);
+        Vector3 offset = new(0.5f, 0.125f, 0f);
 
         var oldMatrix = Gizmos.matrix;
 
@@ -227,15 +224,4 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public string TypeToStringAnimation(AttackDirection attackDirection)
-    {
-        return attackDirection switch
-        {
-            AttackDirection.Left => "side",
-            AttackDirection.Right => "side",
-            AttackDirection.Up => "back",
-            AttackDirection.Down => "front",
-            _ => "",
-        };
-    }
 }

@@ -132,12 +132,27 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayAttackAnimation()
     {
-        ChangeAnimationState("attack_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir) + "_" + playerAttack.ComboIndex);
+        ChangeAnimationState("attack_" + TypeToStringAnimation(playerAttack.AttackDir) + "_" + playerAttack.ComboIndex);
     }
 
     public void PlayIdleAfterAttack()
     {
-        ChangeAnimationState("idle_" + playerAttack.TypeToStringAnimation(playerAttack.AttackDir));
+        // THIS NEEDS TO CHANGE
+        string anim = TypeToStringAnimation(playerAttack.AttackDir);
+
+        if (anim == "back_side")
+        {
+            ChangeAnimationState("idle_back");
+        }
+        else if (anim == "front_side")
+        {
+            ChangeAnimationState("idle_front");
+        }
+        else
+        {
+            ChangeAnimationState("idle_" + TypeToStringAnimation(playerAttack.AttackDir));
+        }
+
     }
     
     public void PlayDashAnimation()
@@ -159,7 +174,21 @@ public class PlayerAnimation : MonoBehaviour
 
         currentState = newState;
     }
-
+    private string TypeToStringAnimation(AttackDirection attackDirection)
+    {
+        return attackDirection switch
+        {
+            AttackDirection.Left => "side",
+            AttackDirection.Right => "side",
+            AttackDirection.Up => "back",
+            AttackDirection.Down => "front",
+            AttackDirection.UpRight => "back_side",
+            AttackDirection.UpLeft => "back_side",
+            AttackDirection.DownRight => "front_side",
+            AttackDirection.DownLeft => "front_side",
+            _ => "",
+        };
+    }
     public AnimationClip FindAnimationByName(string name)
     {
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)

@@ -1,106 +1,7 @@
 fileFormatVersion: 2
 guid: 746272ffde94fac468f61510cd2647d5
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 368543389579951487
-    second: slime_0
-  - first:
-      213: -458641133534639524
-    second: slime_1
-  - first:
-      213: 2542698315722941828
-    second: slime_2
-  - first:
-      213: -3711818451352614709
-    second: slime_3
-  - first:
-      213: -6875693984060724655
-    second: slime_4
-  - first:
-      213: 8065215198520230363
-    second: slime_5
-  - first:
-      213: 292511346337569837
-    second: slime_6
-  - first:
-      213: -6776676135277293862
-    second: slime_7
-  - first:
-      213: 5879532933249936704
-    second: slime_8
-  - first:
-      213: 1702944112137351692
-    second: slime_9
-  - first:
-      213: 574139385759250185
-    second: slime_10
-  - first:
-      213: -1071876908328471809
-    second: slime_11
-  - first:
-      213: 7065398221910334755
-    second: slime_12
-  - first:
-      213: 5088725752757704037
-    second: slime_13
-  - first:
-      213: 2446715294408889903
-    second: slime_14
-  - first:
-      213: -6455651614561120216
-    second: slime_15
-  - first:
-      213: 1700843758525247274
-    second: slime_16
-  - first:
-      213: -1893580178282796242
-    second: slime_17
-  - first:
-      213: 8878132033782264596
-    second: slime_18
-  - first:
-      213: 4963280553436401018
-    second: slime_19
-  - first:
-      213: 3519091041362292632
-    second: slime_20
-  - first:
-      213: -3395474172157937565
-    second: slime_21
-  - first:
-      213: 6932627294812020299
-    second: slime_22
-  - first:
-      213: 4223093693952456910
-    second: slime_23
-  - first:
-      213: 7427473825912618326
-    second: slime_24
-  - first:
-      213: 1540438928351404177
-    second: slime_25
-  - first:
-      213: -572565752260146881
-    second: slime_26
-  - first:
-      213: 7540427358155989450
-    second: slime_27
-  - first:
-      213: -3433080256221142714
-    second: slime_28
-  - first:
-      213: -8263499900113843028
-    second: slime_29
-  - first:
-      213: -3746336789924475392
-    second: slime_30
-  - first:
-      213: 4541736877509699167
-    second: slime_31
-  - first:
-      213: -1622549613547736378
-    second: slime_32
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
