@@ -14,10 +14,14 @@
 
 - Smooth **4-directional movement** with dash ability.
 - **Dynamic combat** with enemy AI and item-based upgrades.
+- **8-directional 3-Attack combo** 
 - **Inventory and loot** system with item rarity and enhancements.
-- **Quest system**.
-- **Shops and vendors** with item buying/selling mechanics.
-- **SQLite database integration** for world data.
+- **SQLite database integration** for world data and saving.
+- **SFX/Music** sound controller using a mixer.
+- **English and Spanish** supported via Unity Localization System.
+- **Tooltip, floating combat text and alert** systems.
+- **Mob placement and creation via Database**
+- **Dynamic Keybinding** system
 
 ---
 
@@ -26,7 +30,7 @@
 - **Engine:** Unity.
 - **Language:** C#.
 - **Database:** SQLite (via plugin).
-- **Art:** Aseprite (in progress).
+- **Art:** Freelancers.
 - **Version Control:** Git.
 
 ---
