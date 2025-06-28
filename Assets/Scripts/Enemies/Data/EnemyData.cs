@@ -5,6 +5,7 @@ public class EnemyData
     public int ID;
     public string Name;
     public int MaxHealth;
+    public int Level;
     public float MovementSpeed;
     public float PatrolSpeed;
     public float MaxPatrolCD;

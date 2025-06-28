@@ -12,7 +12,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private EnemyLoot enemyLoot;
     private EnemyData data;
     private RespawnData respawnData;
-    private EnemyUI enemyUI;
 
     private int id;
     private int health;
@@ -26,6 +25,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,7 +41,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         enemyAnimation = GetComponent<EnemyAnimation>();
         enemyLoot = GetComponent<EnemyLoot>();
         respawnData = GetComponent<RespawnData>();
-        enemyUI = GetComponent<EnemyUI>();
 
         id = EnemyDatabase.GetIdByName(gameObject.name);
         data = EnemyDatabase.GetEnemyData(id);

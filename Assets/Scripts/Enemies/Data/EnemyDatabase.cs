@@ -17,6 +17,7 @@ public static class EnemyDatabase
             ID = id,
             Name = table.Rows[0]["name"].ToString(),
             MaxHealth = int.Parse(table.Rows[0]["health"].ToString()),
+            Level = int.Parse(table.Rows[0]["level"].ToString()),
             MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString()),
             PatrolSpeed = float.Parse(table.Rows[0]["patrol_speed"].ToString()),
             MaxPatrolCD = float.Parse(table.Rows[0]["max_patrol_cd"].ToString()),

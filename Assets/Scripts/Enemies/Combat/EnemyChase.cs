@@ -88,7 +88,7 @@ public class EnemyChase : MonoBehaviour
     private float CalculateChaseDistance()
     {
         // TODO: CALCULATE ACCORDING TO PLAYER AND ENEMY LEVEL DIFFERENCE
-        return 6f;
+        return 2f;
     }
 
 }
