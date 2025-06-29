@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,17 +11,21 @@ public class EnemyCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Canvas canvas;
 
-    private new PolygonCollider2D collider;
+    private SpriteRenderer spriteRenderer;
 
     private EnemyHealth enemyHealth;
     private EnemyData enemyData;
 
+    private bool hideOnExit;
+
     private void Start()
     {
-        collider = GetComponent<PolygonCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         enemyHealth = GetComponent<EnemyHealth>();
         enemyData = EnemyDatabase.GetEnemyData(EnemyDatabase.GetIdByName(gameObject.name));
+
+        hideOnExit = true;
 
     }
 
@@ -34,11 +39,26 @@ public class EnemyCanvas : MonoBehaviour
     public void HideCanvas()
     {
         canvas.gameObject.SetActive(false);
+        hideOnExit = true;
     }
 
-    public void UpdateFramePosition()
+    public void ShowCanvasSeconds(float seconds)
     {
-        float colYExtents = collider.bounds.extents.y;
+        StartCoroutine(ShowCanvasSecondsIE(seconds));
+    }
+
+    private IEnumerator ShowCanvasSecondsIE(float seconds)
+    {
+        hideOnExit = false;
+        ShowCanvas();
+        yield return new WaitForSeconds(seconds);
+        hideOnExit = true;
+        HideCanvas();
+    }
+
+    private void UpdateFramePosition()
+    {
+        float colYExtents = spriteRenderer.bounds.extents.y;
         float Yoffset = 0.2f;
 
         LevelBarVLO.transform.localPosition = new Vector3(0, colYExtents + Yoffset, 0);
@@ -59,6 +79,6 @@ public class EnemyCanvas : MonoBehaviour
 
     private void OnMouseExit()
     {
-        HideCanvas();
+        if (hideOnExit) HideCanvas();
     }
 }
