@@ -37,7 +37,7 @@ public class EnemyAnimation : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         enemyData = EnemyDatabase.GetEnemyData(EnemyDatabase.GetIdByName(gameObject.name));
 
-        controller = Resources.Load<RuntimeAnimatorController>($"AnimationControllers/{enemyData.Name}");
+        controller = Resources.Load<RuntimeAnimatorController>($"AnimationControllers/Mobs/{enemyData.Name}");
         animator.runtimeAnimatorController = controller;
         currentState = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
     }

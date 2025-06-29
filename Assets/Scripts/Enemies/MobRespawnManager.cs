@@ -36,7 +36,7 @@ public class MobRespawnManager : MonoBehaviour
 
     private void SpawnFromDB()
     {
-        string query = $"SELECT * FROM mobs";
+        string query = $"SELECT * FROM mobs_spawn";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
 
         foreach (DataRow row in table.Rows)
