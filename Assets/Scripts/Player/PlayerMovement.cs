@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -80,9 +81,18 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
+    private void OnEnable()
+    {
+        GameManager.OnGameStateChanged += StopMovement;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // If Game State blocks input, just return
+        if (GameManager.Instance.IsInputBlocked()) return;
+
+        // Otherwise, read input.
         if (canMove && playerHealth.IsAlive)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
@@ -100,7 +110,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // If Game State blocks input, just return
+        if (GameManager.Instance.IsInputBlocked()) return;
 
+        // Otherwise, read input
         if (canMove && playerHealth.IsAlive)
         {
             if (horizontal > 0)
@@ -132,17 +145,8 @@ public class PlayerMovement : MonoBehaviour
     public void StopMovement()
     {
         rb.linearVelocity = Vector2.zero;
-    }
-
-    private void NotAllowMovement()
-    {
-        canMove = false;
-
-    }
-
-    private void AllowMovement()
-    {
-        canMove = true;
+        horizontal = 0;
+        vertical = 0;
     }
 
     public IEnumerator Dash()
@@ -202,5 +206,10 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(PlayerManager.Instance.DashCD);
         canDash = true;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= StopMovement;
     }
 }

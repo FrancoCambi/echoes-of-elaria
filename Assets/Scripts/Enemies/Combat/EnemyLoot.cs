@@ -48,13 +48,6 @@ public class EnemyLoot : MonoBehaviour
         }*/
     }
 
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1) && PlayerInLootRange())
-        {
-            LootManager.Instance.ShowLootTable(Dropped, this);
-        }
-    }
 
     private bool PlayerInLootRange()
     {
@@ -64,6 +57,13 @@ public class EnemyLoot : MonoBehaviour
 
         return col.Distance(playerCol).distance <= 1f;
 
+    }
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1) && PlayerInLootRange())
+        {
+            LootManager.Instance.ShowLootTable(Dropped, this);
+        }
     }
 
     private void OnDestroy()

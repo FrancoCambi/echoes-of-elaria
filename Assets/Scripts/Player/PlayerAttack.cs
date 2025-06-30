@@ -70,6 +70,10 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        // If GameState blocks input, just return
+        if (GameManager.Instance.IsInputBlocked()) return;
+
+        // Otherwise, read input.
         if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !attacking && !playerMovement.Dashing)
         {
             playerMovement.CanMove = false;

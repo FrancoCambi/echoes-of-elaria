@@ -124,6 +124,8 @@ public class KeyBindsManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsInputBlocked()) return;
+
         if (listening && hoveredSlot != null)
         {
             foreach (KeyControl key in Keyboard.current.allKeys)

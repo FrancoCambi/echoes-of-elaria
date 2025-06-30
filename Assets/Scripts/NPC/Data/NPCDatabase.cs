@@ -52,6 +52,20 @@ public static class NPCDatabase
         return behaviors;
     }
 
+    public static List<string> GetDialogueKeysByID(int id)
+    {
+        List<string> keys = new();
+        string query = $"SELECT * from npc_dialogue WHERE npc_id = {id}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        foreach (DataRow row in table.Rows)
+        {
+            keys.Add($"npc_{id}_{row["text_index"]}");
+        }
+
+        return keys;
+    }
+
     private static NPCType StringToNPCType(string type)
     {
         return type switch

@@ -1,8 +1,19 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-public enum Language { English, Spanish }
+public enum Language
+{
+    English, 
+    Spanish,
+}
+
+public enum GameState
+{
+    Dialogue,
+    Playing,
+}
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -18,13 +29,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static event Action OnGameStateChanged;
+
     public static int SelCharID { get; set; }
 
     public static Language CurrentLanguage { get; set; }
 
+    public static GameState CurrentState { get; private set; }
+
     private void Awake()
     {
         SelCharID = 1;
+        CurrentState = GameState.Playing;
 
         StartCoroutine(nameof(LoadLanguage));
     }
@@ -40,6 +56,8 @@ public class GameManager : MonoBehaviour
     }
 
     /*TESTING*/
+
+    #region language
 
     public static void SwitchLanguage(Language newLanguage)
     {
@@ -84,4 +102,20 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    #endregion
+
+    #region game state
+
+    public void SetGameState(GameState gameState)
+    {
+        CurrentState = gameState;
+        OnGameStateChanged?.Invoke();
+    }
+
+    public bool IsInputBlocked()
+    {
+        return CurrentState == GameState.Dialogue;
+    }
+
+    #endregion
 }

@@ -26,9 +26,11 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        // If Input is blocked, just return.
         if (KeyBindsManager.Instance.Listening) return;
+        if (GameManager.Instance.IsInputBlocked()) return;
 
-
+        // Otherwise, read input.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (AnyOpen())
