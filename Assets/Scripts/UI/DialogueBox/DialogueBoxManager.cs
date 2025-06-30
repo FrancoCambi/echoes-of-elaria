@@ -22,7 +22,6 @@ public class DialogueBoxManager : Panel
     [SerializeField] private TextMeshProUGUI npcNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
-    private bool isTyping;
     private float lettersPerSecond;
 
     private void Start()
@@ -32,15 +31,20 @@ public class DialogueBoxManager : Panel
     
     public async Task ShowDialogueBox(List<string> lines, string npcName)
     {
+        // Set state to dialogue so the player can't move, use 
+        // spells, etc.
         GameManager.Instance.SetGameState(GameState.Dialogue);
         npcNameText.text = npcName;
         Open();
 
+        // Foreach line, type it, waiting for it to end
+        // before typing the next
         foreach (string line in lines)
         {
             await TypeLine(line);
         }
 
+        // Change the state again and close the window.
         GameManager.Instance.SetGameState(GameState.Playing);
         Close();
 
@@ -50,12 +54,14 @@ public class DialogueBoxManager : Panel
     {
         dialogueText.text = "";
 
+        // Write char by char
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
             await Task.Delay((int)((1f / lettersPerSecond) * 1000));
         }
 
+        // Wait for the player to press E.
         await WaitForKeyDown(KeyCode.E);
     }
 

@@ -21,6 +21,7 @@ public class NPCDialogue : MonoBehaviour
 
     private List<string> GetDialogueLines()
     {
+        // Get the keys via DB
         List<string> keys = NPCDatabase.GetDialogueKeysByID(npcData.ID);
 
         List<string> lines = new();
@@ -43,8 +44,11 @@ public class NPCDialogue : MonoBehaviour
 
     private void OnMouseOver()
     {
+        // If I press right click, I'm in range and not already talking, talk with npc.
         if (Input.GetMouseButtonDown(1) && PlayerInInteractRange() && !DialogueBoxManager.Instance.IsOpen)
         {
+            // This is setted this way because ShowDialogueBox is async but I dont care about
+            // awaiting it.
             _ = DialogueBoxManager.Instance.ShowDialogueBox(GetDialogueLines(), npcData.Name);
         }
     }

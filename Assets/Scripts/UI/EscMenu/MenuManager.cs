@@ -15,11 +15,15 @@ public class MenuManager : Panel
 
     public void PlayButton()
     {
+        if (KeyBindsManager.Instance.Listening) return;
+
         Close();
     }
 
     public void OptionsButton()
     {
+        if (KeyBindsManager.Instance.Listening) return;
+
         OptionsManager.Instance.Open();
     }
 
@@ -37,6 +41,8 @@ public class MenuManager : Panel
 
     public void QuitButton()
     {
+        if (KeyBindsManager.Instance.Listening) return;
+
         Application.Quit();
     }
 
