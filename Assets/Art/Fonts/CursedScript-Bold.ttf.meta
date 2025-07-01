@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dda7d4424ecd88d4d8504be3cc458a0b
+guid: f550ac4685252a444946efcde784dec5
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - 'C&C Red Alert [INET]'
+  - CursedScript
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
