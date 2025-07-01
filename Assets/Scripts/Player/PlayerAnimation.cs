@@ -5,7 +5,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private Material originalMaterial;
+    private Material defaultMaterial;
     private Material flashMaterial;
 
     private PlayerMovement playerMovement;
@@ -42,8 +42,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = Resources.Load<Material>("SRMaterials/Default");
-        flashMaterial = Resources.Load<Material>("SRMaterials/Flash");
+        defaultMaterial = Resources.Load<Material>("Shaders/DefaultShaderMat");
+        flashMaterial = Resources.Load<Material>("Shaders/DamageFlashMat");
 
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -104,7 +104,7 @@ public class PlayerAnimation : MonoBehaviour
 
         spriteRenderer.material = flashMaterial;
         yield return new WaitForSeconds(flashTime);
-        spriteRenderer.material = originalMaterial;
+        spriteRenderer.material = defaultMaterial;
 
         playingHit = false;
 

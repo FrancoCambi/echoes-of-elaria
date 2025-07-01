@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
-    private Material originalMaterial;
+    private Material defaultMaterial;
     private Material flashMaterial;
     private Animator animator;
     private RuntimeAnimatorController controller;
@@ -30,8 +30,8 @@ public class EnemyAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = Resources.Load<Material>("SRMaterials/Default");
-        flashMaterial = Resources.Load<Material>("SRMaterials/Flash");
+        defaultMaterial = Resources.Load<Material>("Shaders/DefaultShaderMat");
+        flashMaterial = Resources.Load<Material>("Shaders/DamageFlashMat");
 
         enemyAttack = GetComponent<EnemyJumpAttack>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -77,7 +77,7 @@ public class EnemyAnimation : MonoBehaviour
 
         spriteRenderer.material = flashMaterial;
         yield return new WaitForSeconds(flashTime);
-        spriteRenderer.material = originalMaterial;
+        spriteRenderer.material = defaultMaterial;
     }
     public void StartFlash()
     {

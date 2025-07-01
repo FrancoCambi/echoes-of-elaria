@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 7994616375053902885}
   - component: {fileID: 4674595347013582635}
   - component: {fileID: 7228774748815848593}
+  - component: {fileID: -165836398647212662}
   m_Layer: 6
   m_Name: BaseMob
   m_TagString: Enemy
@@ -547,6 +548,18 @@ MonoBehaviour:
   levelText: {fileID: 7211175176278845632}
   nameText: {fileID: 2036284307132897162}
   canvas: {fileID: 553277157228986153}
+--- !u!114 &-165836398647212662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543989726710345842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f4bac7744ceef4abcab90e4084a1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725309693705437365
 GameObject:
   m_ObjectHideFlags: 0
