@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: cee0dce469d98a84884114515917807a
+guid: cfb212c8d4fc62a4580dd67c335ac057
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4061544392688177597
-    second: HealthFrame_0
+      213: 6204150951295139564
+    second: OldHealthFrame_0
   - first:
-      213: -1094896098956413825
-    second: HealthFrame_1
+      213: 6199594393781919883
+    second: OldHealthFrame_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HealthFrame_0
+      name: OldHealthFrame_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 23
-        width: 62
-        height: 40
+        x: 38
+        y: 49
+        width: 50
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db198ad2b118d5830800000000000000
-      internalID: 4061544392688177597
+      spriteID: cee39d05b62991650800000000000000
+      internalID: 6204150951295139564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthFrame_1
+      name: OldHealthFrame_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 12
-        width: 33
-        height: 7
+        x: 78
+        y: 49
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,30 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f74fdbb8cc52ec0f0800000000000000
-      internalID: -1094896098956413825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthFrame_2
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 3
-        width: 30
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ce41df86a68dd448b35053392334b79
-      internalID: -164566089
+      spriteID: b80efd81142690650800000000000000
+      internalID: 6199594393781919883
       vertices: []
       indices: 
       edges: []
@@ -185,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 64014f3b098ab864d8f41163c664cd89
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -194,10 +172,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      HealthFrame_0: 4061544392688177597
-      HealthFrame_1: -1094896098956413825
-      HealthFrame_2: -164566089
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
