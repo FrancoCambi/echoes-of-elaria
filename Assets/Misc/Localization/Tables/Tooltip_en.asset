@@ -23,6 +23,22 @@ MonoBehaviour:
       Level: {3}\r"
     m_Metadata:
       m_Items: []
+  - m_Id: 8084589302616064
+    m_Localized: 'Armor: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085515375579136
+    m_Localized: 'Stamina: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085569641484288
+    m_Localized: 'Intellect: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085640730742784
+    m_Localized: 'Arcane Power: {0}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

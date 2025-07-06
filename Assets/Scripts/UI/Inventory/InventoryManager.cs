@@ -49,7 +49,7 @@ public class InventoryManager : Panel
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
-            AddItems(2, 1);
+            AddItems(3, 1);
         }
     }
 

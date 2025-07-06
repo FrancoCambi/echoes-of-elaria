@@ -19,6 +19,22 @@ MonoBehaviour:
     m_Key: itemTooltipDescription
     m_Metadata:
       m_Items: []
+  - m_Id: 8084589302616064
+    m_Key: ArmorStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085515375579136
+    m_Key: StaminaStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085569641484288
+    m_Key: IntellectStat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8085640730742784
+    m_Key: ArcanePowerStat
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

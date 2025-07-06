@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: Test item
     m_Metadata:
       m_Items: []
+  - m_Id: 8076825255841792
+    m_Localized: Test Equip
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

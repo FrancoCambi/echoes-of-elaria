@@ -18,21 +18,37 @@ public class ItemsManager : MonoBehaviour
     {
         string query = $"SELECT * FROM items WHERE id = {id}";
         DataTable table = DBManager.Instance.ExecuteQuery(query);
-        Item item = null;
+        if (table.Rows.Count == 0) return null;
 
-        if (table.Rows.Count > 0)
+       
+        int _id = int.Parse(table.Rows[0]["id"].ToString());
+        string _name = table.Rows[0]["name"].ToString();
+        int _requiredLevel = int.Parse(table.Rows[0]["required_level"].ToString());
+        int _itemLevel = int.Parse(table.Rows[0]["item_level"].ToString());
+        int _rarity = int.Parse(table.Rows[0]["rarity"].ToString());
+        int _maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
+        int _typeId = int.Parse(table.Rows[0]["type_id"].ToString());
+        int armor = 0;
+        int stamina = 0;
+        int intellect = 0;
+        int power = 0;
+
+        if (_typeId == 2)
         {
-            int _id = int.Parse(table.Rows[0]["id"].ToString());
-            string _name = table.Rows[0]["name"].ToString();
-            int _requiredLevel = int.Parse(table.Rows[0]["required_level"].ToString());
-            int _itemLevel = int.Parse(table.Rows[0]["item_level"].ToString());
-            int _rarity = int.Parse(table.Rows[0]["rarity"].ToString());
-            int _maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
-            int _typeId = int.Parse(table.Rows[0]["type_id"].ToString());
-            item = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId);
+            armor = int.Parse(table.Rows[0]["armor"].ToString());
+            stamina = int.Parse(table.Rows[0]["stamina"].ToString());
+            intellect = int.Parse(table.Rows[0]["intellect"].ToString());
+            power = int.Parse(table.Rows[0]["arcane_power"].ToString());
+            Gear gear = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId, armor, stamina, intellect, power);
+            return gear;
+
+        }
+        else
+        {
+            Item item = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId);
+            return item;
         }
 
-        return item;
     }
 
     public List<ItemEffect> GetEffectsByID(int id)
