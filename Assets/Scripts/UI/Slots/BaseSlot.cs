@@ -78,7 +78,11 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         content = newContent;
         icon.sprite = newContent.Icon;
         icon.enabled = true;
-        amountText.enabled = true;
+
+        if (amountText != null)
+        {
+            amountText.enabled = true;
+        }
     }
 
     public virtual void AddAmount(int quantity)
@@ -94,7 +98,10 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public virtual void UpdateText()
     {
-        amountText.text = amount > 1 ? amount.ToString() : "";
+        if (amountText != null)
+        {
+            amountText.text = amount > 1 ? amount.ToString() : "";
+        }
     }
 
     public virtual void Clear()
@@ -103,7 +110,10 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         icon.enabled = false;
         amount = 0;
         UpdateText();
-        amountText.enabled = false;
+        if (amountText != null)
+        {
+            amountText.enabled = false;
+        }
 
         if (TooltipManager.Instance.HoveredSlot == this)
         {

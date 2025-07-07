@@ -19,6 +19,10 @@ public class PlayerManager : MonoBehaviour
     public int CurrentXp { get; private set; }
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
+    public int Armor { get; private set; }
+    public int Stamina { get; private set; }
+    public int Intellect { get; private set; }
+    public int ArcanePower { get; private set; }
     public float BasicAttackRange { get; private set; }
     public float MovementSpeed { get; private set; }
     public float DashForce { get; private set; }
@@ -34,7 +38,7 @@ public class PlayerManager : MonoBehaviour
     public static event Action<int> OnCurrentHealthChanged;
     public static event Action<int> OnMaxHealthChanged;
     public static event Action<int> OnCurrentRageChanged;
-    //public static event Action<int> OnMaxRageChanged;
+    public static event Action OnStatsChanged;
 
 
     private void Awake()
@@ -57,6 +61,10 @@ public class PlayerManager : MonoBehaviour
             DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
             MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
             MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
+            Armor = int.Parse(table.Rows[0]["armor"].ToString());
+            Stamina = int.Parse(table.Rows[0]["stamina"].ToString());
+            Intellect = int.Parse(table.Rows[0]["intellect"].ToString());
+            ArcanePower = int.Parse(table.Rows[0]["arcane_power"].ToString());
             BasicAttackRange = float.Parse(table.Rows[0]["basic_attack_range"].ToString());
             MaxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
             CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
@@ -123,6 +131,38 @@ public class PlayerManager : MonoBehaviour
         SaveStatToDatabase("current_health", MaxDamage);
     }
 
+    // ------------------STATS---------------------------//
+
+    public void UpdateArmor(int newArmor)
+    {
+        Armor = newArmor;
+        SaveStatToDatabase("armor", Armor);
+        OnStatsChanged?.Invoke();
+    }
+
+    public void UpdateStamina(int newStamina)
+    {
+        Stamina = newStamina;
+        SaveStatToDatabase("stamina", Stamina);
+        OnStatsChanged?.Invoke();
+    }
+
+    public void UpdateIntellect(int newIntellect)
+    {
+        Intellect = newIntellect;
+        SaveStatToDatabase("intellect", Intellect);
+        OnStatsChanged?.Invoke();
+    }
+
+    public void UpdateArcanePower(int newArcanePower)
+    {
+        ArcanePower = newArcanePower;
+        SaveStatToDatabase("arcane_power", ArcanePower);
+        OnStatsChanged?.Invoke();
+    }
+
+    // ------------------STATS---------------------------//
+
     public void UpdateMaxRage(int newMaxRage)
     {
         MaxRage = newMaxRage;
@@ -167,6 +207,50 @@ public class PlayerManager : MonoBehaviour
 
         FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Xp, $"+{xp}xp", transform.position, new Vector2(-1, 0.5f));
     }
+
+    // ------------------STATS---------------------------//
+
+    public void GainArmor(int armor)
+    {
+        UpdateArmor((int)Mathf.Clamp(Armor + armor, 0, Mathf.Infinity));
+    }
+
+    public void GainStamina(int stamina)
+    {
+        UpdateStamina((int)Mathf.Clamp(Stamina + stamina, 0, Mathf.Infinity));
+    }
+
+    public void GainIntellect(int intellect)
+    {
+        UpdateIntellect((int)Mathf.Clamp(Intellect + intellect, 0, Mathf.Infinity));
+    }
+
+    public void GainArcanePower(int arcanePower)
+    {
+        UpdateArcanePower((int)Mathf.Clamp(ArcanePower + arcanePower, 0, Mathf.Infinity));
+    }
+
+    public void LoseArmor(int armor)
+    {
+        UpdateArmor((int)Mathf.Clamp(Armor - armor, 0, Mathf.Infinity));
+    }
+
+    public void LoseStamina(int stamina)
+    {
+        UpdateStamina((int)Mathf.Clamp(Stamina - stamina, 0, Mathf.Infinity));
+    }
+
+    public void LoseIntellect(int intellect)
+    {
+        UpdateIntellect((int)Mathf.Clamp(Intellect - Intellect, 0, Mathf.Infinity));
+    }
+
+    public void LoseArcanePower(int arcanePower)
+    {
+        UpdateArcanePower((int)Mathf.Clamp(ArcanePower - arcanePower, 0, Mathf.Infinity));
+    }
+
+    // ------------------STATS---------------------------//
 
     public void Heal(int hp)
     {

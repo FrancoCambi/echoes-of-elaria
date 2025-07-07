@@ -20,32 +20,27 @@ public class ItemsManager : MonoBehaviour
         DataTable table = DBManager.Instance.ExecuteQuery(query);
         if (table.Rows.Count == 0) return null;
 
-       
-        int _id = int.Parse(table.Rows[0]["id"].ToString());
-        string _name = table.Rows[0]["name"].ToString();
-        int _requiredLevel = int.Parse(table.Rows[0]["required_level"].ToString());
-        int _itemLevel = int.Parse(table.Rows[0]["item_level"].ToString());
-        int _rarity = int.Parse(table.Rows[0]["rarity"].ToString());
-        int _maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
-        int _typeId = int.Parse(table.Rows[0]["type_id"].ToString());
-        int armor = 0;
-        int stamina = 0;
-        int intellect = 0;
-        int power = 0;
+        string name = table.Rows[0]["name"].ToString();
+        int requiredLevel = int.Parse(table.Rows[0]["required_level"].ToString());
+        int itemLevel = int.Parse(table.Rows[0]["item_level"].ToString());
+        ItemRarity rarity = GetItemRarityById(int.Parse(table.Rows[0]["rarity"].ToString()));
+        int maxStack = int.Parse(table.Rows[0]["max_stack"].ToString());
+        ItemType type = GetItemTypeFromString(table.Rows[0]["item_type"].ToString());
 
-        if (_typeId == 2)
+        if (type == ItemType.Equipment)
         {
-            armor = int.Parse(table.Rows[0]["armor"].ToString());
-            stamina = int.Parse(table.Rows[0]["stamina"].ToString());
-            intellect = int.Parse(table.Rows[0]["intellect"].ToString());
-            power = int.Parse(table.Rows[0]["arcane_power"].ToString());
-            Gear gear = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId, armor, stamina, intellect, power);
+            EquipmentType equipType = GetEquipTypeFromString(table.Rows[0]["equipment_type"].ToString());
+            int armor = int.Parse(table.Rows[0]["armor"].ToString());
+            int stamina = int.Parse(table.Rows[0]["stamina"].ToString());
+            int intellect = int.Parse(table.Rows[0]["intellect"].ToString());
+            int power = int.Parse(table.Rows[0]["arcane_power"].ToString());
+            Gear gear = new(id, name, requiredLevel, itemLevel, rarity, maxStack, type, equipType, armor, stamina, intellect, power);
             return gear;
 
         }
         else
         {
-            Item item = new(_id, _name, _requiredLevel, _itemLevel, _rarity, _maxStack, _typeId);
+            Item item = new(id, name, requiredLevel, itemLevel, rarity, maxStack, type);
             return item;
         }
 
@@ -72,6 +67,47 @@ public class ItemsManager : MonoBehaviour
         }
 
         return effects;
+    }
+
+    private EquipmentType GetEquipTypeFromString(string type)
+    {
+        return type switch
+        {
+            "helm" => EquipmentType.Helm,
+            "chest" => EquipmentType.Chest,
+            "legs" => EquipmentType.Legs,
+            "hands" => EquipmentType.Hands,
+            "feet" => EquipmentType.Feet,
+            "ring" => EquipmentType.Ring,
+            "trinket" => EquipmentType.Trinket,
+            _ => EquipmentType.None,
+        };
+    }
+
+    private ItemType GetItemTypeFromString(string type)
+    {
+        return type switch
+        {
+            "consumable" => ItemType.Consumable,
+            "equipment" => ItemType.Equipment,
+            "material" => ItemType.Material,
+            "quest" => ItemType.Quest,
+            _ => ItemType.None,
+        };
+    }
+
+    private ItemRarity GetItemRarityById(int id)
+    {
+        return id switch
+        {
+            0 => ItemRarity.Common,
+            1 => ItemRarity.Uncommon,
+            2 => ItemRarity.Rare,
+            3 => ItemRarity.Epic,
+            4 => ItemRarity.Legendary,
+            _ => ItemRarity.None,
+
+        };
     }
 
     private ItemEffectType GetEffectTypeFromString(string type)

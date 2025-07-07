@@ -1,21 +1,55 @@
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
+public enum EquipmentType
+{
+    Helm, Chest, Legs, Hands, Feet, Ring, Trinket, None
+}
+
 public class Gear : Item
 {
+    public EquipmentType EquipType { get; private set; }
     public int Armor { get; private set; }
     public int Stamina { get; private set; } 
     public int Intellect { get; private set; }
     public int ArcanePower {  get; private set; }
 
-    public Gear(int id, string name, int reqLevel, int itemLevel, int rarity, int maxStack, 
-        int typeId, int armor, int stamina, int intellect, int arcanePower) 
-        : base(id, name, reqLevel, itemLevel, rarity, maxStack, typeId)
+    public Gear(int id, string name, int reqLevel, int itemLevel, ItemRarity rarity, int maxStack, 
+        ItemType type, EquipmentType equipType, int armor, int stamina, int intellect, int arcanePower) 
+        : base(id, name, reqLevel, itemLevel, rarity, maxStack, type)
     {
+        EquipType = equipType;   
         Armor = armor;
         Stamina = stamina;
         Intellect = intellect;
         ArcanePower = arcanePower;
+    }
+
+    public void Equip()
+    {
+        GiveStats();
+    }
+
+    public void UnEquip()
+    {
+        TakeStatsAway();
+
+    }
+
+    private void GiveStats()
+    {
+        PlayerManager.Instance.GainArmor(Armor);
+        PlayerManager.Instance.GainStamina(Stamina);
+        PlayerManager.Instance.GainIntellect(Intellect);
+        PlayerManager.Instance.GainArcanePower(ArcanePower);
+    }
+
+    private void TakeStatsAway()
+    {
+        PlayerManager.Instance.LoseArmor(Armor);
+        PlayerManager.Instance.LoseStamina(Stamina);
+        PlayerManager.Instance.LoseIntellect(Intellect);
+        PlayerManager.Instance.LoseArcanePower(ArcanePower);
     }
 
     public override string GetDescription()

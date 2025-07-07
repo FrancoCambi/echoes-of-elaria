@@ -28,19 +28,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8084589302616064
-    m_Localized: 'Armadura: {0}'
+    m_Localized: + {0} Armadura
     m_Metadata:
       m_Items: []
   - m_Id: 8085515375579136
-    m_Localized: 'Aguante: {0}'
+    m_Localized: + {0} Aguante
     m_Metadata:
       m_Items: []
   - m_Id: 8085569641484288
-    m_Localized: 'Intelecto: {0}'
+    m_Localized: + {0} Intelecto
     m_Metadata:
       m_Items: []
   - m_Id: 8085640730742784
-    m_Localized: 'Poder Arcano: {0}'
+    m_Localized: + {0} Poder Arcano
     m_Metadata:
       m_Items: []
   references:

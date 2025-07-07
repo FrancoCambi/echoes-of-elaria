@@ -135,6 +135,14 @@ public class InventorySlot : BaseSlot
                 // why would it be a consumable then?
                 AddAmount(-1);
             }
+            else if (content is Gear contentGear)
+            {
+                EquipmentManager.Instance.EquipGear(contentGear);
+
+                AddAmount(-1);
+
+
+            }
         }
     }
 }
