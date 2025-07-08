@@ -73,9 +73,10 @@ public class EquipmentSlot : BaseSlot
 
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            Clear();
             // THIS NEEDS CHECK FOR FULL INVENTORY
             InventoryManager.Instance.AddItems(equippedGear.Id, 1);
+
+            Clear();
         }
 
     }

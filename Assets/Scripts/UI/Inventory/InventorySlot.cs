@@ -174,6 +174,7 @@ public class InventorySlot : BaseSlot
                     EquipmentManager.Instance.EquipGear(contentGear);
                     AddAmount(-1);
                     AddItemsInEmpty(id, 1);
+                    TooltipManager.Instance.ShowTooltip(this);
                 }
                 else
                 {
