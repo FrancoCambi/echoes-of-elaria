@@ -50,10 +50,13 @@ public class InventoryManager : Panel
         else if (Input.GetKeyDown(KeyCode.J))
         {
             AddItems(3, 1);
+            AddItems(4, 1);
         }
     }
 
 
+    // TODO: FIX RETURN SO IT RETURNS TRUE IF IT CAN ADD ITEMS
+    // AND FALSE OTHERWISE.
     public bool AddItems(int itemID, int amount)
     {
         if (ItemInInventory(itemID) && GetFirstNonFullSlot(itemID) != null)

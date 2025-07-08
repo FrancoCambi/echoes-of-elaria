@@ -96,26 +96,54 @@ public class InventorySlot : BaseSlot
         // If drag same thing, none or no item, just return
         if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
 
-        if (!IsEmpty && content.CanStackWith(fromSlot.Content))
+
+        // From Inventory Slot
+        if (fromSlot is InventorySlot)
         {
-            int transferable = content.MaxStack - amount;
-            int transferAmount = Mathf.Min(transferable, fromSlot.Amount);
-            AddAmount(transferAmount);
-            fromSlot.AddAmount(-transferAmount);
+            if (!IsEmpty && content.CanStackWith(fromSlot.Content))
+            {
+                int transferable = content.MaxStack - amount;
+                int transferAmount = Mathf.Min(transferable, fromSlot.Amount);
+                AddAmount(transferAmount);
+                fromSlot.AddAmount(-transferAmount);
+            }
+            else if ((!IsEmpty && !content.CanStackWith(fromSlot.Content)) || IsFull)
+            {
+                int tmpID = (content as Item).Id;
+                int tmpAmount = amount;
+                Clear();
+                AddItemsInEmpty((fromSlot.Content as Item).Id, fromSlot.Amount);
+                fromSlot.Clear();
+                (fromSlot as InventorySlot).AddItemsInEmpty(tmpID, tmpAmount);
+            }
+            else // IsEmpty
+            {
+                AddItemsInEmpty((fromSlot.Content as Item).Id, fromSlot.Amount);
+                fromSlot.Clear();
+            }
         }
-        else if ((!IsEmpty && !content.CanStackWith(fromSlot.Content)) || IsFull)
+        // From Action Slot
+        else if (fromSlot is ActionSlot actionSlot)
         {
-            int tmpID = (content as Item).Id;
-            int tmpAmount = amount;
-            Clear();
-            AddItemsInEmpty((fromSlot.Content as Item).Id, fromSlot.Amount);
-            fromSlot.Clear();
-            (fromSlot as InventorySlot).AddItemsInEmpty(tmpID, tmpAmount);
+            actionSlot.Clear();
         }
-        else
+        // From Equipment Slot
+        else if (fromSlot is EquipmentSlot equipmentSlot)
         {
-            AddItemsInEmpty((fromSlot.Content as Item).Id, fromSlot.Amount);
-            fromSlot.Clear();
+            if (IsEmpty)
+            {
+                AddItemsInEmpty((equipmentSlot.Content as Gear).Id, fromSlot.Amount);
+                equipmentSlot.Clear();
+            }
+            // Replace i
+            else if (content is Gear gearContent && equipmentSlot.EquippedGear.IsSameType(gearContent))
+            {
+                int id = (fromSlot.Content as Item).Id;
+                EquipmentManager.Instance.EquipGear(content as Gear);
+                AddAmount(-1);
+                AddItemsInEmpty(id, 1);
+                
+            }
         }
 
         InventoryManager.Instance.SaveItemsToDatabase();
@@ -138,10 +166,20 @@ public class InventorySlot : BaseSlot
             }
             else if (content is Gear contentGear)
             {
-                EquipmentManager.Instance.EquipGear(contentGear);
+                EquipmentSlot matchingSlot = EquipmentManager.Instance.GetSlotByType(contentGear.EquipType);
 
-                AddAmount(-1);
-
+                if (!matchingSlot.IsEmpty)
+                {
+                    int id = (matchingSlot.Content as Gear).Id;
+                    EquipmentManager.Instance.EquipGear(contentGear);
+                    AddAmount(-1);
+                    AddItemsInEmpty(id, 1);
+                }
+                else
+                {
+                    EquipmentManager.Instance.EquipGear(contentGear);
+                    AddAmount(-1);
+                }
 
             }
         }

@@ -36,6 +36,11 @@ public class Gear : Item
 
     }
 
+    public bool IsSameType(Gear gear)
+    {
+        return EquipType == gear.EquipType;
+    }
+
     private void GiveStats()
     {
         PlayerManager.Instance.GainArmor(Armor);

@@ -33,15 +33,18 @@ public class EquipmentSlot : BaseSlot
 
     public void UnEquipGear()
     {
-        Clear();
+        if (equippedGear == null) return;
+        
+        equippedGear.UnEquip();
+        equippedGear = null;
+        
+    }
 
-        if (equippedGear != null)
-        {
-            InventoryManager.Instance.AddItems(equippedGear.Id, 1);
-            equippedGear.UnEquip();
-            equippedGear = null;
-        }
+    public override void Clear()
+    {
+        base.Clear();
 
+        UnEquipGear();
     }
 
     public override int GetSlotIndex()
@@ -68,22 +71,40 @@ public class EquipmentSlot : BaseSlot
         icon.color = Color.white;
         DragManager.Instance.EndDrag();
 
-        if (!EventSystem.current.IsPointerOverGameObject() || DragManager.Instance.ToSlot is InventorySlot)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            UnEquipGear();
+            Clear();
+            // THIS NEEDS CHECK FOR FULL INVENTORY
+            InventoryManager.Instance.AddItems(equippedGear.Id, 1);
         }
 
     }
 
     public override void OnDrop(PointerEventData eventData)
     {
-
         BaseSlot fromSlot = DragManager.Instance.FromSlot;
 
         if (fromSlot == this || fromSlot == null || fromSlot.Content is not Gear ||
             fromSlot.Content is Gear && (fromSlot.Content as Gear).EquipType != equipType) return;
 
-        EquipmentManager.Instance.EquipGear(fromSlot.Content as Gear);
+        // From inventory slot
+        if (fromSlot is InventorySlot)
+        {
+            if (IsEmpty)
+            {
+                EquipmentManager.Instance.EquipGear(fromSlot.Content as Gear);
+                fromSlot.AddAmount(-1);
+            }
+            else
+            {
+                int id = equippedGear.Id;
+                EquipmentManager.Instance.EquipGear(fromSlot.Content as Gear);
+                fromSlot.AddAmount(-1);
+                InventoryManager.Instance.AddItemsInSlot(id, 1, fromSlot.GetSlotIndex());
+
+
+            }
+        }
     }
 
     public override void OnPointerClick(PointerEventData eventData)

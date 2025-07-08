@@ -28,14 +28,13 @@ public class EquipmentManager : Panel
     public void EquipGear(Gear gear)
     {
         EquipmentSlot matchingSlot = GetSlotByType(gear.EquipType);
-        print(matchingSlot.name);
 
-        matchingSlot.UnEquipGear();
+        matchingSlot.Clear();
         matchingSlot.EquipGear(gear);
     }
 
 
-    private EquipmentSlot GetSlotByType(EquipmentType type)
+    public EquipmentSlot GetSlotByType(EquipmentType type)
     {
         foreach (EquipmentSlot slot in slots)
         {
