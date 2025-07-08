@@ -17,7 +17,9 @@ public class DragManager : MonoBehaviour
     private Image draggedImage;
 
     public SlotContent DraggedContent { get; private set; }
+
     public BaseSlot FromSlot { get; private set; }
+    public BaseSlot ToSlot { get; set; }
 
     public bool IsDragging
     {
@@ -50,6 +52,7 @@ public class DragManager : MonoBehaviour
     public void Drop()
     {
         FromSlot = null;
+        ToSlot = null;
     }
 
     public void MoveImage(Vector3 newPos)

@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: AlertLevelUp
     m_Metadata:
       m_Items: []
+  - m_Id: 8293649717235712
+    m_Key: GeneralStatsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8293832580501504
+    m_Key: AttributesStatsText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f550ac4685252a444946efcde784dec5
+guid: 1eef6936317899d4aab06025a9ca36ed
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - CursedScript
+  - Micro 5
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

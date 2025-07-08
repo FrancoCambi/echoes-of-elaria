@@ -26,6 +26,25 @@ MonoBehaviour:
     m_Localized: Tu nivel ha aumentado!
     m_Metadata:
       m_Items: []
+  - m_Id: 8293649717235712
+    m_Localized: 'Vida: {0}
+
+      Nivel de Objecto: {1}
+
+      Velocidad: {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8293832580501504
+    m_Localized: 'Armadura: {0}
+
+      Aguante: {1}
+
+      Intelecto: {2}
+
+      Poder
+      Arcano: {3}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -149,12 +149,22 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             TooltipManager.Instance.ShowTooltip(this);
         }
+
+        if (DragManager.Instance.IsDragging)
+        {
+            DragManager.Instance.ToSlot = this;
+        }
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         
         TooltipManager.Instance.HideTooltip();
-        
+
+        if (DragManager.Instance.IsDragging)
+        {
+            DragManager.Instance.ToSlot = null;
+        }
+
     }
 
 

@@ -26,6 +26,25 @@ MonoBehaviour:
     m_Localized: Your level has increased!
     m_Metadata:
       m_Items: []
+  - m_Id: 8293649717235712
+    m_Localized: 'Health: {0}
+
+      Item Level: {1}
+
+      Speed: {2}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8293832580501504
+    m_Localized: 'Armor: {0}
+
+      Stamina: {1}
+
+      Intellect: {2}
+
+      Arcane
+      Power: {3}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -93,6 +93,7 @@ public class InventorySlot : BaseSlot
 
         BaseSlot fromSlot = DragManager.Instance.FromSlot;
 
+        // If drag same thing, none or no item, just return
         if (fromSlot == this || fromSlot == null || fromSlot.Content is not Item) return;
 
         if (!IsEmpty && content.CanStackWith(fromSlot.Content))

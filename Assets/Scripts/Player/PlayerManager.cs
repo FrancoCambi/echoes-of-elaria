@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public int Level { get; private set; }
+    public int ItemLevel { get; private set; }
     public int CurrentXp { get; private set; }
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
@@ -55,6 +56,7 @@ public class PlayerManager : MonoBehaviour
         if (table.Rows.Count > 0)
         {
             Level = int.Parse(table.Rows[0]["level"].ToString());
+            ItemLevel = int.Parse(table.Rows[0]["level"].ToString());
             CurrentXp = int.Parse(table.Rows[0]["current_xp"].ToString());
             MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
             DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
