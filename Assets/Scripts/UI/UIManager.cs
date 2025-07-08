@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     {
         panelList = new()
         {
-            InventoryManager.Instance, MenuManager.Instance, OptionsManager.Instance, LootManager.Instance
+            InventoryManager.Instance, MenuManager.Instance, OptionsManager.Instance, LootManager.Instance, EquipmentManager.Instance
         };
     }
 
@@ -51,6 +51,10 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             InventoryManager.Instance.OpenClose();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            EquipmentManager.Instance.OpenClose();
         }
     }
 
