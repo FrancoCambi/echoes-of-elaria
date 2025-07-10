@@ -54,45 +54,48 @@ public class InventoryManager : Panel
         }
     }
 
-
-    // TODO: FIX RETURN SO IT RETURNS TRUE IF IT CAN ADD ITEMS
-    // AND FALSE OTHERWISE.
     public bool AddItems(int itemID, int amount)
     {
+        bool result;
         if (ItemInInventory(itemID) && GetFirstNonFullSlot(itemID) != null)
         {
-            StackItems(itemID, amount);
+            result = StackItems(itemID, amount);
         }
         else
         {
-            AddItemsInEmpty(itemID, amount);
+            result = AddItemsInEmpty(itemID, amount);
         }
 
         SaveItemsToDatabase();
-        return true;
+        return result;
     }
 
-    private void AddItemsInEmpty(int itemID, int amount)
+    private bool AddItemsInEmpty(int itemID, int amount)
     {
         if (amount > 0)
         {
             if (GetFirstEmptySlot() is InventorySlot slot and not null)
             {
                 slot.AddItemsInEmpty(itemID, amount);
+                return true;
             }
         }
+
+        return false;
     }
 
-    private void StackItems(int itemID, int amount)
+    private bool StackItems(int itemID, int amount)
     {
         if (amount > 0)
         {
             if (GetFirstNonFullSlot(itemID) is InventorySlot slot and not null)
             {
                 slot.AddItemsInNonEmpty(itemID, amount);
+                return true;
             }
         }
 
+        return false;
     }
 
     public void AddItemsInSlot(int itemID, int amount, int slotIndex)

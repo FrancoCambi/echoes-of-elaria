@@ -71,10 +71,9 @@ public class EquipmentSlot : BaseSlot
         icon.color = Color.white;
         DragManager.Instance.EndDrag();
 
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject()
+            && InventoryManager.Instance.AddItems(equippedGear.Id, 1))
         {
-            // THIS NEEDS CHECK FOR FULL INVENTORY
-            InventoryManager.Instance.AddItems(equippedGear.Id, 1);
 
             Clear();
         }

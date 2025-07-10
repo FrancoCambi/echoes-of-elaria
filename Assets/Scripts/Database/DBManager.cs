@@ -28,7 +28,7 @@ public class DBManager : MonoBehaviour
         string filePath = Path.Combine(Application.streamingAssetsPath, "template.db");
         dbPath = $"URI=file:{filePath}";
 
-        // Conexión inicial
+        // Conexiï¿½n inicial
         connection = new SqliteConnection(dbPath);
         connection.Open();
         Debug.Log("Connected to DB: " + filePath);
