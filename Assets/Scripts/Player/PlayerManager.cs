@@ -36,9 +36,9 @@ public class PlayerManager : MonoBehaviour
 
     public static event Action OnLevelUp;
     public static event Action OnXpGained;
-    public static event Action<int> OnCurrentHealthChanged;
-    public static event Action<int> OnMaxHealthChanged;
-    public static event Action<int> OnCurrentRageChanged;
+    public static event Action OnCurrentHealthChanged;
+    public static event Action OnMaxHealthChanged;
+    public static event Action OnCurrentRageChanged;
     public static event Action OnStatsChanged;
 
 
@@ -110,14 +110,14 @@ public class PlayerManager : MonoBehaviour
     {
         CurrentHealth = newHealth;
         SaveStatToDatabase("current_health", CurrentHealth);
-        OnCurrentHealthChanged?.Invoke(CurrentHealth);
+        OnCurrentHealthChanged?.Invoke();
     }
 
     public void UpdateMaxHealth(int newHealth)
     {
         MaxHealth = newHealth;
         SaveStatToDatabase("current_health", MaxHealth);
-        OnMaxHealthChanged?.Invoke(MaxHealth);
+        OnMaxHealthChanged?.Invoke();
 
     }
 
@@ -176,7 +176,7 @@ public class PlayerManager : MonoBehaviour
     {
         CurrentRage = newRage;
         SaveStatToDatabase("current_rage", CurrentRage);
-        OnCurrentRageChanged?.Invoke(CurrentRage);
+        OnCurrentRageChanged?.Invoke();
 
     }
 
@@ -220,6 +220,7 @@ public class PlayerManager : MonoBehaviour
     public void GainStamina(int stamina)
     {
         UpdateStamina((int)Mathf.Clamp(Stamina + stamina, 0, Mathf.Infinity));
+        GainMaxHealth(stamina * GameConstants.StaminaMultiplier);
     }
 
     public void GainIntellect(int intellect)
@@ -240,6 +241,7 @@ public class PlayerManager : MonoBehaviour
     public void LoseStamina(int stamina)
     {
         UpdateStamina((int)Mathf.Clamp(Stamina - stamina, 0, Mathf.Infinity));
+        LoseMaxHealth(stamina * GameConstants.StaminaMultiplier);
     }
 
     public void LoseIntellect(int intellect)
@@ -254,22 +256,48 @@ public class PlayerManager : MonoBehaviour
 
     // ------------------STATS---------------------------//
 
-    public void Heal(int hp)
+    /// <summary>
+    /// Increases max health
+    /// </summary>
+    /// <param name="hp"></param>
+    public void GainMaxHealth(int hp)
+    {
+        UpdateMaxHealth((int)Mathf.Clamp(MaxHealth + hp, 0, Mathf.Infinity));
+    }
+
+    /// <summary>
+    /// Decreases max health
+    /// </summary>
+    /// <param name="hp"></param>
+    public void LoseMaxHealth(int hp)
+    {
+        UpdateMaxHealth((int)Mathf.Clamp(MaxHealth - hp, 0, Mathf.Infinity));
+    }
+
+    /// <summary>
+    /// Heal function
+    /// </summary>
+    /// <param name="hp"></param>
+    public void GainCurrentHealth(int hp)
     {
         UpdateCurrentHealth(Mathf.Clamp(CurrentHealth + hp, 0, MaxHealth));
 
         AudioClip healSoundClip = Resources.Load<AudioClip>("Audio/Clips/Heal");
 
         SoundFXManager.Instance.PlaySoundFXClip(healSoundClip, transform);
-        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Heal, $"+{hp}", transform.position, new Vector2(0,0));
+        FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Heal, $"+{hp}", transform.position, new Vector2(0, 0));
     }
 
-    public void TakeDamage(int damage)
+    /// <summary>
+    /// Take damage function
+    /// </summary>
+    /// <param name="damage"></param>
+    public void LoseCurrentHealth(int damage)
     {
         UpdateCurrentHealth(Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth));
 
         // Gain rage (This formula probably needs to change in the future)
-        int rageGained =  (int)Mathf.Ceil((damage * 3) / (float)(Level * 8));
+        int rageGained = (int)Mathf.Ceil((damage * 3) / (float)(Level * 8));
         GainRage(rageGained);
 
         FloatingTextManager.Instance.ShowFloatingText(FloatingTextType.Damage, $"-{damage}", transform.position, new Vector2(0, 0));

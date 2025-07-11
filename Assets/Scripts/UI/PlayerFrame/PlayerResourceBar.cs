@@ -18,13 +18,13 @@ public class PlayerResourceBar : MonoBehaviour
 
     private void Start()
     {
-        UpdateBar(PlayerManager.Instance.CurrentRage);
+        UpdateBar();
     }
 
-    private void UpdateBar(int currentRage)
+    private void UpdateBar()
     {
-        bar.fillAmount = currentRage / (float)PlayerManager.Instance.MaxRage;
-        resourceText.text = $"{currentRage}/{PlayerManager.Instance.MaxRage}";
+        bar.fillAmount = PlayerManager.Instance.CurrentRage / (float)PlayerManager.Instance.MaxRage;
+        resourceText.text = $"{PlayerManager.Instance.CurrentRage}/{PlayerManager.Instance.MaxRage}";
     }
 
     private void OnDisable()

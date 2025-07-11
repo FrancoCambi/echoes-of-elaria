@@ -49,7 +49,7 @@ public class ItemEffect
 
     private void HealHp()
     {
-        PlayerManager.Instance.Heal(Value);
+        PlayerManager.Instance.GainCurrentHealth(Value);
     }
 
     private void GainRage()

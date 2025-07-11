@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class InventoryManager : Panel
 {
@@ -81,6 +82,8 @@ public class InventoryManager : Panel
             }
         }
 
+        string fullInvMsg = LocalizationSettings.StringDatabase.GetLocalizedString("Ui", "AlertFullInventory");
+        AlertManager.Instance.ThrowAlert(fullInvMsg);
         return false;
     }
 
@@ -95,6 +98,8 @@ public class InventoryManager : Panel
             }
         }
 
+        string fullInvMsg = LocalizationSettings.StringDatabase.GetLocalizedString("Ui", "AlertFullInventory");
+        AlertManager.Instance.ThrowAlert(fullInvMsg);
         return false;
     }
 

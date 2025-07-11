@@ -45,6 +45,10 @@ MonoBehaviour:
       Arcano: {3}'
     m_Metadata:
       m_Items: []
+  - m_Id: 9356575605010432
+    m_Localized: "Tu inventario est\xE1 lleno."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

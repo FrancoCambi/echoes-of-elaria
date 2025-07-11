@@ -77,7 +77,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         StartCoroutine(nameof(StopInvincibility));
 
         int receivedDamage = CalculateDamageReceived(damage);
-        PlayerManager.Instance.TakeDamage(receivedDamage);
+        PlayerManager.Instance.LoseCurrentHealth(receivedDamage);
 
         if (PlayerManager.Instance.CurrentHealth <= 0)
         {

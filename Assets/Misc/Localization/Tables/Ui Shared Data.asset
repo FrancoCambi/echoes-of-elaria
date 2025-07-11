@@ -31,6 +31,10 @@ MonoBehaviour:
     m_Key: AttributesStatsText
     m_Metadata:
       m_Items: []
+  - m_Id: 9356575605010432
+    m_Key: AlertFullInventory
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

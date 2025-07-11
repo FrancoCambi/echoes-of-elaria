@@ -13,21 +13,23 @@ public class PlayerHealthBar : MonoBehaviour
         healthText = GetComponentInChildren<TextMeshProUGUI>();
 
         PlayerManager.OnCurrentHealthChanged += UpdateBar;
+        PlayerManager.OnMaxHealthChanged += UpdateBar;
     }
 
     private void Start()
     {
-        UpdateBar(PlayerManager.Instance.CurrentHealth);
+        UpdateBar();
     }
 
-    private void UpdateBar(int currentHealth)
+    private void UpdateBar()
     {
-        bar.fillAmount = currentHealth / (float)PlayerManager.Instance.MaxHealth;
-        healthText.text = $"{currentHealth}/{PlayerManager.Instance.MaxHealth}";
+        bar.fillAmount = PlayerManager.Instance.CurrentHealth / (float)PlayerManager.Instance.MaxHealth;
+        healthText.text = $"{PlayerManager.Instance.CurrentHealth}/{PlayerManager.Instance.MaxHealth}";
     }
 
     private void OnDisable()
     {
         PlayerManager.OnCurrentHealthChanged -= UpdateBar;
+        PlayerManager.OnMaxHealthChanged -= UpdateBar;
     }
 }
