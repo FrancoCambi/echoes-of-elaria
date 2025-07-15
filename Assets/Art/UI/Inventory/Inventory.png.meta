@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 43398b8c023d888459251b651900ea4a
+guid: 97ce4455205ad404888d7f7d442d6b84
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 739905185230883310
-    second: Inventory_0
+      213: 4109972547402078614
+    second: NewInventory_0
   - first:
-      213: 5223370693312396623
-    second: Inventory_1
+      213: -4146867289356854621
+    second: NewInventory_1
+  - first:
+      213: 1767515839313956535
+    second: NewInventory_2
+  - first:
+      213: 1716804049723358788
+    second: NewInventory_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +57,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -116,35 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inventory_0
+      name: SortButton
       rect:
         serializedVersion: 2
-        x: 12
-        y: 35
-        width: 24
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 5, z: 3, w: 3}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ee9082588dba44a00800000000000000
-      internalID: 739905185230883310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inventory_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 40
-        width: 18
-        height: 18
+        x: 144
+        y: 483
+        width: 29
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f4d321198f32d7840800000000000000
-      internalID: 5223370693312396623
+      spriteID: 699128c914e890930800000000000000
+      internalID: 4109972547402078614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventoryBackground
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 313
+        width: 221
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 31, z: 25, w: 24}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa923fdb2e5376c0800000000000000
+      internalID: -4146867289356854621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InventorySlot
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 432
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7be4f298a4a778810800000000000000
+      internalID: 1767515839313956535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CloseButton
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 387
+        width: 29
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e76bcef2053d710800000000000000
+      internalID: 1716804049723358788
       vertices: []
       indices: 
       edges: []
@@ -163,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d5afb780336b1f442b1b2bef88b808bb
+    spriteID: 2e73a19f8d4d61d43a82a0bd657ac5bf
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Inventory_0: 739905185230883310
-      Inventory_1: 5223370693312396623
+      CloseButton: 1716804049723358788
+      InventoryBackground: -4146867289356854621
+      InventorySlot: 1767515839313956535
+      SortButton: 4109972547402078614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
