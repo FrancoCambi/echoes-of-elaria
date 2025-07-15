@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -29,6 +32,14 @@ public class InventoryManager : Panel
         }
     }
 
+    public bool SlotsLeft
+    {
+        get
+        {
+            return GetFirstEmptySlot() != null;
+        }
+    }
+
     public override void Awake()
     {
         base.Awake();
@@ -46,7 +57,7 @@ public class InventoryManager : Panel
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            AddItems(1, 3);
+            AddItems(1, 2);
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
@@ -54,6 +65,8 @@ public class InventoryManager : Panel
             AddItems(4, 1);
         }
     }
+
+    #region itemManagement
 
     public bool AddItems(int itemID, int amount)
     {
@@ -87,17 +100,18 @@ public class InventoryManager : Panel
         return false;
     }
 
+
     private bool StackItems(int itemID, int amount)
     {
-        if (amount > 0)
+        InventorySlot slot = GetFirstNonFullSlot(itemID);
+        
+        if (slot.Amount + amount <= slot.Content.MaxStack || SlotsLeft)
         {
-            if (GetFirstNonFullSlot(itemID) is InventorySlot slot and not null)
-            {
-                slot.AddItemsInNonEmpty(itemID, amount);
-                return true;
-            }
+             slot.AddItemsInNonEmpty(itemID, amount);
+             return true;
         }
-
+        
+        // Else
         string fullInvMsg = LocalizationSettings.StringDatabase.GetLocalizedString("Ui", "AlertFullInventory");
         AlertManager.Instance.ThrowAlert(fullInvMsg);
         return false;
@@ -111,6 +125,33 @@ public class InventoryManager : Panel
 
         slot.AddItemsInEmpty(itemID, amount);
     }
+
+    public void SortInventory()
+    {
+        List<Tuple<int, int>> itemsData = new();
+
+        foreach (InventorySlot slot in Slots)
+        {
+            if (slot.IsEmpty) continue;
+
+            itemsData.Add(new Tuple<int, int>((slot.Content as Item).Id, slot.Amount));
+        }
+
+        ClearInventory();
+
+        itemsData = itemsData.OrderBy(x => x.Item1).ToList();
+
+        for (int i = 0; i < itemsData.Count; i++)
+        {
+            AddItemsInSlot(itemsData[i].Item1, itemsData[i].Item2, i);
+        }
+        
+        SaveItemsToDatabase();
+    }
+
+    #endregion
+
+    #region utility
 
     public InventorySlot GetFirstEmptySlot()
     {
@@ -151,6 +192,20 @@ public class InventoryManager : Panel
         }
         return false;
     }
+
+    private void ClearInventory()
+    {
+        foreach (InventorySlot slot in Slots)
+        {
+            slot.Clear();
+        }
+
+        SaveItemsToDatabase();
+    }
+
+    #endregion
+
+    #region persistence
     public void SaveItemsToDatabase()
     {
         List<(int, int, int, int)> valuesList = new();
@@ -194,5 +249,7 @@ public class InventoryManager : Panel
             AddItemsInSlot(itemID, amount, slotIndex);
         }
     }
+
+    #endregion
 
 }

@@ -12,7 +12,6 @@ public class InventorySlot : BaseSlot
         base.AddAmount(quantity);
 
         OnInventorySlotAmountChanged?.Invoke();
-        InventoryManager.Instance.SaveItemsToDatabase();
     }
 
     public override void Clear()
