@@ -18,6 +18,7 @@ public class InventorySlot : BaseSlot
     {
         base.Clear();
 
+        InventoryManager.Instance.SlotCleared(GetSlotIndex());
         OnInventorySlotAmountChanged?.Invoke();
     }
 
@@ -145,6 +146,8 @@ public class InventorySlot : BaseSlot
             }
         }
 
+        print("a");
+
         InventoryManager.Instance.SaveItemsToDatabase();
         DragManager.Instance.Drop();
         base.OnDrop(eventData);
@@ -172,7 +175,7 @@ public class InventorySlot : BaseSlot
                     int id = (matchingSlot.Content as Gear).Id;
                     EquipmentManager.Instance.EquipGear(contentGear);
                     AddAmount(-1);
-                    AddItemsInEmpty(id, 1);
+                    InventoryManager.Instance.AddItemsInSlot(id, 1, GetSlotIndex());
                     TooltipManager.Instance.ShowTooltip(this);
                 }
                 else

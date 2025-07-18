@@ -25,15 +25,14 @@ public class Gear : Item
         ArcanePower = arcanePower;
     }
 
-    public void Equip()
+    public void Equip(bool updateStats = true)
     {
-        GiveStats();
+        if (updateStats) GiveStats();
     }
 
-    public void UnEquip()
+    public void UnEquip(bool updateStats = true)
     {
-        TakeStatsAway();
-
+        if (updateStats) TakeStatsAway();
     }
 
     public bool IsSameType(Gear gear)

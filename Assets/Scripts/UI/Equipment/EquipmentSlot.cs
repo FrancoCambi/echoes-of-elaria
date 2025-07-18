@@ -23,22 +23,24 @@ public class EquipmentSlot : BaseSlot
         }
     }
 
-    public void EquipGear(Gear gear)
+    public void EquipGear(Gear gear, bool updateStats = true)
     {
         SetContent(gear);
         AddAmount(1);
         equippedGear = gear;
-        gear.Equip();
+        gear.Equip(updateStats);
     }
 
-    public void UnEquipGear()
+    public void UnEquipGear(bool updateStats = true)
     {
         if (equippedGear == null) return;
         
-        equippedGear.UnEquip();
+        equippedGear.UnEquip(updateStats);
         equippedGear = null;
+        EquipmentManager.Instance.UnEquipGear();
         
     }
+
 
     public override void Clear()
     {

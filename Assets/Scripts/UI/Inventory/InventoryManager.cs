@@ -63,6 +63,8 @@ public class InventoryManager : Panel
         {
             AddItems(3, 1);
             AddItems(4, 1);
+            AddItems(5, 1);
+            AddItems(6, 1);
         }
     }
 
@@ -82,6 +84,11 @@ public class InventoryManager : Panel
 
         SaveItemsToDatabase();
         return result;
+    }
+
+    public void SlotCleared(int index)
+    {
+        SaveItemsToDatabase();
     }
 
     private bool AddItemsInEmpty(int itemID, int amount)
@@ -124,6 +131,8 @@ public class InventoryManager : Panel
         if (!slot.IsEmpty) return;
 
         slot.AddItemsInEmpty(itemID, amount);
+
+        SaveItemsToDatabase();
     }
 
     public void SortInventory()

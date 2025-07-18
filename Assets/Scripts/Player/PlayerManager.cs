@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using static UnityEngine.Rendering.DebugUI;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -47,35 +48,14 @@ public class PlayerManager : MonoBehaviour
         LoadStatsFromDatabase();
     }
 
-    private void LoadStatsFromDatabase()
+    private void OnEnable()
     {
+        EquipmentManager.OnEquipmentChanged += SaveStatsToDatabase;
+    }
 
-        string query = $"SELECT * FROM characters WHERE character_id = {GameManager.SelCharID}";
-        DataTable table = DBManager.Instance.ExecuteQuery(query);
-
-        if (table.Rows.Count > 0)
-        {
-            Level = int.Parse(table.Rows[0]["level"].ToString());
-            ItemLevel = int.Parse(table.Rows[0]["level"].ToString());
-            CurrentXp = int.Parse(table.Rows[0]["current_xp"].ToString());
-            MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
-            DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
-            DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
-            MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
-            MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
-            Armor = int.Parse(table.Rows[0]["armor"].ToString());
-            Stamina = int.Parse(table.Rows[0]["stamina"].ToString());
-            Intellect = int.Parse(table.Rows[0]["intellect"].ToString());
-            ArcanePower = int.Parse(table.Rows[0]["arcane_power"].ToString());
-            BasicAttackRange = float.Parse(table.Rows[0]["basic_attack_range"].ToString());
-            MaxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
-            CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
-            MaxRage = int.Parse(table.Rows[0]["max_rage"].ToString());
-            CurrentRage = int.Parse(table.Rows[0]["current_rage"].ToString());
-            InventorySpace = int.Parse(table.Rows[0]["inventory_space"].ToString());
-
-
-        }
+    private void OnDisable()
+    {
+        EquipmentManager.OnEquipmentChanged -= SaveStatsToDatabase;
     }
 
     #region Updaters
@@ -116,7 +96,7 @@ public class PlayerManager : MonoBehaviour
     public void UpdateMaxHealth(int newHealth)
     {
         MaxHealth = newHealth;
-        SaveStatToDatabase("current_health", MaxHealth);
+        SaveStatToDatabase("max_health", MaxHealth);
         OnMaxHealthChanged?.Invoke();
 
     }
@@ -138,28 +118,24 @@ public class PlayerManager : MonoBehaviour
     public void UpdateArmor(int newArmor)
     {
         Armor = newArmor;
-        SaveStatToDatabase("armor", Armor);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateStamina(int newStamina)
     {
         Stamina = newStamina;
-        SaveStatToDatabase("stamina", Stamina);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateIntellect(int newIntellect)
     {
         Intellect = newIntellect;
-        SaveStatToDatabase("intellect", Intellect);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateArcanePower(int newArcanePower)
     {
         ArcanePower = newArcanePower;
-        SaveStatToDatabase("arcane_power", ArcanePower);
         OnStatsChanged?.Invoke();
     }
 
@@ -246,7 +222,7 @@ public class PlayerManager : MonoBehaviour
 
     public void LoseIntellect(int intellect)
     {
-        UpdateIntellect((int)Mathf.Clamp(Intellect - Intellect, 0, Mathf.Infinity));
+        UpdateIntellect((int)Mathf.Clamp(Intellect - intellect, 0, Mathf.Infinity));
     }
 
     public void LoseArcanePower(int arcanePower)
@@ -312,10 +288,56 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
 
+    #region database
+
+    private void LoadStatsFromDatabase()
+    {
+
+        string query = $"SELECT * FROM characters WHERE character_id = {GameManager.SelCharID}";
+        DataTable table = DBManager.Instance.ExecuteQuery(query);
+
+        if (table.Rows.Count > 0)
+        {
+            Level = int.Parse(table.Rows[0]["level"].ToString());
+            ItemLevel = int.Parse(table.Rows[0]["level"].ToString());
+            CurrentXp = int.Parse(table.Rows[0]["current_xp"].ToString());
+            MovementSpeed = float.Parse(table.Rows[0]["movement_speed"].ToString());
+            DashForce = float.Parse(table.Rows[0]["dash_force"].ToString());
+            DashCD = float.Parse(table.Rows[0]["dash_cd"].ToString());
+            MinDamage = int.Parse(table.Rows[0]["min_damage"].ToString());
+            MaxDamage = int.Parse(table.Rows[0]["max_damage"].ToString());
+            Armor = int.Parse(table.Rows[0]["armor"].ToString());
+            Stamina = int.Parse(table.Rows[0]["stamina"].ToString());
+            Intellect = int.Parse(table.Rows[0]["intellect"].ToString());
+            ArcanePower = int.Parse(table.Rows[0]["arcane_power"].ToString());
+            BasicAttackRange = float.Parse(table.Rows[0]["basic_attack_range"].ToString());
+            MaxHealth = int.Parse(table.Rows[0]["max_health"].ToString());
+            CurrentHealth = int.Parse(table.Rows[0]["current_health"].ToString());
+            MaxRage = int.Parse(table.Rows[0]["max_rage"].ToString());
+            CurrentRage = int.Parse(table.Rows[0]["current_rage"].ToString());
+            InventorySpace = int.Parse(table.Rows[0]["inventory_space"].ToString());
+
+
+        }
+    }
+
     private void SaveStatToDatabase(string statName, float value)
     {
         string query = $"UPDATE characters SET {statName} = {value} WHERE character_id = {GameManager.SelCharID}";
         DBManager.Instance.ExecuteQuery(query);
     }
+
+    private void SaveStatsToDatabase()
+    {
+        string query = $"UPDATE characters " +
+            $"SET armor = {Armor}, " +
+                 $"stamina = {Stamina}, " +
+                 $"intellect = {Intellect}, " +
+                 $"arcane_power = {ArcanePower} " + 
+                 $"WHERE character_id = {GameManager.SelCharID}";
+        DBManager.Instance.ExecuteQuery(query);
+    }
+
+    #endregion
 
 }
