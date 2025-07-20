@@ -7,6 +7,8 @@ public class EquipmentSlot : BaseSlot
 
     private Gear equippedGear;
 
+    #region properties
+
     public EquipmentType EquipType
     {
         get
@@ -23,6 +25,10 @@ public class EquipmentSlot : BaseSlot
         }
     }
 
+    #endregion
+
+    #region slotManagement
+
     public void EquipGear(Gear gear, bool updateStats = true)
     {
         SetContent(gear);
@@ -31,16 +37,15 @@ public class EquipmentSlot : BaseSlot
         gear.Equip(updateStats);
     }
 
-    public void UnEquipGear(bool updateStats = true)
+    public void UnEquipGear(bool updateStats = true, bool saveEquipment = true)
     {
         if (equippedGear == null) return;
         
         equippedGear.UnEquip(updateStats);
         equippedGear = null;
-        EquipmentManager.Instance.UnEquipGear();
+        EquipmentManager.Instance.UnEquipGear(saveEquipment);
         
     }
-
 
     public override void Clear()
     {
@@ -49,10 +54,25 @@ public class EquipmentSlot : BaseSlot
         UnEquipGear();
     }
 
+    public void ClearWithoutSaving()
+    {
+        base.Clear();
+
+        UnEquipGear(saveEquipment: false);
+    }
+
+    #endregion
+
+    #region utils
+
     public override int GetSlotIndex()
     {
         return EquipmentManager.Instance.Slots.IndexOf(this);
     }
+
+    #endregion
+
+    #region interfaces
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
@@ -113,4 +133,6 @@ public class EquipmentSlot : BaseSlot
     {
         return;
     }
+
+    #endregion
 }

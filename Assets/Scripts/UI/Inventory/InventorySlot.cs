@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Profiling;
 
 public class InventorySlot : BaseSlot
 {
 
     public event Action OnInventorySlotAmountChanged;
 
+    #region slotManagement
     public override void AddAmount(int quantity)
     {
         base.AddAmount(quantity);
@@ -20,6 +22,13 @@ public class InventorySlot : BaseSlot
 
         InventoryManager.Instance.SlotCleared(GetSlotIndex());
         OnInventorySlotAmountChanged?.Invoke();
+    }
+
+    public void ClearWithoutSaving()
+    {
+        base.Clear();
+        OnInventorySlotAmountChanged?.Invoke();
+
     }
 
     public void AddItemsInEmpty(int itemID, int quantity)
@@ -58,10 +67,18 @@ public class InventorySlot : BaseSlot
         }
     }
 
+    #endregion
+
+    #region utils
+
     public override int GetSlotIndex()
     {
         return InventoryManager.Instance.Slots.IndexOf(this);
     }
+
+    #endregion
+
+    #region interfaces
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
@@ -146,8 +163,6 @@ public class InventorySlot : BaseSlot
             }
         }
 
-        print("a");
-
         InventoryManager.Instance.SaveItemsToDatabase();
         DragManager.Instance.Drop();
         base.OnDrop(eventData);
@@ -174,17 +189,19 @@ public class InventorySlot : BaseSlot
                 {
                     int id = (matchingSlot.Content as Gear).Id;
                     EquipmentManager.Instance.EquipGear(contentGear);
-                    AddAmount(-1);
+                    ClearWithoutSaving();
                     InventoryManager.Instance.AddItemsInSlot(id, 1, GetSlotIndex());
                     TooltipManager.Instance.ShowTooltip(this);
                 }
                 else
                 {
                     EquipmentManager.Instance.EquipGear(contentGear);
-                    AddAmount(-1);
+                    Clear();
                 }
 
             }
         }
     }
+
+    #endregion
 }

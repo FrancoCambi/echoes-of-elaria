@@ -19,6 +19,8 @@ public class EquipmentManager : Panel
     [SerializeField]
     private List<EquipmentSlot> slots = new();
 
+    #region properties
+
     public List<EquipmentSlot> Slots
     {
         get
@@ -26,6 +28,8 @@ public class EquipmentManager : Panel
             return slots;
         }
     }
+
+    #endregion
 
     public static event Action OnEquipmentChanged;
 
@@ -40,21 +44,45 @@ public class EquipmentManager : Panel
         LoadEquipment();
     }
 
+    #region equipmentManagement
+
     public void EquipGear(Gear gear, bool updateStats = true)
     {
         EquipmentSlot matchingSlot = GetSlotByType(gear.EquipType);
 
-        matchingSlot.Clear();
-        matchingSlot.EquipGear(gear, updateStats);
-        OnEquipmentChanged?.Invoke();
+        if (matchingSlot.IsEmpty)
+        {
+            AddGearToEmpty(gear, matchingSlot, updateStats);
+        }
+        else
+        {
+            ReplaceGear(gear, matchingSlot, updateStats);
+        }
+
         SaveEquipment();
     }
 
-    public void UnEquipGear()
+    private void AddGearToEmpty(Gear gear, EquipmentSlot slot, bool updateStats = true)
+    {
+        slot.EquipGear(gear, updateStats);
+        OnEquipmentChanged?.Invoke();
+    }
+
+    private void ReplaceGear(Gear gear, EquipmentSlot slot, bool updateStats = true)
+    {
+        slot.ClearWithoutSaving();
+        AddGearToEmpty(gear, slot, updateStats);
+    }
+
+    public void UnEquipGear(bool saveEquipment = true)
     {
         OnEquipmentChanged?.Invoke();
-        SaveEquipment();
+        if (saveEquipment) SaveEquipment();
     }
+
+    #endregion
+
+    #region utils
 
     public EquipmentSlot GetSlotByType(EquipmentType type)
     {
@@ -69,10 +97,16 @@ public class EquipmentManager : Panel
         return null;
     }
 
-    #region database
+    #endregion
+
+    #region persistance
 
     private void SaveEquipment()
     {
+
+#if UNITY_EDITOR
+        print("Equipment has been saved.");
+#endif
         List<(int, string, int)> valuesList = new();
 
         foreach (EquipmentSlot slot in slots)

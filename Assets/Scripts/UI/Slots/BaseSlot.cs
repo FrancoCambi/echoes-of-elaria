@@ -65,7 +65,7 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     }
 
-    #region methods
+    #region content
 
     public virtual void SetContent(SlotContent newContent)
     {
@@ -78,6 +78,7 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         content = newContent;
         icon.sprite = newContent.Icon;
         icon.enabled = true;
+        amount = 0;
 
         if (amountText != null)
         {
@@ -94,6 +95,12 @@ public abstract class BaseSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             Clear();
         }
+    }
+
+    public virtual void ReplaceContent(SlotContent newContent, int quantity)
+    {
+        SetContent(newContent);
+        AddAmount(quantity);
     }
 
     public virtual void UpdateText()

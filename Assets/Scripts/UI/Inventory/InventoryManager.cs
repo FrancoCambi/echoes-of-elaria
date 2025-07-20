@@ -86,10 +86,6 @@ public class InventoryManager : Panel
         return result;
     }
 
-    public void SlotCleared(int index)
-    {
-        SaveItemsToDatabase();
-    }
 
     private bool AddItemsInEmpty(int itemID, int amount)
     {
@@ -124,7 +120,7 @@ public class InventoryManager : Panel
         return false;
     }
 
-    public void AddItemsInSlot(int itemID, int amount, int slotIndex)
+    public void AddItemsInSlot(int itemID, int amount, int slotIndex, bool save = true)
     {
         InventorySlot slot = slots[slotIndex];
 
@@ -132,7 +128,7 @@ public class InventoryManager : Panel
 
         slot.AddItemsInEmpty(itemID, amount);
 
-        SaveItemsToDatabase();
+        if (save) SaveItemsToDatabase();
     }
 
     public void SortInventory()
@@ -152,7 +148,7 @@ public class InventoryManager : Panel
 
         for (int i = 0; i < itemsData.Count; i++)
         {
-            AddItemsInSlot(itemsData[i].Item1, itemsData[i].Item2, i);
+            AddItemsInSlot(itemsData[i].Item1, itemsData[i].Item2, i, false);
         }
         
         SaveItemsToDatabase();
@@ -206,17 +202,22 @@ public class InventoryManager : Panel
     {
         foreach (InventorySlot slot in Slots)
         {
-            slot.Clear();
+            slot.ClearWithoutSaving();
         }
-
-        SaveItemsToDatabase();
     }
 
     #endregion
 
     #region persistence
+    public void SlotCleared(int index)
+    {
+        SaveItemsToDatabase();
+    }
     public void SaveItemsToDatabase()
     {
+#if UNITY_EDITOR
+        print("Inventory has been saved.");
+#endif
         List<(int, int, int, int)> valuesList = new();
 
         foreach (InventorySlot slot in slots)
@@ -255,7 +256,7 @@ public class InventoryManager : Panel
             int amount = int.Parse(row["amount"].ToString());
             int slotIndex = int.Parse(row["slot_index"].ToString());
 
-            AddItemsInSlot(itemID, amount, slotIndex);
+            AddItemsInSlot(itemID, amount, slotIndex, false);
         }
     }
 
