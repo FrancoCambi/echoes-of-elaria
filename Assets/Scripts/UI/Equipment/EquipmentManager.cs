@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EquipmentManager : Panel
@@ -84,24 +85,40 @@ public class EquipmentManager : Panel
 
     #region utils
 
+    /// <summary>
+    /// This function returns the first empty slot or the last 
+    /// full slot if none is empty.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public EquipmentSlot GetSlotByType(EquipmentType type)
     {
+        EquipmentSlot result = null;
+
         foreach (EquipmentSlot slot in slots)
         {
             if (slot.EquipType == type)
             {
-                return slot;
+                result = slot;
+
+                if (slot.IsEmpty)
+                {
+                   return result;
+                }
             }
         }
 
-        return null;
+        return result;
     }
 
     #endregion
 
     #region persistance
 
-    private void SaveEquipment()
+    private void SaveEquipment() => PersistenceQueue.Instance.Enqueue(async () => await SaveEquipmentAsync());
+  
+
+    private async Task SaveEquipmentAsync()
     {
 
 #if UNITY_EDITOR
@@ -130,7 +147,8 @@ public class EquipmentManager : Panel
             $"COMMIT;"
             :
             $"DELETE FROM character_equipment WHERE character_id = {GameManager.SelCharID}";
-        DBManager.Instance.ExecuteQuery(query);
+
+        await DBManager.Instance.ExecuteQueryAsync(query);
     }
 
     private void LoadEquipment()

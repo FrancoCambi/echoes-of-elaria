@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -62,9 +63,11 @@ public class InventoryManager : Panel
         else if (Input.GetKeyDown(KeyCode.J))
         {
             AddItems(3, 1);
-            AddItems(4, 1);
-            AddItems(5, 1);
-            AddItems(6, 1);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            ClearInventory();
         }
     }
 
@@ -82,7 +85,7 @@ public class InventoryManager : Panel
             result = AddItemsInEmpty(itemID, amount);
         }
 
-        SaveItemsToDatabase();
+        SaveInventory();
         return result;
     }
 
@@ -128,7 +131,7 @@ public class InventoryManager : Panel
 
         slot.AddItemsInEmpty(itemID, amount);
 
-        if (save) SaveItemsToDatabase();
+        if (save) SaveInventory();
     }
 
     public void SortInventory()
@@ -151,7 +154,7 @@ public class InventoryManager : Panel
             AddItemsInSlot(itemsData[i].Item1, itemsData[i].Item2, i, false);
         }
         
-        SaveItemsToDatabase();
+        SaveInventory();
     }
 
     #endregion
@@ -211,9 +214,11 @@ public class InventoryManager : Panel
     #region persistence
     public void SlotCleared(int index)
     {
-        SaveItemsToDatabase();
+        SaveInventory();
     }
-    public void SaveItemsToDatabase()
+
+    public void SaveInventory() => PersistenceQueue.Instance.Enqueue(async () => await SaveInventoryAsync());
+    public async Task SaveInventoryAsync()
     {
 #if UNITY_EDITOR
         print("Inventory has been saved.");
@@ -242,7 +247,7 @@ public class InventoryManager : Panel
             : 
             $"DELETE FROM characters_inventory WHERE character_id = {GameManager.SelCharID}";
 
-        DBManager.Instance.ExecuteQuery(query);
+        await DBManager.Instance.ExecuteQueryAsync(query);
     }
     
     public void LoadItemsFromDatabase()

@@ -163,7 +163,7 @@ public class InventorySlot : BaseSlot
             }
         }
 
-        InventoryManager.Instance.SaveItemsToDatabase();
+        InventoryManager.Instance.SaveInventory();
         DragManager.Instance.Drop();
         base.OnDrop(eventData);
     }
