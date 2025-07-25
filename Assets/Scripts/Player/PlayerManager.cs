@@ -50,12 +50,12 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EquipmentManager.OnEquipmentChanged += SaveStatsToDatabase;
+        //EquipmentManager.OnEquipmentChanged += SaveStatsToDatabase;
     }
 
     private void OnDisable()
     {
-        EquipmentManager.OnEquipmentChanged -= SaveStatsToDatabase;
+        //EquipmentManager.OnEquipmentChanged -= SaveStatsToDatabase;
     }
 
     #region Updaters
@@ -118,24 +118,28 @@ public class PlayerManager : MonoBehaviour
     public void UpdateArmor(int newArmor)
     {
         Armor = newArmor;
+        SaveStatToDatabase("armor", Armor);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateStamina(int newStamina)
     {
         Stamina = newStamina;
+        SaveStatToDatabase("stamina", Stamina);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateIntellect(int newIntellect)
     {
         Intellect = newIntellect;
+        SaveStatToDatabase("intellect", Intellect);
         OnStatsChanged?.Invoke();
     }
 
     public void UpdateArcanePower(int newArcanePower)
     {
         ArcanePower = newArcanePower;
+        SaveStatToDatabase("arcane_power", ArcanePower);
         OnStatsChanged?.Invoke();
     }
 
